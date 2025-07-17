@@ -1,0 +1,35 @@
+<div class="row" *ngIf="!cargando">
+    <div class="col">
+        <h1>{{measure.Name | titlecase}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove measure</button>
+        </div>
+    </div>    
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+</div>
+<hr>
+<div *ngIf="!cargando">
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>straighten</mat-icon>
+                Measure
+            </ng-template>
+            <care-plan-measure-details></care-plan-measure-details>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>rss_feed</mat-icon>
+                Telemetry
+                </ng-template>
+            <care-plan-measure-telemetry></care-plan-measure-telemetry>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+</div>

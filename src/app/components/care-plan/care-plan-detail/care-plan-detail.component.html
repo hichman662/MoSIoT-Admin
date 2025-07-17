@@ -1,0 +1,51 @@
+<div class="row" *ngIf="!cargando">
+    <div class="col">
+        <h1 id="carePlanName">{{this.carePlan.Name | titlecase}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../">Back</a>
+            &nbsp;
+            <button id="deletebtn" class="btn btn-outline-danger" (click)="removeDialog()">Remove care plan</button>
+        </div>
+    </div>    
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+</div>
+<hr>
+<div *ngIf="!cargando">
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>receipt</mat-icon>
+            Details
+        </ng-template>
+        <care-plan-details></care-plan-details>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>list</mat-icon>
+            Care Activities
+        </ng-template>
+        <care-plan-care-activity></care-plan-care-activity>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>show_chart</mat-icon>
+            Goals
+        </ng-template>
+        <care-plan-goal></care-plan-goal>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>storage</mat-icon>
+            Address condition
+        </ng-template>
+        <care-plan-adress-condition></care-plan-adress-condition>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+</div>

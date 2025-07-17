@@ -1,0 +1,95 @@
+<form [formGroup]="patientProfileForm" (ngSubmit)="editPatientProfile()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>receipt</mat-icon>
+                Details
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea id="description" type="text" class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Hazard Avoidance</b><br>
+                        <select class="form-select" formControlName="Hazard" required>
+                            <option value="1">Flashing</option>
+                            <option value="2">Motion Simulation</option>
+                            <option value="3">Olfactory Hazard</option>
+                            <option value="4">Sound</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Region</b><br>
+                        <input id="region" type="text" class="form-control" formControlName="Region" required>
+                        <div *ngIf="Region?.invalid && (Region?.dirty || Region?.touched)">
+                            <div *ngIf="Region?.errors?.['required']">
+                                <div class="invalid-feedback">A region is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Preferred Language</b><br>
+                        <select class="form-select" formControlName="Language" required>
+                            <option value="1">ES</option>
+                            <option value="2">EN</option>
+                            <option value="3">FR</option>
+                            <option value="4">IT</option>
+                            <option value="5">PR</option>
+                            <option value="6">DE</option>
+                            <option value="7">JA</option>
+                            <option value="8">KO</option>
+                            <option value="9">ZH</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientProfile()">Cancel</button>
+        &nbsp;
+        <button id="btnsave" type="submit" class="btn btn-primary" [disabled]="!patientProfileForm.valid">Save</button>
+    </div>
+</form>

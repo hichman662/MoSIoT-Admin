@@ -1,0 +1,69 @@
+<form [formGroup]="careActivityNutritionForm" (ngSubmit)="editaCareAcitivityNutrition()">
+    <h1>{{careActivity.Name | titlecase}}</h1>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>restaurant</mat-icon>
+                Nutrition Order
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-floating needs-validation row">
+                        <input type="text" class="form-control" formControlName="Name" id="name" required>
+                        <label for="name">Name</label>
+                        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+                            <div *ngIf="Name?.errors?.['required']">
+                                <div class="invalid-feedback">The name is required</div>
+                            </div>
+                        </div>
+                        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+                            <div class="valid-feedback">¡Valid Name!</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Diet Code</b><br>
+                        <input type="text" class="form-control" formControlName="Code" required>
+                        <div *ngIf="Code?.invalid && (Code?.dirty || Code?.touched)">
+                            <div *ngIf="Code?.errors?.['required']">
+                                <div class="invalid-feedback">A diet code is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelCareActivityNutrition()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!careActivityNutritionForm.valid">Save</button>
+    </div>
+</form>

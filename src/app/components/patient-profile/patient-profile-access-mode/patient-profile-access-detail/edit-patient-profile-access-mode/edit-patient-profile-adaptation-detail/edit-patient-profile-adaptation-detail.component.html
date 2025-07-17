@@ -1,0 +1,63 @@
+<form [formGroup]="patientAdaptationForm" (ngSubmit)="editPatientAdaptation()">
+    <div class="row">
+        <div class="col">
+            <h1>{{accessMode.Name | titlecase}}</h1>
+        </div>  
+    </div>
+    <hr>
+    <div>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>fingerprint</mat-icon>
+                Adaptation detail required
+            </ng-template>
+
+            <ol class="list-group mt-2" *ngFor="let adaptationDetailItem of accessMode.AdaptationDetail">
+                <div *ngIf="adaptationDetailItem.Id == adaptationDetail.Id; then liToEdit else liNormal"></div>
+
+                <ng-template #liToEdit>
+                    <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                <b>Adaptation Request</b><br>
+                                <select class="form-select" formControlName="Type" required>
+                                    <option value="1">Enhanced</option>
+                                    <option value="2">Real Time</option>
+                                    <option value="3">Record</option>
+                                    <option value="4">Symbolic</option>
+                                    <option value="5">Synthesized</option>
+                                    <option value="6">Verbatim</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-2">
+                                <b>Description</b><br>
+                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                    <div *ngIf="Description?.errors?.['required']">
+                                        <div class="invalid-feedback">A description is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientAdaptation()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="!patientAdaptationForm.valid">Save</button>
+                        </div>
+                    </li>
+                </ng-template>
+
+                <ng-template #liNormal>
+                    <li class="list-group-item d-flex align-items-start">
+                        <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{adaptationDetailItem.AdaptationRequest | adaptationDetail | titlecase}}</div>
+                        {{adaptationDetailItem.Description}}
+                        </div>
+                    </li>
+                </ng-template>
+            </ol>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+</form>

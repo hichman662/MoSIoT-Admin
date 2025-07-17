@@ -1,0 +1,57 @@
+<form [formGroup]="devicePropertyForm" (ngSubmit)="editDeviceProperty()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Property profile
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Writable</b><br>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="Writable">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Cloudable</b><br>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="Cloudable">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelDeviceProperty()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!devicePropertyForm.valid">Save</button>
+    </div>
+</form>

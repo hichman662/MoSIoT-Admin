@@ -1,0 +1,82 @@
+<form [formGroup]="patientAdaptationForm" (ngSubmit)="editPatientAdaptation()">
+    <div class="row">
+        <div class="col">
+            <h1>{{accessMode.Name | titlecase}}</h1>
+        </div>  
+    </div>
+    <hr>
+    <div>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>storage</mat-icon>
+                Adaptation Request
+            </ng-template>
+
+            <ol class="list-group mt-2" *ngFor="let adaptationRequestItem of accessMode.AdaptationRequest">
+                <div *ngIf="adaptationRequestItem.Id == adaptationRequest.Id; then liToEdit else liNormal"></div>
+
+                <ng-template #liToEdit>
+                    <li class="list-group-item d-flex align-items-start"  style="background-color: aliceblue;">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                <b>Access Mode Target</b><br>
+                                <select class="form-select" formControlName="Target" required>
+                                    <option value="1">Auditory</option>
+                                    <option value="2">Colour</option>
+                                    <option value="3">Item Size</option>
+                                    <option value="4">Olfactory</option>
+                                    <option value="5">Orientation</option>
+                                    <option value="6">Position</option>
+                                    <option value="7">Tactile</option>
+                                    <option value="8">Text On Image</option>
+                                    <option value="9">Textual</option>
+                                    <option value="10">Visual</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-2">
+                                <b>Description</b><br>
+                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                    <div *ngIf="Description?.errors?.['required']">
+                                        <div class="invalid-feedback">A description is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="badge bg-primary rounded-pill">
+                            Language:
+                            <select class="form-select" formControlName="Language" required>
+                                <option value="1">ES</option>
+                                <option value="2">EN</option>
+                                <option value="3">FR</option>
+                                <option value="4">IT</option>
+                                <option value="5">PR</option>
+                                <option value="6">DE</option>
+                                <option value="7">JA</option>
+                                <option value="8">KO</option>
+                                <option value="9">ZH</option>
+                            </select>
+                        </span>
+                        <div>
+                            <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientAdaptation()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="!patientAdaptationForm.valid">Save</button>
+                        </div>
+                    </li>
+                </ng-template>
+
+                <ng-template #liNormal>
+                    <li class="list-group-item d-flex align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{adaptationRequestItem.AccessModeTarget | accessModeType | titlecase}}</div>
+                            {{adaptationRequestItem.Description | titlecase}}
+                        </div>
+                        <span class="badge bg-primary rounded-pill">Language: {{adaptationRequestItem.LanguageOfAdaptation | language | uppercase}}</span>
+                    </li>
+                </ng-template>
+            </ol>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+</form>

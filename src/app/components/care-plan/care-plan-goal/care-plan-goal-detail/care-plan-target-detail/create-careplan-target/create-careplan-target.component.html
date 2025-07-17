@@ -1,0 +1,65 @@
+<h1>{{goal.Name | titlecase}}</h1>
+<hr>
+<div>
+  <mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>list_alt</mat-icon>
+            Target
+        </ng-template>
+        <form [formGroup]="targetForm" (ngSubmit)="createTarget()">
+            <ol class="list-group mt-2">
+                <li class="list-group-item d-flex align-items-start" *ngFor="let target of goal.Targets">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{target.DueDate | date}}</div>
+                        <div>Desired Value: {{target.DesiredValue}}</div>
+                        <div>Description: {{target.Description | titlecase}}</div>
+                        <div>Measure: {{target.Measure?.Name | isAssigned | titlecase}}</div>
+                    </div>
+                </li>
+
+                <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">
+                            <b>Due Date</b><br>
+                            <mat-form-field appearance="fill">
+                                <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="DueDate">
+                                <mat-hint>Month/Day/Year</mat-hint>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>                          
+                        </div>
+    
+                        <div>
+                            <b>Desired Value</b><br>
+                            <input type="number" class="form-control" formControlName="Desired">
+                        </div>
+    
+                        <div>
+                            <b>Description</b><br>
+                            <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                            <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                <div *ngIf="Description?.errors?.['required']">
+                                    <div class="invalid-feedback">A description is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="reset" class="btn btn-outline-secondary" (click)="cancelTarget()">Cancel</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!targetForm.valid">Create</button>
+                    </div>
+                </li>
+            </ol>
+        </form>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>straighten</mat-icon>
+            Measure
+        </ng-template>
+        <care-plan-measure-details></care-plan-measure-details>
+    </mat-tab>
+  </mat-tab-group>
+</div>

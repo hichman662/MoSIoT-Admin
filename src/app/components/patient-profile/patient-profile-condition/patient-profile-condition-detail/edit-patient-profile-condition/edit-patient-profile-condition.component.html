@@ -1,0 +1,90 @@
+<form [formGroup]="patientConditionForm" (ngSubmit)="editPatientCondition()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Condition detail
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Clinical status</b><br>
+                        <select class="form-select" formControlName="Clinical" required>
+                            <option value="1">Active</option>
+                            <option value="2">Recurrence</option>
+                            <option value="3">Relapse</option>
+                            <option value="4">Inactive</option>
+                            <option value="5">Remission</option>
+                            <option value="6">Resolved</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>Disease</b><br>
+                        <select class="form-select" formControlName="Disease" required>
+                            <option value="1">Alzheimer</option>
+                            <option value="2">Parkinson</option>
+                            <option value="3">Cancer</option>
+                            <option value="4">Heart Disease</option>
+                            <option value="5">Obesity</option>
+                            <option value="6">Diabetes</option>
+                            <option value="7">Epilepsy</option>
+                            <option value="8">Apnea Sleep</option>
+                            <option value="9">Narcolepsy</option>
+                            <option value="10">Eating disorders</option>
+                            <option value="11">Osteoporosis</option>
+                            <option value="12">Asthma</option>
+                            <option value="13">Fibrosis</option>
+                            <option value="14">Oral Health</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientCondition()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!patientConditionForm.valid">Save</button>
+    </div>
+</form>

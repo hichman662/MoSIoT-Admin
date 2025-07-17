@@ -1,0 +1,78 @@
+<form [formGroup]="measureForm" (ngSubmit)="editMeasure()">
+    <h1>{{goal.Name | titlecase}}</h1>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>straighten</mat-icon>
+                Measure
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Name</b><br>
+                        <input type="text" class="form-control" formControlName="Name" required>
+                        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+                            <div *ngIf="Name?.errors?.['required']">
+                                <div class="invalid-feedback">A name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>LOIN Code</b><br>
+                        <input type="text" class="form-control" formControlName="LOIN" required>
+                        <div *ngIf="LOIN?.invalid && (LOIN?.dirty || LOIN?.touched)">
+                            <div *ngIf="LOIN?.errors?.['required']">
+                                <div class="invalid-feedback">A LOIN code is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelMeasure()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!measureForm.valid">Save</button>
+    </div>
+</form>
+
+<mat-tab-group animationDuration="0ms">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>show_chart</mat-icon>
+            Telemetries
+        </ng-template>
+        <care-plan-measure-telemetry></care-plan-measure-telemetry>
+    </mat-tab>
+</mat-tab-group>

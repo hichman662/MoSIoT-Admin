@@ -1,0 +1,51 @@
+<div class="row" *ngIf="!cargando">
+    <div class="col">
+        <h1 id="patientProfileName">{{this.patientProfile.Name | titlecase}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../">Back</a>
+            &nbsp;
+            <button id="deletebtn" class="btn btn-outline-danger" (click)="removeDialog()">Remove patient profile</button>
+        </div>
+    </div>    
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+</div>
+<hr>
+<div *ngIf="!cargando">
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>receipt</mat-icon>
+            Details
+        </ng-template>
+        <patient-profile-details></patient-profile-details>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>storage</mat-icon>
+            Condition
+        </ng-template>
+        <patient-profile-condition></patient-profile-condition>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>accessibility</mat-icon>
+            Disability
+        </ng-template>
+        <patient-profile-disability></patient-profile-disability>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>fingerprint</mat-icon>
+            Access Mode
+        </ng-template>
+        <patient-profile-access-mode></patient-profile-access-mode>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+</div>

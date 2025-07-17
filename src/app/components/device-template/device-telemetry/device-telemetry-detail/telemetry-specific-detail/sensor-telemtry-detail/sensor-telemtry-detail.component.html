@@ -1,0 +1,14 @@
+<div *ngIf="!isNew;else createNew" >
+    <dataTable [dataSource] = tableDataSource></dataTable>
+    
+    <div class="d-flex justify-content-end mt-2">
+        <a class="btn btn-success" (click)="editSensor()">Edit</a>
+    </div>
+</div>
+
+<ng-template #createNew>
+    <h4 class="mt-3">There is not Sensor created, create new</h4>
+    <div class="d-flex justify-content-end mt-2">
+        <a class="btn btn-success" (click)="createSensor()">Create Sensor</a>
+    </div>
+</ng-template>

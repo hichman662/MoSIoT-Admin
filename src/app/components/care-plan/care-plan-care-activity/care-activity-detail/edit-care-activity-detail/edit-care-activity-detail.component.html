@@ -1,0 +1,99 @@
+<form [formGroup]="careActivityForm" (ngSubmit)="editaCareAcitivity()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>receipt</mat-icon>
+                Care Activity Detail
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Type Activity</b><br>
+                        <select class="form-select" formControlName="Type" required>
+                            <option value="1">Medication</option>
+                            <option value="2">Nutrition Order</option>
+                            <option value="3">Comunication</option>
+                            <option value="4">Appointment</option>
+                            <option value="5">Sport Activity</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Periodicity</b><br>
+                        <select class="form-select" formControlName="Periodicity" required>
+                            <option value="1">Daily</option>
+                            <option value="2">Monthly</option>
+                            <option value="3">Per Hour</option>
+                            <option value="4">Weekly</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Duration</b><br>
+                        <input type="number" class="form-control" formControlName="Duration" required>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Location</b><br>
+                        <textarea class="form-control" formControlName="Location" required></textarea>
+                        <div *ngIf="Location?.invalid && (Location?.dirty || Location?.touched)">
+                            <div *ngIf="Location?.errors?.['required']">
+                                <div class="invalid-feedback">A location is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelCareActivity()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!careActivityForm.valid">Save</button>
+    </div>
+</form>

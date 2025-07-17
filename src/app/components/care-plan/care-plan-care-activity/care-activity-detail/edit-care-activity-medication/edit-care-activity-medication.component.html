@@ -1,0 +1,115 @@
+<form [formGroup]="careActivityMedicationForm" (ngSubmit)="editaCareAcitivityMedication()">
+    <h1>{{careActivity.Name | titlecase}}</h1>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>local_hospital</mat-icon>
+                Medication
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-floating needs-validation row">
+                        <input type="text" class="form-control" formControlName="Name" id="name" required>
+                        <label for="name">Name</label>
+                        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+                            <div *ngIf="Name?.errors?.['required']">
+                                <div class="invalid-feedback">The name is required</div>
+                            </div>
+                        </div>
+                        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+                            <div class="valid-feedback">¡Valid Name!</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Product Reference</b><br>
+                        <input type="number" class="form-control" formControlName="Product">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Manufacturer</b><br>
+                        <input type="text" class="form-control" formControlName="Manufacturer" required>
+                        <div *ngIf="Manufacturer?.invalid && (Manufacturer?.dirty || Manufacturer?.touched)">
+                            <div *ngIf="Manufacturer?.errors?.['required']">
+                                <div class="invalid-feedback">A manufacturer is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Dosage</b><br>
+                        <input type="text" class="form-control" formControlName="Dosage" required>
+                        <div *ngIf="Dosage?.invalid && (Dosage?.dirty || Dosage?.touched)">
+                            <div *ngIf="Dosage?.errors?.['required']">
+                                <div class="invalid-feedback">A dosage is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Form</b><br>
+                        <select class="form-select" formControlName="Form" required>
+                            <option value="1">Tablet</option>
+                            <option value="2">Powder</option>
+                            <option value="3">Capsule</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Medication Code</b><br>
+                        <input type="text" class="form-control" formControlName="Code" required>
+                        <div *ngIf="Code?.invalid && (Code?.dirty || Code?.touched)">
+                            <div *ngIf="Code?.errors?.['required']">
+                                <div class="invalid-feedback">A medication code is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelCareActivityMedication()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!careActivityMedicationForm.valid">Save</button>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex">
+        <h1 id="patientProfileList" style="color: blue;">
+            <mat-icon>assignment_ind</mat-icon> Patient Profiles
+        </h1>
+        <div class="align-self-center p-3" *ngIf="cargando">
+            <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </div>
+    <div class="justify-content-end">
+        <a id="btnCreate" class="btn btn-outline-primary mt-2" (click)="createPatientProfile()">Create new</a>
+    </div>
+</div>
+
+<hr>
+
+<div>
+    <ul class="list-group" *ngFor="let patientProfile of patientProfiles">
+        <li id="liElement" (click)="details(patientProfile.Id)" class="list-group-item list-group-item-action d-flex justify-content-between" role='button'>{{patientProfile.Name | titlecase}} <mat-icon>keyboard_arrow_right</mat-icon></li>
+    </ul>
+</div>

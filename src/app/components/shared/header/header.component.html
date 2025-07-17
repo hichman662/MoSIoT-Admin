@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+    <div class="container-fluid">
+        <img  class="navbar-brand" src="../../../../assets/favicon.png" style="width: 50px; height: 50px;" routerLink="/Home" routerLinkActive="active">
+
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link d-flex" routerLink="/DeviceTemplate"><mat-icon>devices</mat-icon> Device Template</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" routerLink="/PatientProfile"><mat-icon>assignment_ind</mat-icon>Patient Profile Template</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" routerLink="/CarePlan"><mat-icon> local_hospital</mat-icon> Care Plan Template</a>
+                </li>
+            </ul>
+
+            <button id="menubtn" class="btn btn-primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            
+            <mat-menu #menu="matMenu">
+                <menu></menu>
+            </mat-menu>
+
+        </div>
+    </div>
+</nav>

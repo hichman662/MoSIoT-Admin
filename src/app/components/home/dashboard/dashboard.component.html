@@ -1,0 +1,152 @@
+&nbsp;
+&nbsp;
+<div class="row mt-3">
+    <h1 style="color: blue;">Statistics</h1>
+    <hr>
+    <div class="col-8">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Total Sessions (number)
+                2022
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+                <div style="display: block;">
+                    <canvas baseChart width="700" height="300"
+                        [type]="'line'"
+                        [data]="lineChartData"
+                        [options]="lineChartOptions"
+                        [legend]="lineChartLegend">
+                    </canvas>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-4">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Total Time Session by user (seconds)
+                2022
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+                <div style="display: block;">
+                    <canvas baseChart
+                        [type]="'pie'"
+                        [datasets]="pieChartDatasets"
+                        [labels]="pieChartLabels"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins"
+                        [legend]="pieChartLegend">
+                    </canvas>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-4">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Actions
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+                <div style="display: block;">
+                    <h6>Patients</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                    <h6>Caregivers</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Chadwick</td>
+                                <td>Lorine</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Tami</td>
+                                <td>Bronte</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jami</td>
+                                <td>Vikki</td>
+                                <td>3</td>
+                                </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Rusty</td>
+                                <td>Michelyne</td>
+                                <td>8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="col-8">
+        <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                Total Actions by user type (number)
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+                <div style="display: block;">
+                    <canvas baseChart width="700" height="430"
+                        [data]="barChartData"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [type]="'bar'">
+                </canvas>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div class="row mt-5"></div>

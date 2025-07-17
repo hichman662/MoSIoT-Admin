@@ -1,0 +1,57 @@
+<form [formGroup]="sensorForm" (ngSubmit)="edit()">
+    <h1>{{telemetry.Name}}</h1>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Specific Telemetry
+            </ng-template>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>BASIC INFO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <b>Name</b><br>
+                                <div class="needs-validation">
+                                    <input type="text" class="form-control" formControlName="Name" required>
+                                    <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+                                        <div *ngIf="Name?.errors?.['required']">
+                                            <div class="invalid-feedback">The name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <b>Sensor Type</b><br>
+                                <div class="needs-validation">
+                                    <input type="text" class="form-control" formControlName="Type" required>
+                                    <div *ngIf="Type?.invalid && (Type?.dirty || Type?.touched)">
+                                        <div *ngIf="Type?.errors?.['required']">
+                                            <div class="invalid-feedback">The sensor type is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </mat-tab>
+    </mat-tab-group>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!sensorForm.valid">Save</button>
+    </div>
+</form>

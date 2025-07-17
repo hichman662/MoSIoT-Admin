@@ -1,0 +1,39 @@
+<div *ngIf="!isNew;else createNew">
+    <dataTable [dataSource] = tableDataSource></dataTable>
+
+    <div class="d-flex justify-content-end mt-2">
+        <a class="btn btn-success" (click)="editState()">Edit</a>
+    </div>
+
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                State Devices
+            </ng-template>
+
+            <ol class="list-group mt-2" *ngFor="let stateDevice of state.States">
+                <li class="list-group-item d-flex align-items-start">
+                    <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{stateDevice.Name | titlecase}}</div>
+                    Value: {{stateDevice.Value}}
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-success" (click)="editStateDevice(stateDevice.Id)">Edit</button>
+                        <button class="btn btn-outline-danger" (click)="removeDialog(stateDevice.Id)">Remove</button>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="d-flex justify-content-end mt-2">
+                <a class="btn btn-success" (click)="addStateDevice()">Add State Device</a>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<ng-template #createNew>
+    <h4 class="mt-3">There is not state created, create new</h4>
+    <div class="d-flex justify-content-end mt-2">
+        <a class="btn btn-success" (click)="createState()">Create State</a>
+    </div>
+</ng-template>

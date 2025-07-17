@@ -1,0 +1,18 @@
+<div *ngIf="loggeado; else noLoggeado">
+    <button mat-menu-item>
+        <mat-icon>accessibility</mat-icon>
+        <span>Profile</span>
+    </button>
+    <button id="logoutbtn" mat-menu-item (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+</div>
+
+<ng-template #noLoggeado>
+    <button mat-menu-item (click)="loginView()">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+    </button>
+</ng-template>
+

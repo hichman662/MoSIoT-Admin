@@ -1,0 +1,78 @@
+<form [formGroup]="patientDisabilityForm" (ngSubmit)="editPatientDisability()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                Disability details
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Disability type</b><br>
+                        <select class="form-select" formControlName="Type" required>
+                            <option value="1">Auditory</option>
+                            <option value="2">Cognitive</option>
+                            <option value="3">Physical</option>
+                            <option value="4">Speech</option>
+                            <option value="5">Visual</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>Severity</b><br>
+                        <select class="form-select" formControlName="Severity" required>
+                            <option value="1">Severe</option>
+                            <option value="2">Moderate</option>
+                            <option value="3">Mild</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientDisability()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!patientDisabilityForm.valid">Save</button>
+    </div>
+</form>

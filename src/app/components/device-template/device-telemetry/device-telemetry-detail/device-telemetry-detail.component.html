@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col">
+        <h1>{{telemetry.Name | titlecase}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../../../{{this.device.Id}}">Back</a>
+            &nbsp;
+            <button class="btn btn-outline-danger" (click)="removeDialog()">Remove telemetry</button>
+        </div>
+    </div>    
+</div>
+<hr>
+<div>
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab label="Telemetries profile">
+        <dataTable [dataSource] = tableProfileDataSource></dataTable>
+
+        <div class="d-flex justify-content-end mt-2">
+            <a class="btn btn-success" (click)="editTelemetryProfile()">Edit</a>
+        </div>
+    </mat-tab>
+    <mat-tab label="Specific Telemetry">
+        <telemetry-specific-detail [telemetry] = telemetry></telemetry-specific-detail>
+    </mat-tab>
+  </mat-tab-group>
+</div>

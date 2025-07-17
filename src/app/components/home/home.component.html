@@ -1,0 +1,62 @@
+<div id="home">
+    <div class="row">
+        <div class="col-4">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Device Template</h5>
+                    <p class="card-text">Edit, create o remove your device templates</p>
+                    <div class="align-self-center p-3" *ngIf="cargando">
+                        <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+                    </div>
+
+                    <a class="btn btn-outline-primary" (click)="goDevice()">Device templates</a>
+                </div>                
+            </div>
+            <div class="card-footer text-muted">
+                <h1 class="text-center" style="color: blue;" *ngIf="!cargando && devices != []"><b>{{devices.length}}</b></h1>
+            </div>
+        </div>
+
+
+        <div class="col-4">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Patient profile</h5>
+                    <p class="card-text">Edit, create o remove your patient profiles templates</p>
+                    <div class="align-self-center p-3" *ngIf="cargando">
+                        <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+                    </div>
+
+                    <a class="btn btn-outline-primary" (click)="goPatient()" >Patient profiles</a>
+                </div>                
+            </div>
+            <div class="card-footer text-muted">
+                <h1 class="text-center" style="color: blue;" *ngIf="!cargando"><b>{{patients.length}}</b></h1>
+            </div>
+        </div>
+
+        
+        <div class="col-4">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Care Plan</h5>
+                    <p class="card-text">Edit, create o remove your care plan templates</p>
+                    <div class="align-self-center p-3" *ngIf="cargando">
+                        <mat-progress-spinner [diameter]="20" mode="indeterminate"></mat-progress-spinner>
+                    </div>
+                    
+                    <a class="btn btn-outline-primary" (click)="goCarePlan()">Care Plans</a>
+                </div>
+                
+            </div>
+            <div class="card-footer text-muted">
+                <h1 class="text-center" style="color: blue;" *ngIf="!cargando"><b>{{carePlans.length}}</b></h1>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="dashboard">
+        <dashboard></dashboard>
+    </div>
+</div>

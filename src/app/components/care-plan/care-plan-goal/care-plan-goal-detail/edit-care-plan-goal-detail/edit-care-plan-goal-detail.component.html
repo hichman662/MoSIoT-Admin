@@ -1,0 +1,114 @@
+<form [formGroup]="goalForm" (ngSubmit)="editGoal()">
+    <div class="form-floating needs-validation row">
+        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <label for="name">Name</label>
+        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
+            <div *ngIf="Name?.errors?.['required']">
+                <div class="invalid-feedback">The name is required</div>
+            </div>
+        </div>
+        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+            <div class="valid-feedback">¡Valid Name!</div>
+        </div>
+    </div>
+    <hr>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>show_chart</mat-icon>
+                Goals
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>BASIC INFO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <b>Category</b><br>
+                        <select class="form-select" formControlName="Category" required>
+                            <option value="1">Dietary</option>
+                            <option value="2">Safety</option>
+                            <option value="3">Behavioral</option>
+                            <option value="4">Physiotherapy</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Description</b><br>
+                        <textarea class="form-control" formControlName="Description" required></textarea>
+                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                            <div *ngIf="Description?.errors?.['required']">
+                                <div class="invalid-feedback">A description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Priority</b><br>
+                        <select class="form-select" formControlName="Priority" required>
+                            <option value="1">High</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Low</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Status</b><br>
+                        <select class="form-select" formControlName="Status" required>
+                            <option value="1">Draft</option>
+                            <option value="2">Active</option>
+                            <option value="3">On Hold</option>
+                            <option value="4">Revoked</option>
+                            <option value="5">Completed</option>
+                            <option value="6">Canceled</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <b>Outcome Code</b><br>
+                        <input class="form-control" formControlName="Outcome" required>
+                        <div *ngIf="Outcome?.invalid && (Outcome?.dirty || Outcome?.touched)">
+                            <div *ngIf="Outcome?.errors?.['required']">
+                                <div class="invalid-feedback">An outcome is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr *ngIf="isNew">
+                <td>
+                    <div>
+                        <b>Condition</b><br>
+                        <select class="custom-select" size="5" formControlName="Condition">
+                            <option *ngFor="let condition of conditions" [value]="condition.Id">{{condition.Name}}</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end mt-2">
+        <button type="reset" class="btn btn-outline-secondary" (click)="cancelGoal()">Cancel</button>
+        &nbsp;
+        <button type="submit" class="btn btn-primary" [disabled]="!goalForm.valid">Save</button>
+    </div>
+</form>

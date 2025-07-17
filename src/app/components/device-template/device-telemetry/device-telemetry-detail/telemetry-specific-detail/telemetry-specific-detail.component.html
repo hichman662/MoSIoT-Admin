@@ -1,0 +1,12 @@
+<div *ngIf="telemetry.Type == 1">
+    <state-telemetry-detail [state] = telemetry.State!></state-telemetry-detail>
+</div>
+<div *ngIf="telemetry.Type == 2">
+    <event-telemtry-detail [event] = telemetry.Event_!></event-telemtry-detail>
+</div>
+<div *ngIf="telemetry.Type == 3">
+    <location-telemtry-detail [location] = telemetry.Location!></location-telemtry-detail>
+</div>
+<div *ngIf="telemetry.Type == 4">
+    <sensor-telemtry-detail [sensor] = telemetry.Sensor!></sensor-telemtry-detail>
+</div>

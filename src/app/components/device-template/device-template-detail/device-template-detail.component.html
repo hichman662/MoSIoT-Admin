@@ -1,0 +1,51 @@
+<div class="row" *ngIf="!cargando">
+    <div class="col">
+        <h1 id="deviceName">{{this.device.Name}}</h1>
+    </div>
+    <div class="col">
+        <div class="d-flex justify-content-end">
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../">Back</a>
+            &nbsp;
+            <button id="deletebtn" class="btn btn-outline-danger" (click)="removeDialog()">Remove device</button>
+        </div>
+    </div>    
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+</div>
+<hr>
+<div *ngIf="!cargando">
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>receipt</mat-icon>
+            Profile
+        </ng-template>
+        <device-profile [id]="id"></device-profile>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>rss_feed</mat-icon>
+            Telemetries
+        </ng-template>
+        <device-telemetry [id]="id"></device-telemetry>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>tune</mat-icon>
+            Properties
+        </ng-template>
+        <device-property [id]="id"></device-property>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>flash_on</mat-icon>
+            Commands
+        </ng-template>
+        <device-command [id]="id"></device-command>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="align-self-center" *ngIf="cargando">
+    <mat-progress-spinner [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+</div>

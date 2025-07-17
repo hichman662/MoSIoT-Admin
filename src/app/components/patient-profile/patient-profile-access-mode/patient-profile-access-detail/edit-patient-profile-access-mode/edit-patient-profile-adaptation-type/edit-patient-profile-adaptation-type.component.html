@@ -1,0 +1,66 @@
+<form [formGroup]="patientAdaptationForm" (ngSubmit)="editPatientAdaptation()">
+    <div class="row">
+        <div class="col">
+            <h1>{{accessMode.Name | titlecase}}</h1>
+        </div>  
+    </div>
+    <hr>
+    <div>
+    <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon>accessibility</mat-icon>
+                Adaptation type required
+            </ng-template>
+
+            <ol class="list-group mt-2" *ngFor="let adaptationTypeItem of accessMode.AdaptationType">
+                <div *ngIf="adaptationTypeItem.Id == adaptationType.Id; then liToEdit else liNormal"></div>
+
+                <ng-template #liToEdit>
+                    <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">
+                                <b>Access Mode Target</b><br>
+                                <select class="form-select" formControlName="Type" required>
+                                    <option value="1">Alternative Text</option>
+                                    <option value="2">Audio Description</option>
+                                    <option value="3">Captions</option>
+                                    <option value="4">e_book</option>
+                                    <option value="5">Haptic</option>
+                                    <option value="6">High Contrast</option>
+                                    <option value="7">Long Description</option>
+                                    <option value="8">Sign Language</option>
+                                    <option value="9">Transcript</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-2">
+                                <b>Description</b><br>
+                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
+                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
+                                    <div *ngIf="Description?.errors?.['required']">
+                                        <div class="invalid-feedback">A description is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="reset" class="btn btn-outline-secondary" (click)="cancelPatientAdaptation()">Cancel</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="!patientAdaptationForm.valid">Save</button>
+                        </div>
+                    </li>
+                </ng-template>
+
+                <ng-template #liNormal>
+                    <li class="list-group-item d-flex align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{adaptationTypeItem.AdaptionRequest | adaptationType | titlecase}}</div>
+                            {{adaptationTypeItem.Description}}
+                        </div>
+                    </li>
+                </ng-template>
+            </ol>
+        </mat-tab>
+    </mat-tab-group>
+    </div>
+</form>
