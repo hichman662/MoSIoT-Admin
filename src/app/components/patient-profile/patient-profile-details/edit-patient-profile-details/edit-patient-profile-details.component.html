@@ -1,13 +1,13 @@
 <form [formGroup]="patientProfileForm" (ngSubmit)="editPatientProfile()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,9 +31,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea id="description" type="text" class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea id="description" type="text" class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>
@@ -44,11 +44,11 @@
                 <td>
                     <div>
                         <b>Hazard Avoidance</b><br>
-                        <select class="form-select" formControlName="Hazard" required>
-                            <option value="1">Flashing</option>
-                            <option value="2">Motion Simulation</option>
-                            <option value="3">Olfactory Hazard</option>
-                            <option value="4">Sound</option>
+                        <select class="form-select" formControlName="hazard" required>
+                            <option [value]="1">Flashing</option>
+                            <option [value]="2">Motion Simulation</option>
+                            <option [value]="3">Olfactory Hazard</option>
+                            <option [value]="4">Sound</option>
                         </select>
                     </div>
                 </td>
@@ -57,9 +57,9 @@
                 <td>
                     <div>
                         <b>Region</b><br>
-                        <input id="region" type="text" class="form-control" formControlName="Region" required>
-                        <div *ngIf="Region?.invalid && (Region?.dirty || Region?.touched)">
-                            <div *ngIf="Region?.errors?.['required']">
+                        <input id="region" type="text" class="form-control" formControlName="region" required>
+                        <div *ngIf="region?.invalid && (region?.dirty || region?.touched)">
+                            <div *ngIf="region?.errors?.['required']">
                                 <div class="invalid-feedback">A region is required</div>
                             </div>
                         </div>
@@ -70,16 +70,16 @@
                 <td>
                     <div>
                         <b>Preferred Language</b><br>
-                        <select class="form-select" formControlName="Language" required>
-                            <option value="1">ES</option>
-                            <option value="2">EN</option>
-                            <option value="3">FR</option>
-                            <option value="4">IT</option>
-                            <option value="5">PR</option>
-                            <option value="6">DE</option>
-                            <option value="7">JA</option>
-                            <option value="8">KO</option>
-                            <option value="9">ZH</option>
+                        <select class="form-select" formControlName="language" required>
+                            <option [value]="1">ES</option>
+                            <option [value]="2">EN</option>
+                            <option [value]="3">FR</option>
+                            <option [value]="4">IT</option>
+                            <option [value]="5">PR</option>
+                            <option [value]="6">DE</option>
+                            <option [value]="7">JA</option>
+                            <option [value]="8">KO</option>
+                            <option [value]="9">ZH</option>
                         </select>
                     </div>
                 </td>

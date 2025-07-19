@@ -1,5 +1,5 @@
 <form [formGroup]="locationForm" (ngSubmit)="edit()">
-    <h1>{{telemetry.Name}}</h1>
+    <h1>{{telemetry.name}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -19,9 +19,9 @@
                             <div>
                                 <b>Name</b><br>
                                 <div class="needs-validation">
-                                    <input type="text" class="form-control" formControlName="Name" required>
-                                    <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-                                        <div *ngIf="Name?.errors?.['required']">
+                                    <input type="text" class="form-control" formControlName="name" required>
+                                    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                                        <div *ngIf="name?.errors?.['required']">
                                             <div class="invalid-feedback">The name is required</div>
                                         </div>
                                     </div>
@@ -33,7 +33,7 @@
                         <td>
                             <div>
                                 <b>Latitude</b><br>
-                                <input type="number" formControlName="Latitude" required>
+                                <input type="number" formControlName="latitude" required>
                             </div>
                         </td>
                     </tr>
@@ -42,7 +42,7 @@
                         <td>
                             <div>
                                 <b>Longitude</b><br>
-                                <input type="number" formControlName="Longitude" required>
+                                <input type="number" formControlName="longitude" required>
                             </div>
                         </td>
                     </tr>
@@ -51,7 +51,7 @@
                         <td>
                             <div>
                                 <b>Altitude</b><br>
-                                <input type="number" formControlName="Altitude" required>
+                                <input type="number" formControlName="altitude" required>
                             </div>
                         </td>
                     </tr>

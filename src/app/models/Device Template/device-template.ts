@@ -3,11 +3,11 @@ import { Command } from "./command";
 import { Telemetry } from "./telemetry";
 
 export interface DeviceTemplate {
-    Id:          number;
-    Name:        string;
-    Type:        number;
-    IsEdge:      boolean;
-    Properties?:  Property[];
-    Commands?:    Command[];
-    Telemetries?: Telemetry[];
+    id:          number;
+    name:        string;
+    type:        number;
+    isEdge:      boolean;
+    properties?:  Property[];
+    commands?:    Command[];
+    telemetries?: Telemetry[];
 }

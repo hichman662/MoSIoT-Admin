@@ -29,7 +29,7 @@ export class DeviceCommandDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
     
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-    this.command = this.device.Commands?.find(command => command.Id == this.id)!;
+    this.command = this.device.commands?.find(command => command.id == this.id)!;
 
     this.loadTable();
   }
@@ -37,22 +37,22 @@ export class DeviceCommandDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Type",
-        Value: this.commandTypePipe.transform(this.command.Type)
+        name: "Type",
+        value: this.commandTypePipe.transform(this.command.type)
       },
       {
-        Name: "Synchronous",
-        Value: this.boolToString.transform(this.command.IsSynchronous)
+        name: "Synchronous",
+        value: this.boolToString.transform(this.command.isSynchronous)
       },
       {
-        Name: "Description",
-        Value: this.command.Description
+        name: "Description",
+        value: this.command.description
       }
     ]
   }
 
   editCommand(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Command/" + this.command.Id + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Command/" + this.command.id + "/Edit");
   }
 
   removeDialog(){
@@ -60,7 +60,7 @@ export class DeviceCommandDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.command.Name
+      data: this.command.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -80,7 +80,7 @@ export class DeviceCommandDetailComponent implements OnInit {
   }
 
   removeDevicCommand(){
-    this.deviceService.deleteDeviceCommand(this.command.Id).subscribe({
+    this.deviceService.deleteDeviceCommand(this.command.id).subscribe({
       next: result => {
         console.log("Removing device command...");
       },
@@ -89,7 +89,7 @@ export class DeviceCommandDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("command");
-        this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
+        this.router.navigateByUrl("/DeviceTemplate/" + this.device.id);
       }
     })
   }

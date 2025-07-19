@@ -1,8 +1,8 @@
 export interface NewTelemetry {
-    DeviceTemplate_oid: number;
-    Frecuency:          number;
-    Schema:             number;
-    Unit:               number;
-    Name:               string;
-    Type:               number;
+    deviceTemplate_oid: number;
+    frecuency:          number;
+    schema:             number;
+    unit:               number;
+    name:               string;
+    type:               number;
 }

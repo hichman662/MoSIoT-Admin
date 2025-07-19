@@ -1,5 +1,5 @@
 <form [formGroup]="careActivityNutritionForm" (ngSubmit)="editaCareAcitivityNutrition()">
-    <h1>{{careActivity.Name | titlecase}}</h1>
+    <h1>{{careActivity.name | titlecase}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -19,14 +19,14 @@
             <tr>
                 <td>
                     <div class="form-floating needs-validation row">
-                        <input type="text" class="form-control" formControlName="Name" id="name" required>
+                        <input type="text" class="form-control" formControlName="name" id="name" required>
                         <label for="name">Name</label>
-                        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-                            <div *ngIf="Name?.errors?.['required']">
+                        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                            <div *ngIf="name?.errors?.['required']">
                                 <div class="invalid-feedback">The name is required</div>
                             </div>
                         </div>
-                        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+                        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
                             <div class="valid-feedback">¡Valid Name!</div>
                         </div>
                     </div>
@@ -36,9 +36,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>
@@ -49,9 +49,9 @@
                 <td>
                     <div>
                         <b>Diet Code</b><br>
-                        <input type="text" class="form-control" formControlName="Code" required>
-                        <div *ngIf="Code?.invalid && (Code?.dirty || Code?.touched)">
-                            <div *ngIf="Code?.errors?.['required']">
+                        <input type="text" class="form-control" formControlName="code" required>
+                        <div *ngIf="code?.invalid && (code?.dirty || code?.touched)">
+                            <div *ngIf="code?.errors?.['required']">
                                 <div class="invalid-feedback">A diet code is required</div>
                             </div>
                         </div>

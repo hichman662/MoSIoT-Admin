@@ -20,16 +20,16 @@ export class EditDeviceCommandComponent implements OnInit {
   isNew:boolean = false;
 
   deviceCommandForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['', Validators.required],
-    Synchronous:[''],
-    Description:['', Validators.required]
+    name:['',Validators.required],
+    type:['', Validators.required],
+    synchronous:[''],
+    description:['', Validators.required]
   })
 
-  get Name() { return this.deviceCommandForm.get('Name'); }
-  get Type() { return this.deviceCommandForm.get('Type'); }
-  get Synchronous() { return this.deviceCommandForm.get('Synchronous'); }
-  get Description() { return this.deviceCommandForm.get('Description'); }
+  get name() { return this.deviceCommandForm.get('name'); }
+  get type() { return this.deviceCommandForm.get('type'); }
+  get synchronous() { return this.deviceCommandForm.get('synchronous'); }
+  get description() { return this.deviceCommandForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute, private deviceAdapter: DeviceTemplateAdapterComponent) { }
@@ -37,34 +37,34 @@ export class EditDeviceCommandComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['commandId']);
-    this.command = this.device.Commands?.find(command => command.Id == this.id)!;
+    this.command = this.device.commands?.find(command => command.id == this.id)!;
 
     //If not exists, create new
     if(this.command == undefined){
       this.isNew = true;
       this.initDefaults();
     }
-    this.deviceCommandForm.setValue({Name: this.command.Name, Type: this.command.Type, Synchronous: this.command.IsSynchronous, Description: this.command.Description});
+    this.deviceCommandForm.setValue({name: this.command.name, type: this.command.type, synchronous: this.command.isSynchronous, description: this.command.description});
   }
 
   initDefaults(){
     this.command = {
-      Description: "",
-      Id: 0,
-      IsSynchronous: false,
-      Name: "",
-      Type: 1
+      description: "",
+      id: 0,
+      isSynchronous: false,
+      name: "",
+      type: 1
     }
   }
 
   editDeviceCommand(){
-    this.command.Name = this.deviceCommandForm.get('Name')?.value;
-    this.command.Type = this.deviceCommandForm.get('Type')?.value;
-    this.command.IsSynchronous = this.deviceCommandForm.get('Synchronous')?.value;
-    this.command.Description = this.deviceCommandForm.get('Description')?.value;
+    this.command.name = this.deviceCommandForm.get('name')?.value;
+    this.command.type = this.deviceCommandForm.get('type')?.value;
+    this.command.isSynchronous = this.deviceCommandForm.get('synchronous')?.value;
+    this.command.description = this.deviceCommandForm.get('description')?.value;
 
     if(this.isNew){
-      this.deviceService.createCommand(this.deviceAdapter.newCommnad(this.command, this.device.Id)).subscribe({
+      this.deviceService.createCommand(this.deviceAdapter.newCommnad(this.command, this.device.id)).subscribe({
         next : result =>{
           this.command = result;
         },
@@ -73,13 +73,13 @@ export class EditDeviceCommandComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
           this.sweetAlert.createSuccess("command");
         }
       });
     }
     else{
-      this.deviceService.updateDeviceCommand(this.command.Id,this.command).subscribe({
+      this.deviceService.updateDeviceCommand(this.command.id,this.command).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -88,7 +88,7 @@ export class EditDeviceCommandComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Command/" + this.command.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Command/" + this.command.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -96,6 +96,6 @@ export class EditDeviceCommandComponent implements OnInit {
   }
 
   cancelDeviceCommand(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.id);
   }
 }

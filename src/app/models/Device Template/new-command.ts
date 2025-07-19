@@ -1,7 +1,7 @@
 export interface NewCommand {
-    DeviceTemplate_oid: number;
-    Name:               string;
-    IsSynchronous:      boolean;
-    Type:               number;
-    Description:        string;
+    deviceTemplate_oid: number;
+    name:               string;
+    isSynchronous:      boolean;
+    type:               number;
+    description:        string;
 }

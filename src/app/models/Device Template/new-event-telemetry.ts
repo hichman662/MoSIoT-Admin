@@ -1,5 +1,5 @@
 export interface NewEventTelemetry {
-    Severity:      number;
-    Telemetry_oid: number;
-    Name:          string;
+    severity:      number;
+    telemetry_oid: number;
+    name:          string;
 }

@@ -1,13 +1,13 @@
 <form [formGroup]="deviceCommandForm" (ngSubmit)="editDeviceCommand()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     <div>
                         <b>Synchronous</b><br>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" formControlName="Synchronous">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="synchronous">
                         </div>
                     </div>
                 </td>
@@ -41,7 +41,7 @@
                 <td>
                     <div>
                         <b>Type</b><br>
-                        <select class="form-select" formControlName="Type">
+                        <select class="form-select" formControlName="type">
                             <option value="1">Create</option>
                             <option value="2">Execute</option>
                             <option value="3">Delete</option>
@@ -61,9 +61,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>

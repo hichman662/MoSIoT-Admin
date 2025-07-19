@@ -28,7 +28,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['goalId']);
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
-    this.goal = this.carePlan.Goals?.find(goal => goal.Id == this.id)!;
+    this.goal = this.carePlan.goals?.find(goal => goal.id == this.id)!;
 
     if(this.goal != null){
       this.loadDetailsTable();
@@ -36,7 +36,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
   }
 
   editGoal(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.goal.id + "/Edit");
   }
 
   
@@ -66,7 +66,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
   }
 
   removeGoal(){
-    this.carePlanService.deleteGoal(this.goal.Id).subscribe({
+    this.carePlanService.deleteGoal(this.goal.id).subscribe({
       next: result => {
         console.log("Removing goal...");
       },
@@ -75,7 +75,7 @@ export class CarePlanGoalDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("goal");
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
       }
     })
   }
@@ -83,24 +83,24 @@ export class CarePlanGoalDetailComponent implements OnInit {
   loadDetailsTable(){
     this.tableDetailsDataSource = [
       {
-        Name: "Category",
-        Value: this.categoryGoalPipe.transform(this.goal.Category)
+        name: "Category",
+        value: this.categoryGoalPipe.transform(this.goal.category)
       },
       {
-        Name: "Description",
-        Value: this.goal.Description
+        name: "Description",
+        value: this.goal.description
       },
       {
-        Name: "Priority",
-        Value: this.priorityTypePipe.transform(this.goal.Priority)
+        name: "Priority",
+        value: this.priorityTypePipe.transform(this.goal.priority)
       },
       {
-        Name: "Status",
-        Value: this.careStatusPipe.transform(this.goal.Status)
+        name: "Status",
+        value: this.careStatusPipe.transform(this.goal.status)
       },
       {
-        Name: "Outcome Code",
-        Value: this.goal.OutcomeCode
+        name: "Outcome Code",
+        value: this.goal.outcomeCode
       }
     ]
   }

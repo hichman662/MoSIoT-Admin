@@ -21,14 +21,14 @@ export class EditCarePlanTargetDetailComponent implements OnInit {
   idTarget!:number;
 
   targetForm = this.fb.group({
-    Desired:['',Validators.required],
-    Description:['',Validators.required],
-    DueDate:['',Validators.required]
+    desired:['',Validators.required],
+    description:['',Validators.required],
+    dueDate:['',Validators.required]
   })
 
-  get Desired() { return this.targetForm.get('Desired'); }
-  get DueDate() { return this.targetForm.get('DueDate'); }
-  get Description() { return this.targetForm.get('Description'); }
+  get desired() { return this.targetForm.get('desired'); }
+  get dueDate() { return this.targetForm.get('dueDate'); }
+  get description() { return this.targetForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService,
     private router:Router, private activatedRoute: ActivatedRoute) { }
@@ -37,23 +37,23 @@ export class EditCarePlanTargetDetailComponent implements OnInit {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
 
     this.activatedRoute.params.subscribe((params: Params) => this.idGoal = params['goalId']);
-    this.goal = this.carePlan.Goals?.find(goal => goal.Id == this.idGoal)!;
+    this.goal = this.carePlan.goals?.find(goal => goal.id == this.idGoal)!;
 
     this.activatedRoute.params.subscribe((params: Params) => this.idTarget = params['targetId']);
-    this.target = this.goal.Targets?.find(target => target.Id == this.idTarget)!;
+    this.target = this.goal.targets?.find(target => target.id == this.idTarget)!;
 
-    localStorage.setItem('measureDetail',JSON.stringify(this.target.Measure));
+    localStorage.setItem('measureDetail',JSON.stringify(this.target.measure));
 
-    this.targetForm.setValue({Desired: this.target.DesiredValue, Description: this.target.Description, DueDate: new Date(this.target.DueDate)});
+    this.targetForm.setValue({desired: this.target.desiredValue, description: this.target.description, dueDate: new Date(this.target.dueDate)});
   }
 
   editTarget(){
-    this.target.DesiredValue = this.targetForm.get('Desired')?.value;
-    this.target.DueDate = this.targetForm.get('DueDate')?.value;
-    this.target.DueDate.setDate(this.target.DueDate.getDate() + 1); //Backend substracts a day from the request
-    this.target.Description = this.targetForm.get('Description')?.value;
+    this.target.desiredValue = this.targetForm.get('desired')?.value;
+    this.target.dueDate = this.targetForm.get('dueDate')?.value;
+    this.target.dueDate.setDate(this.target.dueDate.getDate() + 1); //Backend substracts a day from the request
+    this.target.description = this.targetForm.get('description')?.value;
 
-    this.carePlanService.updateTarget(this.target.Id,this.target).subscribe({
+    this.carePlanService.updateTarget(this.target.id,this.target).subscribe({
       next : result =>{
         console.log(result);
       },
@@ -61,7 +61,7 @@ export class EditCarePlanTargetDetailComponent implements OnInit {
         this.sweetAlert.updateError(error);
       },
       complete : () => {
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
         this.sweetAlert.updateSuccess();
       }
     });
@@ -72,6 +72,6 @@ export class EditCarePlanTargetDetailComponent implements OnInit {
   }
 
   cancelTarget(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.idGoal);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.idGoal);
   }
 }

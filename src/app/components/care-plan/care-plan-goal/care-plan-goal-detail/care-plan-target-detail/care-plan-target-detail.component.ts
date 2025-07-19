@@ -23,11 +23,11 @@ export class CarePlanTargetDetailComponent implements OnInit {
   }
 
   editTarget(idTarget:number){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Target/" + idTarget + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.goal.id + "/Target/" + idTarget + "/Edit");
   }
 
   createTarget(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Target/New");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.goal.id + "/Target/New");
   }
 
   removeDialog(id:number){
@@ -64,7 +64,7 @@ export class CarePlanTargetDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Target");
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
       }
     })
   }

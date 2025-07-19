@@ -47,14 +47,14 @@ export class CarePlanComponent implements OnInit {
 
   createCarePlan(){
     let carePlan:CarePlanTemplate = {
-      Id: -999,
-      Description: "",
-      DurationDays: 1,
-      Intent: 1,
-      Name: "",
-      Status: 1,
-      Title: "",
-      Modified: new Date()
+      id: -999,
+      description: "",
+      durationDays: 1,
+      intent: 1,
+      name: "",
+      status: 1,
+      title: "",
+      modified: new Date()
     }
     
     localStorage.setItem('carePlanDetail',JSON.stringify(carePlan));

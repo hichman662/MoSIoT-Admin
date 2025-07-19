@@ -1,5 +1,5 @@
 export interface NewDevice {
-    Name:   string;
-    Type:   number;
-    IsEdge: boolean;
+    name:   string;
+    type:   number;
+    isEdge: boolean;
 }

@@ -16,10 +16,10 @@ export class PatientProfileConditionComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["PatientProfile/" + this.patientProfile.Name + "/Condition/" + id]);
+    this.router.navigate(["PatientProfile/" + this.patientProfile.name + "/Condition/" + id]);
   }
 
   createCondition(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/Condition/" + -999 + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/Condition/" + -999 + "/Edit");
   }
 }

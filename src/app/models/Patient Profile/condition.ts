@@ -1,7 +1,7 @@
 export interface Condition {
-    Id:             number;
-    Description:    string;
-    ClinicalStatus: number;
-    Disease:        number;
-    Name:           string;
+    id:             number;
+    description:    string;
+    clinicalStatus: number;
+    disease:        number;
+    name:           string;
 }

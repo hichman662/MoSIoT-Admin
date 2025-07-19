@@ -20,14 +20,14 @@ export class EditDevicePropertyComponent implements OnInit {
   isNew:boolean = false;
 
   devicePropertyForm = this.fb.group({
-    Name:['',Validators.required],
-    Writable:[''],
-    Cloudable:['']
+    name:['',Validators.required],
+    writable:[''],
+    cloudable:['']
   })
 
-  get Name() { return this.devicePropertyForm.get('Name'); }
-  get Writable() { return this.devicePropertyForm.get('Writable'); }
-  get Cloudable() { return this.devicePropertyForm.get('Cloudable'); }
+  get name() { return this.devicePropertyForm.get('name'); }
+  get writable() { return this.devicePropertyForm.get('writable'); }
+  get cloudable() { return this.devicePropertyForm.get('cloudable'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute, private deviceAdapater: DeviceTemplateAdapterComponent) { }
@@ -35,7 +35,7 @@ export class EditDevicePropertyComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['propertyId']);
-    this.property = this.device.Properties?.find(property => property.Id == this.id)!;
+    this.property = this.device.properties?.find(property => property.id == this.id)!;
 
     //If not exists create new one
     if(this.property == undefined){
@@ -43,25 +43,25 @@ export class EditDevicePropertyComponent implements OnInit {
       this.initDefaults();
     }
 
-    this.devicePropertyForm.setValue({ Name: this.property.Name, Writable: this.property.IsWritable, Cloudable: this.property.IsCloudable});
+    this.devicePropertyForm.setValue({ name: this.property.name, writable: this.property.isWritable, cloudable: this.property.isCloudable});
   }
 
   initDefaults(){
     this.property = {
-      Id: 0,
-      IsCloudable: false,
-      IsWritable: false,
-      Name: ""
+      id: 0,
+      isCloudable: false,
+      isWritable: false,
+      name: ""
     }
   }
 
   editDeviceProperty(){
-    this.property.Name = this.devicePropertyForm.get('Name')?.value;
-    this.property.IsWritable = this.devicePropertyForm.get('Writable')?.value;
-    this.property.IsCloudable = this.devicePropertyForm.get('Cloudable')?.value;
+    this.property.name = this.devicePropertyForm.get('name')?.value;
+    this.property.isWritable = this.devicePropertyForm.get('writable')?.value;
+    this.property.isCloudable = this.devicePropertyForm.get('cloudable')?.value;
 
     if(this.isNew){
-      this.deviceService.createProperty(this.deviceAdapater.newProperty(this.property, this.device.Id)).subscribe({
+      this.deviceService.createProperty(this.deviceAdapater.newProperty(this.property, this.device.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -70,13 +70,13 @@ export class EditDevicePropertyComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
           this.sweetAlert.createSuccess("property");
         }
       });
     }
     else{
-      this.deviceService.updateDeviceProperty(this.property.Id,this.property).subscribe({
+      this.deviceService.updateDeviceProperty(this.property.id,this.property).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -85,7 +85,7 @@ export class EditDevicePropertyComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Property/" + this.property.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Property/" + this.property.id);
 
           this.sweetAlert.updateSuccess();
         }
@@ -94,6 +94,6 @@ export class EditDevicePropertyComponent implements OnInit {
   }
 
   cancelDeviceProperty(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.id);
   }
 }

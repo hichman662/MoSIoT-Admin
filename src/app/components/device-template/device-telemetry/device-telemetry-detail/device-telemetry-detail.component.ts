@@ -30,13 +30,13 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['telemetryId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.id)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.id)!;
 
     this.loadProfileTable();
   }
 
   editTelemetryProfile(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.telemetry.Id + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.telemetry.id + "/Edit");
   }
 
   removeDialog(){
@@ -44,7 +44,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.telemetry.Name
+      data: this.telemetry.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -64,7 +64,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   }
 
   removeDeviceTelemetry(){
-    this.deviceService.deleteDeviceTelemetry(this.telemetry.Id).subscribe({
+    this.deviceService.deleteDeviceTelemetry(this.telemetry.id).subscribe({
       next: result => {
         console.log("Removing device telemetry...");
       },
@@ -73,7 +73,7 @@ export class DeviceTelemetryDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Telemetry");
-        this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
+        this.router.navigateByUrl("/DeviceTemplate/" + this.device.id);
       }
     })
   }
@@ -81,20 +81,20 @@ export class DeviceTelemetryDetailComponent implements OnInit {
   loadProfileTable(){
     this.tableProfileDataSource = [
       {
-        Name: "Frecuency",
-        Value: this.telemetry.Frecuency
+        name: "Frecuency",
+        value: this.telemetry.frecuency
       },
       {
-        Name: "Type",
-        Value: this.telemetryTypePipe.transform(this.telemetry.Type)
+        name: "Type",
+        value: this.telemetryTypePipe.transform(this.telemetry.type)
       },
       {
-        Name: "Unit",
-        Value: this.telemetryUnitType.transform(this.telemetry.Unit)
+        name: "Unit",
+        value: this.telemetryUnitType.transform(this.telemetry.unit)
       },
       {
-        Name: "Schema",
-        Value: this.schemaTypePipe.transform(this.telemetry.Schema)
+        name: "Schema",
+        value: this.schemaTypePipe.transform(this.telemetry.schema)
       }
     ]
   }

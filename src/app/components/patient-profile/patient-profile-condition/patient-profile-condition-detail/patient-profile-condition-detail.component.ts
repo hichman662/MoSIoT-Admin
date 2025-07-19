@@ -28,7 +28,7 @@ export class PatientProfileConditionDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['conditionId']);
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
-    this.condition = this.patientProfile.Condition.find(condition => condition.Id == this.id)!;
+    this.condition = this.patientProfile.condition.find(condition => condition.id == this.id)!;
 
     this.loadTable();
   }
@@ -36,22 +36,22 @@ export class PatientProfileConditionDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Clinical status",
-        Value: this.clinicalType.transform(this.condition.ClinicalStatus)
+        name: "Clinical status",
+        value: this.clinicalType.transform(this.condition.clinicalStatus)
       },
       {
-        Name: "Disease",
-        Value: this.diseaseType.transform(this.condition.Disease)
+        name: "Disease",
+        value: this.diseaseType.transform(this.condition.disease)
       },
       {
-        Name: "Description",
-        Value: this.condition.Description
+        name: "Description",
+        value: this.condition.description
       }
     ]
   }
 
   editCondition(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/Condition/" + this.condition.Id + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/Condition/" + this.condition.id + "/Edit");
   }
 
   removeDialog(){
@@ -59,7 +59,7 @@ export class PatientProfileConditionDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.condition.Name
+      data: this.condition.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -79,8 +79,8 @@ export class PatientProfileConditionDetailComponent implements OnInit {
   }
 
   removePatientProfileCondition(){
-    console.log("Condition ID to remove: " + this.condition.Id);
-    this.patientProfileService.deleteCondition(this.condition.Id).subscribe({
+    console.log("Condition ID to remove: " + this.condition.id);
+    this.patientProfileService.deleteCondition(this.condition.id).subscribe({
       next: result => {
         console.log("Removing condition...");
       },
@@ -89,7 +89,7 @@ export class PatientProfileConditionDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Condition");
-        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
       }
     })
   }

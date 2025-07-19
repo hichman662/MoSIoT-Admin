@@ -1,10 +1,10 @@
 export interface NewMedication {
-    CareActivity_oid: number;
-    ProductReference: number;
-    Name:             string;
-    Manufacturer:     string;
-    Description:      string;
-    Dosage:           string;
-    Form:             number;
-    MedicationCode:   string;
+    careActivity_oid: number;
+    productReference: number;
+    name:             string;
+    manufacturer:     string;
+    description:      string;
+    dosage:           string;
+    form:             number;
+    medicationCode:   string;
 }

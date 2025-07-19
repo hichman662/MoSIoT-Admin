@@ -1,13 +1,13 @@
 <form [formGroup]="devicePropertyForm" (ngSubmit)="editDeviceProperty()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     <div>
                         <b>Writable</b><br>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" formControlName="Writable">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="writable">
                         </div>
                     </div>
                 </td>
@@ -41,7 +41,7 @@
                     <div>
                         <b>Cloudable</b><br>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" formControlName="Cloudable">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="cloudable">
                         </div>
                     </div>
                 </td>

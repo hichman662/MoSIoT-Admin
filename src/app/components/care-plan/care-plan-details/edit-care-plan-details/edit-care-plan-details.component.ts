@@ -22,22 +22,22 @@ export class EditCarePlanDetailsComponent implements OnInit {
   patients!:PatientProfile[];
 
   carePlanForm = this.fb.group({
-    Name:['',Validators.required],
-    Title:['',Validators.required],
-    Description:['', Validators.required],
-    Duration:['', Validators.required],
-    Intent:['', Validators.required],
-    Status:['', Validators.required],
-    Patient:['']
+    name:['',Validators.required],
+    title:['',Validators.required],
+    description:['', Validators.required],
+    duration:['', Validators.required],
+    intent:['', Validators.required],
+    status:['', Validators.required],
+    patient:['']
   })
 
-  get Name() { return this.carePlanForm.get('Name'); }
-  get Title() { return this.carePlanForm.get('Title'); }
-  get Description() { return this.carePlanForm.get('Description'); }
-  get Duration() { return this.carePlanForm.get('Duration'); }
-  get Intent() { return this.carePlanForm.get('Intent'); }
-  get Status() { return this.carePlanForm.get('Status'); }
-  get Patient() { return this.carePlanForm.get('Patient'); }
+  get name() { return this.carePlanForm.get('name'); }
+  get title() { return this.carePlanForm.get('title'); }
+  get description() { return this.carePlanForm.get('description'); }
+  get duration() { return this.carePlanForm.get('duration'); }
+  get intent() { return this.carePlanForm.get('intent'); }
+  get status() { return this.carePlanForm.get('status'); }
+  get patient() { return this.carePlanForm.get('patient'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, private patientProfileService: PatientProfileService, private router:Router, 
     private carePlanAdapter: CarePlanAdapterComponent, private datePipe: DatePipe) { }
@@ -49,23 +49,23 @@ export class EditCarePlanDetailsComponent implements OnInit {
     this.getPatients();
 
     //If not exists, create new
-    if(!this.carePlans.some(carePlan => carePlan.Id == this.carePlan.Id)){
+    if(!this.carePlans.some(carePlan => carePlan.id == this.carePlan.id)){
       this.newCarePlan = true;
     } 
 
-    this.carePlanForm.setValue({Name: this.carePlan.Name, Title: this.carePlan.Title, Description: this.carePlan.Description, Duration: this.carePlan.DurationDays, 
-      Intent: this.carePlan.Intent, Status: this.carePlan.Status, Patient: 1});
+    this.carePlanForm.setValue({name: this.carePlan.name, title: this.carePlan.title, description: this.carePlan.description, duration: this.carePlan.durationDays, 
+      intent: this.carePlan.intent, status: this.carePlan.status, patient: 1});
   
   }
 
   editCarePlan(){
-    this.carePlan.Name = this.carePlanForm.get('Name')?.value;
-    this.carePlan.Title = this.carePlanForm.get('Title')?.value;
-    this.carePlan.Description = this.carePlanForm.get('Description')?.value;
-    this.carePlan.DurationDays = this.carePlanForm.get('Duration')?.value;
-    this.carePlan.Intent = this.carePlanForm.get('Intent')?.value;
-    this.carePlan.Status = this.carePlanForm.get('Status')?.value;
-    this.carePlan.Modified = new Date();
+    this.carePlan.name = this.carePlanForm.get('name')?.value;
+    this.carePlan.title = this.carePlanForm.get('title')?.value;
+    this.carePlan.description = this.carePlanForm.get('description')?.value;
+    this.carePlan.durationDays = this.carePlanForm.get('duration')?.value;
+    this.carePlan.intent = this.carePlanForm.get('intent')?.value;
+    this.carePlan.status = this.carePlanForm.get('status')?.value;
+    this.carePlan.modified = new Date();
 
     if(this.newCarePlan){
       this.carePlanService.createCarePlanTemplate(this.carePlanAdapter.newCarePlan(this.carePlan)).subscribe({
@@ -84,7 +84,7 @@ export class EditCarePlanDetailsComponent implements OnInit {
       })
     }
     else{
-      this.carePlanService.updateCarePlan(this.carePlan.Id,this.carePlan).subscribe({
+      this.carePlanService.updateCarePlan(this.carePlan.id,this.carePlan).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -94,7 +94,7 @@ export class EditCarePlanDetailsComponent implements OnInit {
         complete : () => {
           this.patientAssigned();
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/ " + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -118,8 +118,8 @@ export class EditCarePlanDetailsComponent implements OnInit {
   patientAssigned(){
     let idPatient:number = this.carePlanForm.get('Patient')?.value;
 
-    if(this.carePlan.Patient?.Id != undefined && this.carePlan.Patient?.Id != idPatient){
-      this.carePlanService.updateCarePlanPatient(this.carePlan.Id,idPatient).subscribe({
+    if(this.carePlan.patient?.id != undefined && this.carePlan.patient?.id != idPatient){
+      this.carePlanService.updateCarePlanPatient(this.carePlan.id,idPatient).subscribe({
         next: result => {
           console.log( result );
         },
@@ -134,6 +134,6 @@ export class EditCarePlanDetailsComponent implements OnInit {
   }
 
   cancelCarePlan(){
-    this.router.navigateByUrl("/CarePlan/" + this.carePlan.Id);
+    this.router.navigateByUrl("/CarePlan/" + this.carePlan.id);
   }
 }

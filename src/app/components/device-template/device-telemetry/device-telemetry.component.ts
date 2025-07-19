@@ -18,11 +18,11 @@ export class DeviceTelemetryComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Telemetry/" + id]);
+    this.router.navigate(["DeviceTemplate/" + this.device.name + "/Telemetry/" + id]);
   }
 
   createTelemetry(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + 0 + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + 0 + "/Edit");
   }
 
 }

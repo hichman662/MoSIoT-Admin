@@ -16,11 +16,11 @@ export class DeviceCommandComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Command/" + id]);
+    this.router.navigate(["DeviceTemplate/" + this.device.name + "/Command/" + id]);
   }
 
   createCommand(){
-    this.router.navigateByUrl("DeviceTemplate/"+ this.device.Name +"/Command/New Command/Edit");
+    this.router.navigateByUrl("DeviceTemplate/"+ this.device.name +"/Command/New Command/Edit");
   }
 
 }

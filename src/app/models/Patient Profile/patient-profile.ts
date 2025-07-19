@@ -3,13 +3,13 @@ import { Condition } from "./condition";
 import { Disability } from "./disability";
 
 export interface PatientProfile {
-    Id:                number;
-    PreferredLanguage: number;
-    Region:            string;
-    HazardAvoidance:   number;
-    Name:              string;
-    Description:       string;
-    AccessMode:        AccessMode[];
-    Condition:         Condition[];
-    Disabilities:      Disability[];
+    id:                number;
+    preferredLanguage: number;
+    region:            string;
+    hazardAvoidance:   number;
+    name:              string;
+    description:       string;
+    accessMode:        AccessMode[];
+    condition:         Condition[];
+    disabilities:      Disability[];
 }

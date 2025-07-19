@@ -19,16 +19,16 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   newDisability:boolean = false;
 
   patientDisabilityForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['',Validators.required],
-    Severity:['',Validators.required],
-    Description:['',Validators.required]
+    name:['',Validators.required],
+    type:['',Validators.required],
+    severity:['',Validators.required],
+    description:['',Validators.required]
   })
 
-  get Name() { return this.patientDisabilityForm.get('Name'); }
-  get Type() { return this.patientDisabilityForm.get('Type'); }
-  get Severity() { return this.patientDisabilityForm.get('Severity'); }
-  get Description() { return this.patientDisabilityForm.get('Description'); }
+  get name() { return this.patientDisabilityForm.get('name'); }
+  get type() { return this.patientDisabilityForm.get('type'); }
+  get severity() { return this.patientDisabilityForm.get('severity'); }
+  get description() { return this.patientDisabilityForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
@@ -36,35 +36,35 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['disabilityId']);
-    this.disability = this.patient.Disabilities.find(disability => disability.Id == this.id)!;
+    this.disability = this.patient.disabilities.find(disability => disability.id == this.id)!;
 
     //If not exists, create new
-    if(!this.patient.Disabilities.some(disability => disability.Id == this.id)){
+    if(!this.patient.disabilities.some(disability => disability.id == this.id)){
       this.newDisability = true;
       this.initDefaults();
     }
 
-    this.patientDisabilityForm.setValue({Name: this.disability.Name, Type: this.disability.Type, Severity: this.disability.Severity, Description: this.disability.Description});
+    this.patientDisabilityForm.setValue({Name: this.disability.name, Type: this.disability.type, Severity: this.disability.severity, Description: this.disability.description});
   }
 
   initDefaults(){
     this.disability = {
-      Id: 0,
-      Name: "",
-      Description: "",
-      Severity: 1,
-      Type: 1
+      id: 0,
+      name: "",
+      description: "",
+      severity: 1,
+      type: 1
     }
   }
 
   editPatientDisability(){
-    this.disability.Name = this.patientDisabilityForm.get('Name')?.value;
-    this.disability.Type = this.patientDisabilityForm.get('Type')?.value;
-    this.disability.Severity = this.patientDisabilityForm.get('Severity')?.value;
-    this.disability.Description = this.patientDisabilityForm.get('Description')?.value;
+    this.disability.name = this.patientDisabilityForm.get('name')?.value;
+    this.disability.type = this.patientDisabilityForm.get('type')?.value;
+    this.disability.severity = this.patientDisabilityForm.get('severity')?.value;
+    this.disability.description = this.patientDisabilityForm.get('description')?.value;
 
     if(this.newDisability){
-      this.patientService.createDisability(this.patientProfileAdapter.newDisability(this.disability, this.patient.Id)).subscribe({
+      this.patientService.createDisability(this.patientProfileAdapter.newDisability(this.disability, this.patient.id)).subscribe({
         next : result =>{
           this.disability = result;
         },
@@ -73,13 +73,13 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.createSuccess("Disability");
         }
       });
     }
     else{
-      this.patientService.updatePatientDisability(this.disability.Id,this.disability).subscribe({
+      this.patientService.updatePatientDisability(this.disability.id,this.disability).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -88,7 +88,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -96,6 +96,6 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
   }
 
   cancelPatientDisability(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patient.Id);
+    this.router.navigateByUrl("PatientProfile/ " + this.patient.id);
   }
 }

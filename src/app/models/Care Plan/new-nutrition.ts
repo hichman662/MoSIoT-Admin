@@ -1,6 +1,6 @@
 export interface NewNutrition {
-    Description:      string;
-    DietCode:         string;
-    CareActivity_oid: number;
-    Name:             string;
+    description:      string;
+    dietCode:         string;
+    careActivity_oid: number;
+    name:             string;
 }

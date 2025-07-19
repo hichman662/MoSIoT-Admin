@@ -1,5 +1,5 @@
 export interface Event{
-    Name:     string;
-    Id:       number;
-    Severity: number;
+    name:     string;
+    id:       number;
+    severity: number;
 }

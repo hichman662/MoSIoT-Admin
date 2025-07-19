@@ -21,14 +21,14 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
   id!:number;
 
   careActivityNutritionForm = this.fb.group({
-    Name:['',Validators.required],
-    Description:['',Validators.required],
-    Code:['', Validators.required]
+    name:['',Validators.required],
+    description:['',Validators.required],
+    code:['', Validators.required]
   })
 
-  get Name() { return this.careActivityNutritionForm.get('Name'); }
-  get Description() { return this.careActivityNutritionForm.get('Description'); }
-  get Code() { return this.careActivityNutritionForm.get('Code'); }
+  get name() { return this.careActivityNutritionForm.get('name'); }
+  get description() { return this.careActivityNutritionForm.get('description'); }
+  get code() { return this.careActivityNutritionForm.get('code'); }
 
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
@@ -37,14 +37,14 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivityId']);
-    this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
+    this.careActivity = this.carePlan.careActivities?.find(careActivity => careActivity.id == this.id)!;
 
     if(this.careActivity == undefined){
       this.sweetAlert.readError("care activity","care activity error");
-      this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+      this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
     }
     else{
-      this.careActivityNutrition = this.careActivity.NutritionOrders!;
+      this.careActivityNutrition = this.careActivity.nutritionOrders!;
 
       //If not exists, create new
       if(this.careActivityNutrition == undefined){
@@ -53,25 +53,25 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
       }
     }
 
-    this.careActivityNutritionForm.setValue({Name: this.careActivityNutrition.Name, Code: this.careActivityNutrition.DietCode, Description: this.careActivityNutrition.Description});
+    this.careActivityNutritionForm.setValue({name: this.careActivityNutrition.name, code: this.careActivityNutrition.dietCode, description: this.careActivityNutrition.description});
   }
 
   initDefaults(){
     this.careActivityNutrition = {
-      Name: "",
-      Description: "",
-      DietCode: "",
-      Id: 0
+      name: "",
+      description: "",
+      dietCode: "",
+      id: 0
     }
   }
 
   editaCareAcitivityNutrition(){
-    this.careActivityNutrition.Name = this.careActivityNutritionForm.get('Name')?.value;
-    this.careActivityNutrition.Description = this.careActivityNutritionForm.get('Description')?.value;
-    this.careActivityNutrition.DietCode = this.careActivityNutritionForm.get('Code')?.value;
+    this.careActivityNutrition.name = this.careActivityNutritionForm.get('name')?.value;
+    this.careActivityNutrition.description = this.careActivityNutritionForm.get('description')?.value;
+    this.careActivityNutrition.dietCode = this.careActivityNutritionForm.get('code')?.value;
 
     if(this.isNew){
-      this.carePlanService.createCareActivityNutrition(this.carePlanAdapter.newCareNutrition(this.careActivityNutrition, this.careActivity.Id)).subscribe({
+      this.carePlanService.createCareActivityNutrition(this.carePlanAdapter.newCareNutrition(this.careActivityNutrition, this.careActivity.id)).subscribe({
         next : result =>{
           this.careActivityNutrition = result;
         },
@@ -80,13 +80,13 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.createSuccess("nutrition");
         }
       });
     }
     else{
-      this.carePlanService.updateCareActivityNutrition(this.careActivityNutrition.Id,this.carePlanAdapter.newCareNutrition(this.careActivityNutrition, this.careActivity.Id)).subscribe({
+      this.carePlanService.updateCareActivityNutrition(this.careActivityNutrition.id,this.carePlanAdapter.newCareNutrition(this.careActivityNutrition, this.careActivity.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -95,7 +95,7 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -103,6 +103,6 @@ export class EditCareActivityNutritionOrderComponent implements OnInit {
   }
 
   cancelCareActivityNutrition(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id);
   }
 }

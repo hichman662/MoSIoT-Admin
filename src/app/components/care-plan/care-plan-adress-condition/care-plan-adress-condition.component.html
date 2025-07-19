@@ -1,12 +1,12 @@
 <div class="mt-3 mb-3">
-    <ol class="list-group mt-2"  *ngFor="let condition of carePlan.AddressConditions">
+    <ol class="list-group mt-2"  *ngFor="let condition of carePlan.addressConditions">
         <li class="list-group-item d-flex align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{condition.Name | titlecase}}</div>
-                <div>Description: {{condition.Description | titlecase}}</div>
+                <div class="fw-bold">{{condition.name | titlecase}}</div>
+                <div>Description: {{condition.description | titlecase}}</div>
             </div>
             <div>
-                <button class="btn btn-outline-danger" (click)="removeDialog(condition.Id)">Put off</button>
+                <button class="btn btn-outline-danger" (click)="removeDialog(condition.id)">Put off</button>
             </div>
         </li>
     </ol>
@@ -16,8 +16,8 @@
     <form [formGroup]="adressConditionForm" (ngSubmit)="editAdressCondition()">
         <div>
             <b>Conditions</b><br>
-            <select class="form-select" formControlName="Condition" multiple>
-                <option *ngFor="let condition of conditions" [value]="condition.Id">{{condition.Name}}</option>
+            <select class="form-select" formControlName="condition" multiple>
+                <option *ngFor="let condition of conditions" [value]="condition.id">{{condition.name}}</option>
             </select>
         </div>
 

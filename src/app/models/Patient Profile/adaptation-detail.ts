@@ -1,5 +1,5 @@
 export interface AdaptationDetail {
-    Id:                number;
-    AdaptationRequest: number;
-    Description:       string;
+    id:                number;
+    adaptationRequest: number;
+    description:       string;
 }

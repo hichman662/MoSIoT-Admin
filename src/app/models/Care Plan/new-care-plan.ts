@@ -1,10 +1,10 @@
 export interface NewCarePlan {
-    PatientProfile_oid?: number;
-    Status:             number;
-    Intent:             number;
-    Title:              string;
-    Modified:           Date;
-    DurationDays:       number;
-    Name:               string;
-    Description:        string;
+    patientProfile_oid?: number;
+    status:             number;
+    intent:             number;
+    title:              string;
+    modified:           Date;
+    durationDays:       number;
+    name:               string;
+    description:        string;
 }

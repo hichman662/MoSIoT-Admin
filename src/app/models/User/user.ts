@@ -1,7 +1,7 @@
 export interface User {
-    Id:                      number;
-    Name:                    string;
-    Surnames:                string;
-    Description:             string;
-    DameTiempoTotalSesiones: number;
+    id:                      number;
+    name:                    string;
+    surnames:                string;
+    description:             string;
+    dameTiempoTotalSesiones: number;
 }

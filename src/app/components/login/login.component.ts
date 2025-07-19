@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.user = {
-      Email: this.loginForm.get("email")?.value,
-      Pass: this.loginForm.get("password")?.value
+      email: this.loginForm.get("email")?.value,
+      pass: this.loginForm.get("password")?.value
     };
 
     this.userService.adminLogin(this.user).subscribe({

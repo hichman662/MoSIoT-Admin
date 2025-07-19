@@ -1,4 +1,4 @@
-<h1>{{goal.Name | titlecase}}</h1>
+<h1>{{goal.name | titlecase}}</h1>
 <hr>
 <div>
   <mat-tab-group>
@@ -9,12 +9,12 @@
         </ng-template>
         <form [formGroup]="targetForm" (ngSubmit)="createTarget()">
             <ol class="list-group mt-2">
-                <li class="list-group-item d-flex align-items-start" *ngFor="let target of goal.Targets">
+                <li class="list-group-item d-flex align-items-start" *ngFor="let target of goal.targets">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">{{target.DueDate | date}}</div>
-                        <div>Desired Value: {{target.DesiredValue}}</div>
-                        <div>Description: {{target.Description | titlecase}}</div>
-                        <div>Measure: {{target.Measure?.Name | isAssigned | titlecase}}</div>
+                        <div class="fw-bold">{{target.dueDate | date}}</div>
+                        <div>Desired Value: {{target.desiredValue}}</div>
+                        <div>Description: {{target.description | titlecase}}</div>
+                        <div>Measure: {{target.measure?.name | isAssigned | titlecase}}</div>
                     </div>
                 </li>
 
@@ -24,7 +24,7 @@
                             <b>Due Date</b><br>
                             <mat-form-field appearance="fill">
                                 <mat-label>Choose a date</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="DueDate">
+                                <input matInput [matDatepicker]="picker" formControlName="dueDate">
                                 <mat-hint>Month/Day/Year</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
@@ -33,14 +33,14 @@
     
                         <div>
                             <b>Desired Value</b><br>
-                            <input type="number" class="form-control" formControlName="Desired">
+                            <input type="number" class="form-control" formControlName="desired">
                         </div>
     
                         <div>
                             <b>Description</b><br>
-                            <textarea type="text" class="form-control" formControlName="Description" required></textarea>
-                            <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                                <div *ngIf="Description?.errors?.['required']">
+                            <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                            <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                                <div *ngIf="description?.errors?.['required']">
                                     <div class="invalid-feedback">A description is required</div>
                                 </div>
                             </div>

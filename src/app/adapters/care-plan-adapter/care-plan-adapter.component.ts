@@ -32,14 +32,14 @@ export class CarePlanAdapterComponent implements OnInit {
     let newCarePlan: NewCarePlan;
 
     newCarePlan = {
-      PatientProfile_oid: carePlan.Patient?.Id,
-      Title: carePlan.Title,
-      Description: carePlan.Description,
-      DurationDays: carePlan.DurationDays,
-      Intent: carePlan.Intent,
-      Modified: carePlan.Modified,
-      Name: carePlan.Name,
-      Status: carePlan.Status
+      patientProfile_oid: carePlan.patient?.id,
+      title: carePlan.title,
+      description: carePlan.description,
+      durationDays: carePlan.durationDays,
+      intent: carePlan.intent,
+      modified: carePlan.modified,
+      name: carePlan.name,
+      status: carePlan.status
     }
 
     return newCarePlan;
@@ -49,15 +49,15 @@ export class CarePlanAdapterComponent implements OnInit {
     let newCareActivity: NewCareActivity;
 
     newCareActivity = {
-      CarePlanTemplate_oid: idCarePlanTemplate,
-      Name: careActivity.Name,
-      Description: careActivity.Description,
-      Duration: careActivity.Duration,
-      Location: careActivity.Location,
-      Periodicity: careActivity.Periodicity,
-      TypeActivity: careActivity.TypeActivity,
-      ActivityCode: "",
-      OutcomeCode: ""
+      carePlanTemplate_oid: idCarePlanTemplate,
+      name: careActivity.name,
+      description: careActivity.description,
+      duration: careActivity.duration,
+      location: careActivity.location,
+      periodicity: careActivity.periodicity,
+      typeActivity: careActivity.typeActivity,
+      activityCode: "",
+      outcomeCode: ""
     }
 
     return newCareActivity;
@@ -67,14 +67,14 @@ export class CarePlanAdapterComponent implements OnInit {
     let newMedication: NewMedication;
 
     newMedication = {
-      CareActivity_oid: idCareActivity,
-      Name: medication.Name,
-      Description: medication.Description,
-      Dosage: medication.Dosage, 
-      Form: medication.Form,
-      Manufacturer: medication.Manufacturer, 
-      MedicationCode: medication.MedicationCode,
-      ProductReference: medication.ProductReference
+      careActivity_oid: idCareActivity,
+      name: medication.name,
+      description: medication.description,
+      dosage: medication.dosage, 
+      form: medication.form,
+      manufacturer: medication.manufacturer, 
+      medicationCode: medication.medicationCode,
+      productReference: medication.productReference
     }
 
     return newMedication;
@@ -84,10 +84,10 @@ export class CarePlanAdapterComponent implements OnInit {
     let newNutrition: NewNutrition;
 
     newNutrition = {
-      CareActivity_oid: idCareActivity,
-      Description: nutrition.Description,
-      DietCode: nutrition.DietCode,
-      Name: nutrition.Name
+      careActivity_oid: idCareActivity,
+      description: nutrition.description,
+      dietCode: nutrition.dietCode,
+      name: nutrition.name
     }
 
     return newNutrition;
@@ -97,12 +97,12 @@ export class CarePlanAdapterComponent implements OnInit {
     let newAppointment: NewAppointment;
 
     newAppointment = {
-      CareActivity_oid: idCareActivity,
-      Description: appointment.Description,
-      Direction: appointment.Direction,
-      IsVirtual: appointment.IsVirtual,
-      Id: appointment.Id,
-      ReasonCode: appointment.ReasonCode
+      careActivity_oid: idCareActivity,
+      description: appointment.description,
+      direction: appointment.direction,
+      isVirtual: appointment.isVirtual,
+      id: appointment.id,
+      reasonCode: appointment.reasonCode
     }
 
     return newAppointment;
@@ -112,14 +112,14 @@ export class CarePlanAdapterComponent implements OnInit {
     let newGoal: NewGoal;
 
     newGoal = {
-      CarePlanTemplate_oid: idCarePlanTemplate,
-      Category: goal.Category,
-      Condition_oid: idCondition,
-      Description: goal.Description,
-      Name: goal.Name,
-      OutcomeCode: goal.OutcomeCode,
-      Priority: goal.Priority,
-      Status: goal.Status
+      carePlanTemplate_oid: idCarePlanTemplate,
+      category: goal.category,
+      condition_oid: idCondition,
+      description: goal.description,
+      name: goal.name,
+      outcomeCode: goal.outcomeCode,
+      priority: goal.priority,
+      status: goal.status
     }
 
     return newGoal;
@@ -129,10 +129,10 @@ export class CarePlanAdapterComponent implements OnInit {
     let newTarget: NewTarget;
 
     newTarget = {
-      Description: target.Description,
-      DesiredValue: target.DesiredValue,
-      DueDate: target.DueDate,
-      Goal_oid: idGoal
+      description: target.description,
+      desiredValue: target.desiredValue,
+      dueDate: target.dueDate,
+      goal_oid: idGoal
     }
 
     return newTarget;
@@ -142,9 +142,9 @@ export class CarePlanAdapterComponent implements OnInit {
     let newMeasure: NewMeasure;
 
     newMeasure = {
-      Description: measure.Description,
-      LOINCcode: measure.LOINCcode,
-      Name: measure.Name
+      description: measure.description,
+      lOINCcode: measure.lOINCcode,
+      name: measure.name
     }
 
     return newMeasure;

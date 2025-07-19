@@ -3,11 +3,11 @@ import { AdaptationDetail } from "./adaptation-detail";
 import { AdaptationRequest } from "./adaptation-request";
 
 export interface AccessMode {
-    Id:                number;
-    TypeAccessMode:    number;
-    Description:       string;
-    Name:              string;
-    AdaptationType?:    AdaptationType[];
-    AdaptationDetail?:  AdaptationDetail[];
-    AdaptationRequest?: AdaptationRequest[];
+    id:                number;
+    typeAccessMode:    number;
+    description:       string;
+    name:              string;
+    adaptationType?:    AdaptationType[];
+    adaptationDetail?:  AdaptationDetail[];
+    adaptationRequest?: AdaptationRequest[];
 }

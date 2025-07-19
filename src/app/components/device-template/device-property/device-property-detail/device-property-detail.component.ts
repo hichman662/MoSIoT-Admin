@@ -27,7 +27,7 @@ export class DevicePropertyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['propertyId']);
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
-    this.property = this.device.Properties?.find(property => property.Id == this.id)!;
+    this.property = this.device.properties?.find(property => property.id == this.id)!;
 
     this.loadTable();
   }
@@ -35,18 +35,18 @@ export class DevicePropertyDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Writable",
-        Value: this.boolToString.transform(this.property.IsWritable)
+        name: "Writable",
+        value: this.boolToString.transform(this.property.isWritable)
       },
       {
-        Name: "Cloudable",
-        Value: this.boolToString.transform(this.property.IsCloudable)
+        name: "Cloudable",
+        value: this.boolToString.transform(this.property.isCloudable)
       }
     ]
   }
 
   editProperty(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Property/" + this.property.Id + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Property/" + this.property.id + "/Edit");
   }
 
   removeDialog(){
@@ -54,7 +54,7 @@ export class DevicePropertyDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.property.Name
+      data: this.property.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -74,8 +74,8 @@ export class DevicePropertyDetailComponent implements OnInit {
   }
 
   removeDeviceProperty(){
-    console.log("Property ID to remove: " + this.property.Id);
-    this.deviceService.deleteDeviceProperty(this.property.Id).subscribe({
+    console.log("Property ID to remove: " + this.property.id);
+    this.deviceService.deleteDeviceProperty(this.property.id).subscribe({
       next: result => {
         console.log("Removing device property...");
       },
@@ -84,7 +84,7 @@ export class DevicePropertyDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("property");
-        this.router.navigateByUrl("/DeviceTemplate/" + this.device.Id);
+        this.router.navigateByUrl("/DeviceTemplate/" + this.device.id);
       }
     })
   }

@@ -40,26 +40,26 @@ export class CarePlanMeasureDetailsComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Name",
-        Value: this.measure.Name
+        name: "Name",
+        value: this.measure.name
       },
       {
-        Name: "Description",
-        Value: this.measure.Description
+        name: "Description",
+        value: this.measure.description
       },
       {
-        Name: "LOIN Code",
-        Value: this.measure.LOINCcode
+        name: "LOIN Code",
+        value: this.measure.lOINCcode
       }
     ]
   }
 
   editDetails(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.idGoal + "/Target/" + this.idTarget + "/Measure/" + this.measure.Id + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.idGoal + "/Target/" + this.idTarget + "/Measure/" + this.measure.id + "/Edit");
   }
 
   createMeasure(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.idGoal + "/Target/" + this.idTarget + "/Measure/" + -999 + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.idGoal + "/Target/" + this.idTarget + "/Measure/" + -999 + "/Edit");
   }
 
 }

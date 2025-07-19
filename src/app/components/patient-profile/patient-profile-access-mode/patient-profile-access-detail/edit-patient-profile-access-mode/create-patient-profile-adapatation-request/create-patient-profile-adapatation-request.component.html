@@ -1,7 +1,7 @@
 <form [formGroup]="patientAdaptationForm" (ngSubmit)="createPatientAdaptation()">
     <div class="row">
         <div class="col">
-            <h1>{{accessMode.Name | titlecase}}</h1>
+            <h1>{{accessMode.name | titlecase}}</h1>
         </div>  
     </div>
     <hr>
@@ -14,12 +14,12 @@
             </ng-template>
 
             <ol class="list-group mt-2">
-                <li *ngFor="let adaptationRequestItem of accessMode.AdaptationRequest" class="list-group-item d-flex align-items-start">
+                <li *ngFor="let adaptationRequestItem of accessMode.adaptationRequest" class="list-group-item d-flex align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">{{adaptationRequestItem.AccessModeTarget | accessModeType | titlecase}}</div>
-                        {{adaptationRequestItem.Description | titlecase}}
+                        <div class="fw-bold">{{adaptationRequestItem.accessModeTarget | accessModeType | titlecase}}</div>
+                        {{adaptationRequestItem.description | titlecase}}
                     </div>
-                    <span class="badge bg-primary rounded-pill">Language: {{adaptationRequestItem.LanguageOfAdaptation | language | uppercase}}</span>
+                    <span class="badge bg-primary rounded-pill">Language: {{adaptationRequestItem.languageOfAdaptation | language | uppercase}}</span>
                 </li>
 
                 <hr>
@@ -28,7 +28,7 @@
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">
                             <b>Access Mode Target</b><br>
-                            <select class="form-select" formControlName="Target">
+                            <select class="form-select" formControlName="target">
                                 <option value="1">Auditory</option>
                                 <option value="2">Colour</option>
                                 <option value="3">Item Size</option>
@@ -44,9 +44,9 @@
 
                         <div class="mt-2">
                             <b>Description</b><br>
-                            <textarea type="text" class="form-control" formControlName="Description" required></textarea>
-                            <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                                <div *ngIf="Description?.errors?.['required']">
+                            <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                            <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                                <div *ngIf="description?.errors?.['required']">
                                     <div class="invalid-feedback">A description is required</div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                     
                     <span class="badge bg-primary rounded-pill">
                         Language:
-                        <select class="form-select" formControlName="Language">
+                        <select class="form-select" formControlName="language">
                             <option value="1">ES</option>
                             <option value="2">EN</option>
                             <option value="3">FR</option>

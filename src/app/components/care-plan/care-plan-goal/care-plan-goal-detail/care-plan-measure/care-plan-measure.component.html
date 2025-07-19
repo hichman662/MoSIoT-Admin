@@ -5,7 +5,7 @@
 
     <ng-template #listMeasures>
         <ul class="list-group" *ngFor="let measure of measures">
-            <li class="list-group-item list-group-item-action d-flex justify-content-between" (click)="details(measure.Id)" role='button'>{{measure.Name}} <mat-icon>keyboard_arrow_right</mat-icon></li>
+            <li class="list-group-item list-group-item-action d-flex justify-content-between" (click)="details(measure.id)" role='button'>{{measure.name}} <mat-icon>keyboard_arrow_right</mat-icon></li>
         </ul>
     </ng-template>
 </div>

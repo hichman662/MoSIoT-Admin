@@ -1,6 +1,6 @@
 export interface NewAdaptationRequest {
-    AccessModeTarget:     number;
-    AccessMode_oid:       number;
-    LanguageOfAdaptation: number;
-    Description:          string;
+    accessModeTarget:     number;
+    accessMode_oid:       number;
+    languageOfAdaptation: number;
+    description:          string;
 }

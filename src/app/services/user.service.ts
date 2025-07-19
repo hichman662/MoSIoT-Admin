@@ -13,9 +13,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  adminLogin(data: UserLogin){
-    return this.http.post<UserLogin>(environment.base_url + '/AdminAnonimous/Login',data);
-  }
+  adminLogin(data: UserLogin) {
+  return this.http.post(environment.base_url + '/AdminAnonimous/Login', data, {
+    responseType: 'text' as 'json'
+  });
+}
+
 
   getAllAdminUsers(){
     return this.http.get<UserAdmin[]>(environment.base_url + 'Admin/ReadAll');

@@ -20,18 +20,18 @@ export class EditDeviceTelemetryComponent implements OnInit {
   idTelemetry!:number;
 
   telemtryProfileForm = this.fb.group({
-    Name:['',Validators.required],
-    Frecuency:['',Validators.required],
-    Type:['', Validators.required],
-    Unit:['', Validators.required],
-    Schema:['', Validators.required]
+    name:['',Validators.required],
+    frecuency:['',Validators.required],
+    type:['', Validators.required],
+    unit:['', Validators.required],
+    schema:['', Validators.required]
   })
 
-  get Name() { return this.telemtryProfileForm.get('Name'); }
-  get Frecuency() { return this.telemtryProfileForm.get('Frecuency'); }
-  get Type() { return this.telemtryProfileForm.get('Type'); }
-  get Unit() { return this.telemtryProfileForm.get('Unit'); }
-  get Schema() { return this.telemtryProfileForm.get('Schema'); }
+  get name() { return this.telemtryProfileForm.get('name'); }
+  get frecuency() { return this.telemtryProfileForm.get('frecuency'); }
+  get type() { return this.telemtryProfileForm.get('type'); }
+  get unit() { return this.telemtryProfileForm.get('unit'); }
+  get schema() { return this.telemtryProfileForm.get('schema'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private deviceService:DeviceTemplateService, 
     private router:Router, private activatedRoute: ActivatedRoute, private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -39,7 +39,7 @@ export class EditDeviceTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.idTelemetry)!;
     
     if(this.telemetry == undefined){
       this.isNew = true;
@@ -47,33 +47,33 @@ export class EditDeviceTelemetryComponent implements OnInit {
     }
 
     this.telemtryProfileForm.setValue({
-      Name: this.telemetry.Name,
-      Frecuency: this.telemetry.Frecuency ,
-      Type: this.telemetry.Type, 
-      Unit: this.telemetry.Unit,
-      Schema: this.telemetry.Schema});
+      name: this.telemetry.name,
+      frecuency: this.telemetry.frecuency ,
+      type: this.telemetry.type, 
+      unit: this.telemetry.unit,
+      schema: this.telemetry.schema});
   }
 
   initDefaults(){
     this.telemetry = {
-      Frecuency: 1,
-      Id: 0,
-      Name: "",
-      Schema: 1,
-      Type: 1,
-      Unit: 1
+      frecuency: 1,
+      id: 0,
+      name: "",
+      schema: 1,
+      type: 1,
+      unit: 1
     }
   }
 
   editTelemetry(){
-    this.telemetry.Schema = this.telemtryProfileForm.get('Schema')?.value;
-    this.telemetry.Name =  this.telemtryProfileForm.get('Name')?.value;
-    this.telemetry.Frecuency = this.telemtryProfileForm.get('Frecuency')?.value;
-    this.telemetry.Unit = this.telemtryProfileForm.get('Unit')?.value;
-    this.telemetry.Type = this.telemtryProfileForm.get('Type')?.value;
+    this.telemetry.schema = this.telemtryProfileForm.get('schema')?.value;
+    this.telemetry.name =  this.telemtryProfileForm.get('name')?.value;
+    this.telemetry.frecuency = this.telemtryProfileForm.get('frecuency')?.value;
+    this.telemetry.unit = this.telemtryProfileForm.get('unit')?.value;
+    this.telemetry.type = this.telemtryProfileForm.get('type')?.value;
 
     if(this.isNew){
-      this.deviceService.createTelemetry(this.deviceTemplateAdapter.newTelemetry(this.telemetry, this.device.Id)).subscribe({
+      this.deviceService.createTelemetry(this.deviceTemplateAdapter.newTelemetry(this.telemetry, this.device.id)).subscribe({
         next : result =>{
           this.telemetry = result;
         },
@@ -83,12 +83,12 @@ export class EditDeviceTelemetryComponent implements OnInit {
         complete : () => {
           this.sweetAlert.createSuccess("telemetry");
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
     else{
-      this.deviceService.updateDeviceTelemetry(this.telemetry.Id,this.telemetry).subscribe({
+      this.deviceService.updateDeviceTelemetry(this.telemetry.id,this.telemetry).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -98,13 +98,13 @@ export class EditDeviceTelemetryComponent implements OnInit {
         complete : () => {
           this.sweetAlert.updateSuccess();
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
   }
 
   cancelDeviceTelemetry(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.id);
   }
 }

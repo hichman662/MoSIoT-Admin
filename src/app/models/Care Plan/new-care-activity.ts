@@ -1,11 +1,11 @@
 export interface NewCareActivity {
-    CarePlanTemplate_oid: number;
-    Periodicity:          number;
-    Description:          string;
-    Duration:             number;
-    Location:             string;
-    OutcomeCode:          string;
-    TypeActivity:         number;
-    ActivityCode:         string;
-    Name:                 string;
+    carePlanTemplate_oid: number;
+    periodicity:          number;
+    description:          string;
+    duration:             number;
+    location:             string;
+    outcomeCode:          string;
+    typeActivity:         number;
+    activityCode:         string;
+    name:                 string;
 }

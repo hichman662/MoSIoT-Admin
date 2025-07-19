@@ -1,13 +1,13 @@
 <form [formGroup]="patientAccessForm" (ngSubmit)="editPatientAccess()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <td>
                     <div>
                         <b>Access mode type</b><br>
-                        <select class="form-select" formControlName="Type" required>
+                        <select class="form-select" formControlName="type" required>
                             <option value="1">Auditory</option>
                             <option value="2">Colour</option>
                             <option value="3">Item Size</option>
@@ -50,9 +50,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea type="text" class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>

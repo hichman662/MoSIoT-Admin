@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col">
-        <h1>{{goal.Name | titlecase}}</h1>
+        <h1>{{goal.name | titlecase}}</h1>
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../../../{{this.carePlan.Id}}">Back</a>
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../../../{{this.carePlan.id}}">Back</a>
             &nbsp;
             <button class="btn btn-outline-danger" (click)="removeDialog()">Remove goal</button>
         </div>

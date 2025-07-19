@@ -22,12 +22,12 @@ export class EditEventTelemetryComponent implements OnInit {
   idTelemetry!:number;
 
   eventForm = this.fb.group({
-    Name:['',Validators.required],
-    Severity:['', Validators.required]
+    name:['',Validators.required],
+    severity:['', Validators.required]
   })
 
-  get Name() { return this.eventForm.get('Name'); }
-  get Severity() { return this.eventForm.get('Severity'); }
+  get name() { return this.eventForm.get('name'); }
+  get severity() { return this.eventForm.get('severity'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -35,9 +35,9 @@ export class EditEventTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.idTelemetry)!;
 
-    this.event = this.telemetry.Event_!;
+    this.event = this.telemetry.event_!;
     
     if(this.event == undefined){
       this.isNew = true;
@@ -45,24 +45,24 @@ export class EditEventTelemetryComponent implements OnInit {
     }
 
     this.eventForm.setValue({
-      Name: this.event.Name,
-      Severity: this.event.Severity});
+      Name: this.event.name,
+      Severity: this.event.severity});
   }
 
   initDefaults(){
     this.event = {
-      Id: 0,
-      Name: "",
-      Severity: 1
+      id: 0,
+      name: "",
+      severity: 1
     }
   }
 
   edit(){
-    this.event.Name =  this.eventForm.get('Name')?.value;
-    this.event.Severity = this.eventForm.get('Severity')?.value;
+    this.event.name =  this.eventForm.get('name')?.value;
+    this.event.severity = this.eventForm.get('severity')?.value;
 
     if(this.isNew){
-      this.deviceService.createEventTelemetry(this.deviceTemplateAdapter.newEventTelemetry(this.event, this.telemetry.Id)).subscribe({
+      this.deviceService.createEventTelemetry(this.deviceTemplateAdapter.newEventTelemetry(this.event, this.telemetry.id)).subscribe({
         next : result =>{
           this.event = result;
         },
@@ -71,12 +71,12 @@ export class EditEventTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.createSuccess("event");
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
     else{
-      this.deviceService.updateEventTelemetry(this.event.Id,this.event).subscribe({
+      this.deviceService.updateEventTelemetry(this.event.id,this.event).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -85,13 +85,13 @@ export class EditEventTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.updateSuccess();
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
   }
 
   cancel(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.telemetry.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.telemetry.id);
   }
 }

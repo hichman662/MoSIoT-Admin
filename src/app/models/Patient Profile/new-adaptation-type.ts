@@ -1,5 +1,5 @@
 export interface NewAdaptationType {
-    AdaptionRequest: number;
-    Description:     string;
-    AccessMode_oid:  number;
+    adaptionRequest: number;
+    description:     string;
+    accessMode_oid:  number;
 }

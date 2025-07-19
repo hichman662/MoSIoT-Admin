@@ -1,6 +1,6 @@
 export interface NewTarget {
-    Goal_oid:     number;
-    DesiredValue: string;
-    Description:  string;
-    DueDate:      Date;
+    goal_oid:     number;
+    desiredValue: string;
+    description:  string;
+    dueDate:      Date;
 }

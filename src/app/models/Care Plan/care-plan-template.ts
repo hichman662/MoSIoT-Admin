@@ -4,16 +4,16 @@ import { CareActivity } from "./care-activity";
 import { Goal } from "./goal";
 
 export interface CarePlanTemplate {
-    Id:                 number;
-    Status:             number;
-    Intent:             number;
-    Title:              string;
-    Modified:           Date;
-    DurationDays:       number;
-    Name:               string;
-    Description:        string;
-    CareActivities?:    CareActivity[];
-    Goals?:             Goal[];
-    Patient?:           PatientProfile;
-    AddressConditions?: Condition[];
+    id:                 number;
+    status:             number;
+    intent:             number;
+    title:              string;
+    modified:           Date;
+    durationDays:       number;
+    name:               string;
+    description:        string;
+    careActivities?:    CareActivity[];
+    goals?:             Goal[];
+    patient?:           PatientProfile;
+    addressConditions?: Condition[];
 }

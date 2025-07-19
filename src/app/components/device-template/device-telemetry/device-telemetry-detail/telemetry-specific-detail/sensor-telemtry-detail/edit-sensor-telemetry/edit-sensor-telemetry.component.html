@@ -1,5 +1,5 @@
 <form [formGroup]="sensorForm" (ngSubmit)="edit()">
-    <h1>{{telemetry.Name}}</h1>
+    <h1>{{telemetry.name}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -19,9 +19,9 @@
                             <div>
                                 <b>Name</b><br>
                                 <div class="needs-validation">
-                                    <input type="text" class="form-control" formControlName="Name" required>
-                                    <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-                                        <div *ngIf="Name?.errors?.['required']">
+                                    <input type="text" class="form-control" formControlName="name" required>
+                                    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                                        <div *ngIf="name?.errors?.['required']">
                                             <div class="invalid-feedback">The name is required</div>
                                         </div>
                                     </div>
@@ -34,9 +34,9 @@
                             <div>
                                 <b>Sensor Type</b><br>
                                 <div class="needs-validation">
-                                    <input type="text" class="form-control" formControlName="Type" required>
-                                    <div *ngIf="Type?.invalid && (Type?.dirty || Type?.touched)">
-                                        <div *ngIf="Type?.errors?.['required']">
+                                    <input type="text" class="form-control" formControlName="type" required>
+                                    <div *ngIf="type?.invalid && (type?.dirty || type?.touched)">
+                                        <div *ngIf="type?.errors?.['required']">
                                             <div class="invalid-feedback">The sensor type is required</div>
                                         </div>
                                     </div>

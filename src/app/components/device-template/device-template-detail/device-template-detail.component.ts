@@ -43,7 +43,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.device.Name
+      data: this.device.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -63,7 +63,7 @@ export class DeviceTemplateDetailComponent implements OnInit {
   }
 
   removeDeviceTemplate(){
-    this.deviceService.deleteDeviceTemplate(this.device.Id).subscribe({
+    this.deviceService.deleteDeviceTemplate(this.device.id).subscribe({
       next: result => {
         console.log("Removing device...");
       },

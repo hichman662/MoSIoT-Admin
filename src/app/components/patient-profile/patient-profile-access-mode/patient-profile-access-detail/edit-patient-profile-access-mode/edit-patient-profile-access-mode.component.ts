@@ -19,14 +19,14 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
   newAccessMode:boolean = false;
 
   patientAccessForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['',Validators.required],
-    Description:['',Validators.required]
+    name:['',Validators.required],
+    type:['',Validators.required],
+    description:['',Validators.required]
   })
 
-  get Name() { return this.patientAccessForm.get('Name'); }
-  get Type() { return this.patientAccessForm.get('Type'); }
-  get Description() { return this.patientAccessForm.get('Description'); }
+  get name() { return this.patientAccessForm.get('name'); }
+  get type() { return this.patientAccessForm.get('type'); }
+  get description() { return this.patientAccessForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
@@ -34,33 +34,33 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['accessModeId']);
-    this.accessMode = this.patient.AccessMode.find(access => access.Id == this.id)!;
+    this.accessMode = this.patient.accessMode.find(access => access.id == this.id)!;
 
     //If not exists, create new
-    if(!this.patient.AccessMode.some(access => access.Id == this.id)){
+    if(!this.patient.accessMode.some(access => access.id == this.id)){
       this.initDefaults();
       this.newAccessMode = true;
     }
 
-    this.patientAccessForm.setValue({Name: this.accessMode.Name, Type: this.accessMode.TypeAccessMode, Description: this.accessMode.Description});
+    this.patientAccessForm.setValue({Name: this.accessMode.name, Type: this.accessMode.typeAccessMode, Description: this.accessMode.description});
   }
 
   initDefaults(){
     this.accessMode = {
-      Id: 0,
-      Description: "",
-      Name: "",
-      TypeAccessMode: 1,
+      id: 0,
+      description: "",
+      name: "",
+      typeAccessMode: 1,
     }
   }
 
   editPatientAccess(){
-    this.accessMode.Name = this.patientAccessForm.get('Name')?.value;
-    this.accessMode.TypeAccessMode = this.patientAccessForm.get('Type')?.value;
-    this.accessMode.Description = this.patientAccessForm.get('Description')?.value;
+    this.accessMode.name = this.patientAccessForm.get('name')?.value;
+    this.accessMode.typeAccessMode = this.patientAccessForm.get('type')?.value;
+    this.accessMode.description = this.patientAccessForm.get('description')?.value;
 
     if(this.newAccessMode){
-      this.patientService.createPatientAccessMode(this.patientProfileAdapter.newAccessMode(this.accessMode, this.patient.Id, this.patient.Disabilities[0].Id)).subscribe({
+      this.patientService.createPatientAccessMode(this.patientProfileAdapter.newAccessMode(this.accessMode, this.patient.id, this.patient.disabilities[0].id)).subscribe({
         next : result =>{
           this.accessMode = result;
         },
@@ -69,13 +69,13 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.createSuccess("access mode");
         }
       });
     }
     else{
-      this.patientService.updatePatientAccessMode(this.accessMode.Id,this.accessMode).subscribe({
+      this.patientService.updatePatientAccessMode(this.accessMode.id,this.accessMode).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -84,7 +84,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -92,6 +92,6 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
   }
 
   cancelPatientAccess(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patient.Id);
+    this.router.navigateByUrl("PatientProfile/ " + this.patient.id);
   }
 }

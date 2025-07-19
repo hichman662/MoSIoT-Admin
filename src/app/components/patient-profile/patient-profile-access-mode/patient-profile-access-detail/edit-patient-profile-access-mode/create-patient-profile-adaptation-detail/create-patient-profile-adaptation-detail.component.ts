@@ -21,12 +21,12 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
   idAdapatationType!:number;
 
   patientAdaptationForm = this.fb.group({
-    Type:[''],
-    Description:['',Validators.required]
+    type:[''],
+    description:['',Validators.required]
   })
 
-  get Type() { return this.patientAdaptationForm.get('Type'); }
-  get Description() { return this.patientAdaptationForm.get('Description'); }
+  get type() { return this.patientAdaptationForm.get('type'); }
+  get description() { return this.patientAdaptationForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute) { }
@@ -34,24 +34,24 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idAccessMode = params['accessModeId']);
-    this.accessMode = this.patient.AccessMode.find(access => access.Id == this.idAccessMode)!;
+    this.accessMode = this.patient.accessMode.find(access => access.id == this.idAccessMode)!;
 
     this.initDefaults();
 
-    this.patientAdaptationForm.setValue({Type: this.adaptationDetail.AdaptationRequest, Description: this.adaptationDetail.Description});
+    this.patientAdaptationForm.setValue({Type: this.adaptationDetail.adaptationRequest, Description: this.adaptationDetail.description});
   }
 
   initDefaults(){
     this.adaptationDetail = {
-      AccessMode_oid: this.accessMode.Id,
-      AdaptationRequest: 1,
-      Description: ""
+      accessMode_oid: this.accessMode.id,
+      adaptationRequest: 1,
+      description: ""
     }
   }
 
   createPatientAdaptation(){
-    this.adaptationDetail.AdaptationRequest = this.patientAdaptationForm.get('Type')?.value;
-    this.adaptationDetail.Description = this.patientAdaptationForm.get('Description')?.value;
+    this.adaptationDetail.adaptationRequest = this.patientAdaptationForm.get('type')?.value;
+    this.adaptationDetail.description = this.patientAdaptationForm.get('description')?.value;
     
     this.patientService.createPatientadAptationDetail(this.adaptationDetail).subscribe({
       next : result =>{
@@ -61,13 +61,13 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
         this.sweetAlert.createError("adaptation detail required",error);
       },
       complete : () => {
-        this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+        this.router.navigateByUrl("PatientProfile/" + this.patient.id);
         this.sweetAlert.createSuccess("adaptation detail required");
       }
     });
   }
 
   cancelPatientAdaptation(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patient.Name + "/AccessMode/" + this.idAccessMode);
+    this.router.navigateByUrl("PatientProfile/ " + this.patient.name + "/AccessMode/" + this.idAccessMode);
   }
 }

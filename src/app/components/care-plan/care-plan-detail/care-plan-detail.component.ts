@@ -42,7 +42,7 @@ export class CarePlanDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.carePlan.Name
+      data: this.carePlan.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -62,7 +62,7 @@ export class CarePlanDetailComponent implements OnInit {
   }
 
   removeCarePlan(){
-    this.carePlanService.deleteCarePlan(this.carePlan.Id).subscribe({
+    this.carePlanService.deleteCarePlan(this.carePlan.id).subscribe({
       next: result => {
         console.log("Removing care plan...");
       },

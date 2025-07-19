@@ -26,37 +26,37 @@ export class CarePlanDetailsComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Title",
-        Value: this.carePlan.Title
+        name: "Title",
+        value: this.carePlan.title
       },
       {
-        Name: "Description",
-        Value: this.carePlan.Description
+        name: "Description",
+        value: this.carePlan.description
       },
       {
-        Name: "Duration days",
-        Value: this.carePlan.DurationDays
+        name: "Duration days",
+        value: this.carePlan.durationDays
       },
       {
-        Name: "Intent",
-        Value: this.intentPipe.transform(this.carePlan.Intent)
+        name: "Intent",
+        value: this.intentPipe.transform(this.carePlan.intent)
       },
       {
-        Name: "Status",
-        Value: this.statusPipe.transform(this.carePlan.Status)
+        name: "Status",
+        value: this.statusPipe.transform(this.carePlan.status)
       },
       {
-        Name: "Modified",
-        Value: this.datePipe.transform( this.carePlan.Modified)
+        name: "Modified",
+        value: this.datePipe.transform( this.carePlan.modified)
       },
       {
-        Name: "Patient",
-        Value: this.carePlan.Patient?.Name
+        name: "Patient",
+        value: this.carePlan.patient?.name
       }
     ]
   }
 
   editDetails(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/EditDetails");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/EditDetails");
   }
 }

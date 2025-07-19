@@ -36,28 +36,28 @@ export class StateTelemetryDetailComponent implements OnInit {
   }
 
   editState(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.Name + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.name + "/Edit");
   }
 
   createState(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/State/New/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/State/New/Edit");
   }
 
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Name",
-        Value: this.state.Name
+        name: "Name",
+        value: this.state.name
       }
     ]
   }
 
   editStateDevice(idStateDevice:number){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.Id + "/StateDevice/" + idStateDevice + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.id + "/StateDevice/" + idStateDevice + "/Edit");
   }
 
   addStateDevice(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.Id + "/StateDevice/New");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/State/" + this.state.id + "/StateDevice/New");
   }
 
   removeDialog(id:number){
@@ -94,7 +94,7 @@ export class StateTelemetryDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("state device");
-        this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+        this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
       }
     })
   }

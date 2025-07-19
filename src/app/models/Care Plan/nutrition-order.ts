@@ -1,6 +1,6 @@
 export interface NutritionOrder {
-    Id:          number;
-    Description: string;
-    DietCode:    string;
-    Name:        string;
+    id:          number;
+    description: string;
+    dietCode:    string;
+    name:        string;
 }

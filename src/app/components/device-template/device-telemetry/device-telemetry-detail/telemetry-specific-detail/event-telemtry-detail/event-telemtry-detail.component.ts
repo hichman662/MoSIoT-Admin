@@ -34,22 +34,22 @@ export class EventTelemtryDetailComponent implements OnInit {
   }
 
   editEvent(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Event/" + this.event.Name + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Event/" + this.event.name + "/Edit");
   }
 
   createEvent(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Event/New/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Event/New/Edit");
   }
 
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Name",
-        Value: this.event.Name
+        name: "Name",
+        value: this.event.name
       },
       {
-        Name: "Severity",
-        Value: this.severityTypePipe.transform(this.event.Severity)
+        name: "Severity",
+        value: this.severityTypePipe.transform(this.event.severity)
       }
     ]
   }

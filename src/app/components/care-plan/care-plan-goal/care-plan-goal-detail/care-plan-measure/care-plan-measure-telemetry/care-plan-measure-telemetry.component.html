@@ -1,12 +1,12 @@
 <div class="mt-3 mb-3" *ngIf="!newMeasure">
-    <ol class="list-group mt-2"  *ngFor="let telemetry of measure.TelemetriesMeasure">
+    <ol class="list-group mt-2"  *ngFor="let telemetry of measure.telemetriesMeasure">
         <li class="list-group-item d-flex align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{telemetry.Name | titlecase}}</div>
-                <div>Type: {{telemetry.Type | deviceType}}</div>
+                <div class="fw-bold">{{telemetry.name | titlecase}}</div>
+                <div>Type: {{telemetry.type | deviceType}}</div>
             </div>
             <div>
-                <button class="btn btn-outline-danger" (click)="removeTelemetry(telemetry.Id)">Put off</button>
+                <button class="btn btn-outline-danger" (click)="removeTelemetry(telemetry.id)">Put off</button>
             </div>
         </li>
     </ol>
@@ -16,8 +16,8 @@
     <form [formGroup]="telemetryForm" (ngSubmit)="editTelemetry()">
         <div>
             <b>Telemetries</b><br>
-            <select class="form-select" formControlName="Telemetry" multiple>
-                <option *ngFor="let telemetry of telemetries" [value]="telemetry.Id">{{telemetry.Name}}</option>
+            <select class="form-select" formControlName="telemetry" multiple>
+                <option *ngFor="let telemetry of telemetries" [value]="telemetry.id">{{telemetry.name}}</option>
             </select>
         </div>
 

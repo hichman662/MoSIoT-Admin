@@ -22,12 +22,12 @@ export class EditSensorTelemetryComponent implements OnInit {
   idTelemetry!:number;
 
   sensorForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['', Validators.required]
+    name:['',Validators.required],
+    type:['', Validators.required]
   })
 
-  get Name() { return this.sensorForm.get('Name'); }
-  get Type() { return this.sensorForm.get('Type'); }
+  get name() { return this.sensorForm.get('name'); }
+  get type() { return this.sensorForm.get('type'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -35,9 +35,9 @@ export class EditSensorTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.idTelemetry)!;
 
-    this.sensor = this.telemetry.Sensor!;
+    this.sensor = this.telemetry.sensor!;
     
     if(this.sensor == undefined){
       this.isNew = true;
@@ -45,24 +45,24 @@ export class EditSensorTelemetryComponent implements OnInit {
     }
 
     this.sensorForm.setValue({
-      Name: this.sensor.Name,
-      Type: this.sensor.SensorType});
+      name: this.sensor.name,
+      type: this.sensor.sensorType});
   }
 
   initDefaults(){
     this.sensor = {
-      Id: 0,
-      Name: "",
-      SensorType: ""
+      id: 0,
+      name: "",
+      sensorType: ""
     }
   }
 
   edit(){
-    this.sensor.Name =  this.sensorForm.get('Name')?.value;
-    this.sensor.SensorType = this.sensorForm.get('Type')?.value;
+    this.sensor.name =  this.sensorForm.get('name')?.value;
+    this.sensor.sensorType = this.sensorForm.get('type')?.value;
 
     if(this.isNew){
-      this.deviceService.createSensorTelemetry(this.deviceTemplateAdapter.newSensorTelemetry(this.sensor, this.telemetry.Id)).subscribe({
+      this.deviceService.createSensorTelemetry(this.deviceTemplateAdapter.newSensorTelemetry(this.sensor, this.telemetry.id)).subscribe({
         next : result =>{
           this.sensor = result;
         },
@@ -71,12 +71,12 @@ export class EditSensorTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.createSuccess("sensor");
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
     else{
-      this.deviceService.updateSensorTelemetry(this.sensor.Id,this.sensor).subscribe({
+      this.deviceService.updateSensorTelemetry(this.sensor.id,this.sensor).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -85,13 +85,13 @@ export class EditSensorTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.updateSuccess();
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
   }
 
   cancel(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.telemetry.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.telemetry.id);
   }
 }

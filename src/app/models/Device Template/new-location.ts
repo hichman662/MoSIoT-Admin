@@ -1,7 +1,7 @@
 export interface NewLocation {
-    Latitude:      number;
-    Longitude:     number;
-    Altitude:      number;
-    Telemetry_oid: number;
-    Name:          string;
+    latitude:      number;
+    longitude:     number;
+    altitude:      number;
+    telemetry_oid: number;
+    name:          string;
 }

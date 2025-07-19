@@ -25,10 +25,10 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
   idTarget!:number;
 
   telemetryForm = this.fb.group({
-    Telemetry:['',Validators.required]
+    telemetry:['',Validators.required]
   })
 
-  get Condition() { return this.telemetryForm.get('Telemetry'); }
+  get condition() { return this.telemetryForm.get('telemetry'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private activatedRoute: ActivatedRoute, private carePlanService:CarePlanService, private deviceTemplateService: DeviceTemplateService, private router:Router) { }
 
@@ -52,12 +52,12 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
 
   editTelemetry(){
     if(!this.newMeasure){
-      let idTelemetry:number[] = this.telemetryForm.get('Telemetry')?.value;
+      let idTelemetry:number[] = this.telemetryForm.get('telemetry')?.value;
 
       idTelemetry = this.deleteDuplicates(idTelemetry);
 
-      if(idTelemetry != []){
-        this.carePlanService.updateMeasureTelemtry(this.measure.Id,idTelemetry).subscribe({
+      if(idTelemetry.length > 0){
+        this.carePlanService.updateMeasureTelemtry(this.measure.id,idTelemetry).subscribe({
           next : result =>{
             console.log(result);
           },
@@ -65,7 +65,7 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
             this.sweetAlert.updateError(error);
           },
           complete : () => {
-            this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+            this.router.navigateByUrl("CarePlan/ " + this.carePlan.id);
             this.sweetAlert.updateSuccess();
           }
         });
@@ -95,9 +95,9 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
   deleteDuplicates(newTelemetries:number[]){
     let telemetry!: Telemetry;
     newTelemetries.forEach(newTelemetry => {
-      telemetry = this.measure.TelemetriesMeasure?.find(telemetry => telemetry.Id == newTelemetry)!;
-      if(newTelemetry == telemetry.Id){
-          this.sweetAlert.createError("Telemetry: " + telemetry.Name,"The telemetry was already added to this Measure");
+      telemetry = this.measure.telemetriesMeasure?.find(telemetry => telemetry.id == newTelemetry)!;
+      if(newTelemetry == telemetry.id){
+          this.sweetAlert.createError("Telemetry: " + telemetry.name,"The telemetry was already added to this Measure");
           newTelemetries.splice(newTelemetries.indexOf(newTelemetry),1);
       }
     });
@@ -105,9 +105,9 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
   }
 
   removeTelemetry(idTelemetry:number){
-    this.measure.TelemetriesMeasure?.splice(this.measure.TelemetriesMeasure?.map(telemetry => telemetry.Id).indexOf(idTelemetry),1);
+    this.measure.telemetriesMeasure?.splice(this.measure.telemetriesMeasure?.map(telemetry => telemetry.id).indexOf(idTelemetry),1);
 
-    this.carePlanService.updateMeasure(this.measure.Id,this.measure).subscribe({
+    this.carePlanService.updateMeasure(this.measure.id,this.measure).subscribe({
       next : result =>{
         console.log(result);
       },
@@ -116,13 +116,13 @@ export class CarePlanMeasureTelemetryComponent implements OnInit {
       },
       complete : () => {
         localStorage.setItem('measureDetail',JSON.stringify(this.measure));
-        this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/ " + this.carePlan.id);
         this.sweetAlert.updateSuccess();
       }
     });
   }
 
   details(id:number){
-    this.router.navigate(["CarePlan/" + this.carePlan.Name + "/AdressCondition/" + id]);
+    this.router.navigate(["CarePlan/" + this.carePlan.name + "/AdressCondition/" + id]);
   }
 }

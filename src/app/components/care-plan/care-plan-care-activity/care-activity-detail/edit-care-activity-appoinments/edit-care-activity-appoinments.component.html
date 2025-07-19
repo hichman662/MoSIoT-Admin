@@ -1,5 +1,5 @@
 <form [formGroup]="careActivityAppointmentForm" (ngSubmit)="editaCareAcitivityAppointment()">
-    <h1>{{careActivity.Name | titlecase}}</h1>
+    <h1>{{careActivity.name | titlecase}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -20,9 +20,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>
@@ -33,9 +33,9 @@
                 <td>
                     <div>
                         <b>Direction</b><br>
-                        <input class="form-control" formControlName="Direction" required>
-                        <div *ngIf="Direction?.invalid && (Direction?.dirty || Direction?.touched)">
-                            <div *ngIf="Direction?.errors?.['required']">
+                        <input class="form-control" formControlName="direction" required>
+                        <div *ngIf="direction?.invalid && (direction?.dirty || direction?.touched)">
+                            <div *ngIf="direction?.errors?.['required']">
                                 <div class="invalid-feedback">A direction is required</div>
                             </div>
                         </div>
@@ -46,9 +46,9 @@
                 <td>
                     <div>
                         <b>Reason Code</b><br>
-                        <input type="text" class="form-control" formControlName="Code" required>
-                        <div *ngIf="Code?.invalid && (Code?.dirty || Code?.touched)">
-                            <div *ngIf="Code?.errors?.['required']">
+                        <input type="text" class="form-control" formControlName="code" required>
+                        <div *ngIf="code?.invalid && (code?.dirty || code?.touched)">
+                            <div *ngIf="code?.errors?.['required']">
                                 <div class="invalid-feedback">A reason code is required</div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                     <div>
                         <b>Virtual</b><br>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" formControlName="IsVirtual">
+                            <input class="form-check-input" type="checkbox" role="switch" formControlName="isVirtual">
                         </div>
                     </div>
                 </td>

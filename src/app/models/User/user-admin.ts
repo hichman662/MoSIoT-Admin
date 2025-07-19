@@ -1,7 +1,7 @@
 export interface UserAdmin {
-    Id?:      number;
-    Name:    string;
-    Surname: string;
-    Email:   string;
-    Pass:    string;
+    id?:      number;
+    name:    string;
+    surname: string;
+    email:   string;
+    pass:    string;
 }

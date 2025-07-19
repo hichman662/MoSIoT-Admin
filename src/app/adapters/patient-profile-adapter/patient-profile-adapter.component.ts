@@ -24,11 +24,11 @@ export class PatientProfileAdapterComponent implements OnInit {
     let newPatient: NewPatientProfile;
 
     newPatient = {
-      Description: patientProfile.Description,
-      HazardAvoidance: patientProfile.HazardAvoidance,
-      Name: patientProfile.Name,
-      PreferredLanguage: patientProfile.PreferredLanguage,
-      Region: patientProfile.Region
+      description: patientProfile.description,
+      hazardAvoidance: patientProfile.hazardAvoidance,
+      name: patientProfile.name,
+      preferredLanguage: patientProfile.preferredLanguage,
+      region: patientProfile.region
     }
 
     return newPatient;
@@ -38,11 +38,11 @@ export class PatientProfileAdapterComponent implements OnInit {
     let newAccessMode:NewAccessMode;
 
     newAccessMode = {
-      Patient_oid: patientId,
-      Description: accessMode.Description,
-      Disability_oid: disabilityId,
-      Name: accessMode.Name,
-      TypeAccessMode: accessMode.TypeAccessMode
+      patient_oid: patientId,
+      description: accessMode.description,
+      disability_oid: disabilityId,
+      name: accessMode.name,
+      typeAccessMode: accessMode.typeAccessMode
     }
 
     return newAccessMode;
@@ -52,11 +52,11 @@ export class PatientProfileAdapterComponent implements OnInit {
     let newCondition:NewCondition;
 
     newCondition = {
-      PatientProfile_oid: patientId,
-      ClinicalStatus: condition.ClinicalStatus,
-      Description: condition.Description,
-      Disease: condition.Disease,
-      Name: condition.Name
+      patientProfile_oid: patientId,
+      clinicalStatus: condition.clinicalStatus,
+      description: condition.description,
+      disease: condition.disease,
+      name: condition.name
     }
 
     return newCondition;
@@ -66,11 +66,11 @@ export class PatientProfileAdapterComponent implements OnInit {
     let newDisability:NewDisability;
 
     newDisability = {
-      Patient_oid: patientId,
-      Description: disability.Description,
-      Name: disability.Name,
-      Severity: disability.Severity,
-      Type: disability.Type
+      patient_oid: patientId,
+      description: disability.description,
+      name: disability.name,
+      severity: disability.severity,
+      type: disability.type
     }
 
     return newDisability;

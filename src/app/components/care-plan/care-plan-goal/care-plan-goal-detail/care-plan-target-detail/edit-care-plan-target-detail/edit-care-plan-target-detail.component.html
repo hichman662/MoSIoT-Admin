@@ -1,4 +1,4 @@
-<h1>{{goal.Name | titlecase}}</h1>
+<h1>{{goal.name | titlecase}}</h1>
 <hr>
 <div>
   <mat-tab-group animationDuration="0ms">
@@ -8,8 +8,8 @@
             Target
         </ng-template>
         <form [formGroup]="targetForm" (ngSubmit)="editTarget()">
-            <ol class="list-group mt-2" *ngFor="let target of goal.Targets">
-                <div *ngIf="target.Id == idTarget; then liToEdit else liNormal"></div>
+            <ol class="list-group mt-2" *ngFor="let target of goal.targets">
+                <div *ngIf="target.id == idTarget; then liToEdit else liNormal"></div>
                 <ng-template #liToEdit>
                     <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
                         <div class="ms-2 me-auto">
@@ -17,7 +17,7 @@
                                 <b>Due Date</b><br>
                                 <mat-form-field appearance="fill">
                                     <mat-label>Choose a date</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="DueDate">
+                                    <input matInput [matDatepicker]="picker" formControlName="dueDate">
                                     <mat-hint>Month/Day/Year</mat-hint>
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
@@ -26,14 +26,14 @@
         
                             <div>
                                 <b>Desired Value</b><br>
-                                <input type="number" class="form-control" formControlName="Desired">
+                                <input type="number" class="form-control" formControlName="desired">
                             </div>
         
                             <div>
                                 <b>Description</b><br>
-                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
-                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                                    <div *ngIf="Description?.errors?.['required']">
+                                <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                                <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                                    <div *ngIf="description?.errors?.['required']">
                                         <div class="invalid-feedback">A description is required</div>
                                     </div>
                                 </div>
@@ -49,10 +49,10 @@
                 <ng-template #liNormal>
                     <li class="list-group-item d-flex align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{target.DueDate | date}}</div>
-                            <div>Desired Value: {{target.DesiredValue}}</div>
-                            <div>Description: {{target.Description | titlecase}}</div>
-                            <div>Measure: {{target.Measure?.Name | isAssigned | titlecase}}</div>
+                            <div class="fw-bold">{{target.dueDate | date}}</div>
+                            <div>Desired Value: {{target.desiredValue}}</div>
+                            <div>Description: {{target.description | titlecase}}</div>
+                            <div>Measure: {{target.measure?.name | isAssigned | titlecase}}</div>
                         </div>
                     </li>
                 </ng-template>

@@ -70,10 +70,10 @@ export class DashboardComponent implements OnInit {
   getSessions(){  
     let pieChartDatasetsArray:number[] = [];
     this.users.forEach(user => {
-      this.pieChartLabels.push(user.Name);
-      pieChartDatasetsArray.push(user.DameTiempoTotalSesiones);
+      this.pieChartLabels.push(user.name);
+      pieChartDatasetsArray.push(user.dameTiempoTotalSesiones);
 
-      this.userService.getAllUserSessions(user.Id).subscribe({
+      this.userService.getAllUserSessions(user.id).subscribe({
         next: result => {
           this.sessions = result;
         },

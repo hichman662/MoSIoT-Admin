@@ -19,14 +19,14 @@ export class EditDeviceProfileComponent implements OnInit {
   idDevice!:number;
 
   deviceProfileForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['', Validators.required],
-    IsEdge:[''],
+    name:['',Validators.required],
+    type:['', Validators.required],
+    isEdge:[''],
   })
 
-  get Name() { return this.deviceProfileForm.get('Name'); }
-  get Type() { return this.deviceProfileForm.get('Type'); }
-  get IsEdge() { return this.deviceProfileForm.get('IsEdge'); }
+  get name() { return this.deviceProfileForm.get('name'); }
+  get type() { return this.deviceProfileForm.get('type'); }
+  get isEdge() { return this.deviceProfileForm.get('isEdge'); }
   
   constructor(private fb:FormBuilder, private deviceService:DeviceTemplateService, private router:Router, private deviceTemplateAdapter: DeviceTemplateAdapterComponent,
     private activatedRoute: ActivatedRoute, private sweetAlert: SweetAlertsComponent) { }
@@ -35,7 +35,7 @@ export class EditDeviceProfileComponent implements OnInit {
     this.devices = JSON.parse('' + localStorage.getItem('devices'));
     this.activatedRoute.params.subscribe((params: Params) => this.idDevice = params['deviceId']);
     console.log(this.idDevice + 'id device');
-    this.device = this.devices.find(device => device.Id == this.idDevice)!;
+    this.device = this.devices.find(device => device.id == this.idDevice)!;
 
     //If not exists, create new
     if(this.device == undefined){      
@@ -43,22 +43,22 @@ export class EditDeviceProfileComponent implements OnInit {
       this.initDefaults();
     }
     
-    this.deviceProfileForm.setValue({Name: this.device.Name, Type: this.device.Type, IsEdge: this.device.IsEdge});
+    this.deviceProfileForm.setValue({name: this.device.name, type: this.device.type, isEdge: this.device.isEdge});
   }
 
   initDefaults(){
     this.device = {
-      Id: 0,
-      IsEdge: false,
-      Name: "",
-      Type: 1
+      id: 0,
+      isEdge: false,
+      name: "",
+      type: 1
     }
   }
 
   editDeviceProfile(){
-    this.device.Name = this.deviceProfileForm.get('Name')?.value
-    this.device.IsEdge = this.deviceProfileForm.get('IsEdge')?.value
-    this.device.Type = this.deviceProfileForm.get('Type')?.value
+    this.device.name = this.deviceProfileForm.get('name')?.value
+    this.device.isEdge = this.deviceProfileForm.get('isEdge')?.value
+    this.device.type = this.deviceProfileForm.get('type')?.value
 
     if(this.isNew){
       this.deviceService.createDeviceTemplate(this.deviceTemplateAdapter.newDevice(this.device)).subscribe({
@@ -70,14 +70,14 @@ export class EditDeviceProfileComponent implements OnInit {
         },
         complete: () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/ " + this.device.id);
           
           this.sweetAlert.createSuccess("device");
         }
       })
     }
     else{
-      this.deviceService.updateDeviceTemplate(this.device.Id,this.device).subscribe({
+      this.deviceService.updateDeviceTemplate(this.device.id,this.device).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -86,7 +86,7 @@ export class EditDeviceProfileComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('deviceDetail',JSON.stringify(this.device));
-          this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/ " + this.device.id);
           
           this.sweetAlert.updateSuccess();
         }

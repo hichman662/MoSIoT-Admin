@@ -11,15 +11,15 @@
                 State Devices
             </ng-template>
 
-            <ol class="list-group mt-2" *ngFor="let stateDevice of state.States">
+            <ol class="list-group mt-2" *ngFor="let stateDevice of state.states">
                 <li class="list-group-item d-flex align-items-start">
                     <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{stateDevice.Name | titlecase}}</div>
-                    Value: {{stateDevice.Value}}
+                    <div class="fw-bold">{{stateDevice.name | titlecase}}</div>
+                    Value: {{stateDevice.value}}
                     </div>
                     <div>
-                        <button class="btn btn-outline-success" (click)="editStateDevice(stateDevice.Id)">Edit</button>
-                        <button class="btn btn-outline-danger" (click)="removeDialog(stateDevice.Id)">Remove</button>
+                        <button class="btn btn-outline-success" (click)="editStateDevice(stateDevice.id)">Edit</button>
+                        <button class="btn btn-outline-danger" (click)="removeDialog(stateDevice.id)">Remove</button>
                     </div>
                 </li>
             </ol>

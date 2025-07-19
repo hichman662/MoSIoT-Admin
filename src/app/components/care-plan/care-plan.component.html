@@ -16,6 +16,6 @@
 
 <div>
     <ul class="list-group" *ngFor="let carePlan of carePlans">
-        <li id="liElement" (click)="details(carePlan.Id)" class="list-group-item list-group-item-action d-flex justify-content-between" role='button'>{{carePlan.Name | titlecase}} <mat-icon>keyboard_arrow_right</mat-icon></li>
+        <li id="liElement" (click)="details(carePlan.id)" class="list-group-item list-group-item-action d-flex justify-content-between" role='button'>{{carePlan.name | titlecase}} <mat-icon>keyboard_arrow_right</mat-icon></li>
     </ul>
 </div>

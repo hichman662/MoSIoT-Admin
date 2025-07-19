@@ -27,10 +27,10 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
     IsVirtual:['', Validators.required]
   })
 
-  get Direction() { return this.careActivityAppointmentForm.get('Direction'); }
-  get Description() { return this.careActivityAppointmentForm.get('Description'); }
-  get Code() { return this.careActivityAppointmentForm.get('Code'); }
-  get IsVirtual() { return this.careActivityAppointmentForm.get('IsVirtual'); }
+  get direction() { return this.careActivityAppointmentForm.get('direction'); }
+  get description() { return this.careActivityAppointmentForm.get('description'); }
+  get code() { return this.careActivityAppointmentForm.get('code'); }
+  get isVirtual() { return this.careActivityAppointmentForm.get('isVirtual'); }
 
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
@@ -39,14 +39,14 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivityId']);
-    this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
+    this.careActivity = this.carePlan.careActivities?.find(careActivity => careActivity.id == this.id)!;
 
     if(this.careActivity == undefined){
       this.sweetAlert.readError("care activity","care activity error");
-      this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+      this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
     }
     else{
-      this.careActivityAppointment = this.careActivity.Appointments!;
+      this.careActivityAppointment = this.careActivity.appointments!;
 
       //If not exists, create new
       if(this.careActivityAppointment == undefined){
@@ -55,28 +55,28 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
       }
     }
 
-    this.careActivityAppointmentForm.setValue({Direction: this.careActivityAppointment.Direction, Code: this.careActivityAppointment.ReasonCode, 
-      Description: this.careActivityAppointment.Description, IsVirtual: this.careActivityAppointment.IsVirtual});
+    this.careActivityAppointmentForm.setValue({direction: this.careActivityAppointment.direction, code: this.careActivityAppointment.reasonCode, 
+      description: this.careActivityAppointment.description, isVirtual: this.careActivityAppointment.isVirtual});
   }
 
   initDefaults(){
     this.careActivityAppointment = {
-      Direction: "",
-      Description: "",
-      IsVirtual: false,
-      ReasonCode: "",
-      Id: 0
+      direction: "",
+      description: "",
+      isVirtual: false,
+      reasonCode: "",
+      id: 0
     }
   }
 
   editaCareAcitivityAppointment(){
-    this.careActivityAppointment.Direction = this.careActivityAppointmentForm.get('Direction')?.value;
-    this.careActivityAppointment.Description = this.careActivityAppointmentForm.get('Description')?.value;
-    this.careActivityAppointment.ReasonCode = this.careActivityAppointmentForm.get('Code')?.value;
-    this.careActivityAppointment.IsVirtual = this.careActivityAppointmentForm.get('IsVirtual')?.value;
+    this.careActivityAppointment.direction = this.careActivityAppointmentForm.get('direction')?.value;
+    this.careActivityAppointment.description = this.careActivityAppointmentForm.get('description')?.value;
+    this.careActivityAppointment.reasonCode = this.careActivityAppointmentForm.get('code')?.value;
+    this.careActivityAppointment.isVirtual = this.careActivityAppointmentForm.get('isVirtual')?.value;
 
     if(this.isNew){
-      this.carePlanService.createCareActivityAppointment(this.carePlanAdapter.newCareAppointment(this.careActivityAppointment, this.careActivity.Id)).subscribe({
+      this.carePlanService.createCareActivityAppointment(this.carePlanAdapter.newCareAppointment(this.careActivityAppointment, this.careActivity.id)).subscribe({
         next : result =>{
           this.careActivityAppointment = result;
         },
@@ -85,13 +85,13 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.createSuccess("care activity appointment");
         }
       });
     }
     else{
-      this.carePlanService.updateCareActivityAppointment(this.careActivityAppointment.Id,this.carePlanAdapter.newCareAppointment(this.careActivityAppointment, this.careActivity.Id)).subscribe({
+      this.carePlanService.updateCareActivityAppointment(this.careActivityAppointment.id,this.carePlanAdapter.newCareAppointment(this.careActivityAppointment, this.careActivity.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -100,7 +100,7 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -108,6 +108,6 @@ export class EditCareActivityAppoinmentsComponent implements OnInit {
   }
 
   cancelCareActivityAppointment(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id);
   }
 }

@@ -1,6 +1,6 @@
 export interface NewProperty {
-    DeviceTemplate_oid: number;
-    Name:               string;
-    IsWritable:         boolean;
-    IsCloudable:        boolean;
+    deviceTemplate_oid: number;
+    name:               string;
+    isWritable:         boolean;
+    isCloudable:        boolean;
 }

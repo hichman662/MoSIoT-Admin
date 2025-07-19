@@ -1,5 +1,5 @@
 <form [formGroup]="stateDeviceForm" (ngSubmit)="edit()">
-    <h1>{{telemetry.Name}}</h1>
+    <h1>{{telemetry.name}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -7,17 +7,17 @@
                 Specific Telemetry
             </ng-template>
 
-            <ol class="list-group mt-2" *ngFor="let stateDevice of stateTelemetry.States">
-                <div *ngIf="stateDevice.Id == idStateDevice; then liToEdit else liNormal"></div>
+            <ol class="list-group mt-2" *ngFor="let stateDevice of stateTelemetry.states">
+                <div *ngIf="stateDevice.id == idStateDevice; then liToEdit else liNormal"></div>
 
                 <ng-template #liToEdit>
                     <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">
                                 <b>Name</b><br>
-                                <input type="text" class="form-control" formControlName="Name" required>
-                                <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-                                    <div *ngIf="Name?.errors?.['required']">
+                                <input type="text" class="form-control" formControlName="name" required>
+                                <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                                    <div *ngIf="name?.errors?.['required']">
                                         <div class="invalid-feedback">A name is required</div>
                                     </div>
                                 </div>
@@ -25,9 +25,9 @@
 
                             <div class="mt-2">
                                 <b>Value</b><br>
-                                <input type="text" class="form-control" formControlName="Value" required>
-                                <div *ngIf="Value?.invalid && (Value?.dirty || Value?.touched)">
-                                    <div *ngIf="Value?.errors?.['required']">
+                                <input type="text" class="form-control" formControlName="value" required>
+                                <div *ngIf="value?.invalid && (value?.dirty || value?.touched)">
+                                    <div *ngIf="value?.errors?.['required']">
                                         <div class="invalid-feedback">A value is required</div>
                                     </div>
                                 </div>
@@ -45,8 +45,8 @@
                 <ng-template #liNormal>
                     <li class="list-group-item d-flex align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{stateDevice.Name | titlecase}}</div>
-                            Value: {{stateDevice.Value}}
+                            <div class="fw-bold">{{stateDevice.name | titlecase}}</div>
+                            Value: {{stateDevice.value}}
                         </div>
                     </li>
                 </ng-template>

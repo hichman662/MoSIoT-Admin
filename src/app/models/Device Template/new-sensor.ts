@@ -1,5 +1,5 @@
 export interface NewSensor {
-    SensorType:    string;
-    Telemetry_oid: number;
-    Name:          string;
+    sensorType:    string;
+    telemetry_oid: number;
+    name:          string;
 }

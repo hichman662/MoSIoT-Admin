@@ -1,7 +1,7 @@
 export interface NewDisability {
-    Patient_oid: number;
-    Name:        string;
-    Type:        number;
-    Severity:    number;
-    Description: string;
+    patient_oid: number;
+    name:        string;
+    type:        number;
+    severity:    number;
+    description: string;
 }

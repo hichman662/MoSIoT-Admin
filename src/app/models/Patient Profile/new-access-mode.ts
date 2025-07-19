@@ -1,7 +1,7 @@
 export interface NewAccessMode {
-    Patient_oid:    number;
-    TypeAccessMode: number;
-    Description:    string;
-    Disability_oid: number;
-    Name:           string;
+    patient_oid:    number;
+    typeAccessMode: number;
+    description:    string;
+    disability_oid: number;
+    name:           string;
 }

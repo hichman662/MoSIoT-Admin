@@ -17,18 +17,18 @@ export class EditPatientProfileDetailsComponent implements OnInit {
   newPatient:boolean = false;
 
   patientProfileForm = this.fb.group({
-    Name:['',Validators.required],
-    Description:['', Validators.required],
-    Hazard:['', Validators.required],
-    Region:['', Validators.required],
-    Language:['', Validators.required]
+    name:['',Validators.required],
+    description:['', Validators.required],
+    hazard:['', Validators.required],
+    region:['', Validators.required],
+    language:['', Validators.required]
   })
 
-  get Name() { return this.patientProfileForm.get('Name'); }
-  get Description() { return this.patientProfileForm.get('Description'); }
-  get Hazard() { return this.patientProfileForm.get('Hazard'); }
-  get Region() { return this.patientProfileForm.get('Region'); }
-  get Language() { return this.patientProfileForm.get('Language'); }
+  get name() { return this.patientProfileForm.get('name'); }
+  get description() { return this.patientProfileForm.get('description'); }
+  get hazard() { return this.patientProfileForm.get('hazard'); }
+  get region() { return this.patientProfileForm.get('region'); }
+  get language() { return this.patientProfileForm.get('language'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, private router:Router, private patientProfileAdapter: PatientProfileAdapterComponent) { }
 
@@ -36,20 +36,20 @@ export class EditPatientProfileDetailsComponent implements OnInit {
     this.patients = JSON.parse('' + localStorage.getItem('patientProfiles'));
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     //If not exists, create new
-    if(!this.patients.some(patient => patient.Id == this.patient.Id)){
+    if(!this.patients.some(patient => patient.id == this.patient.id)){
       this.newPatient = true;
     } 
 
-    this.patientProfileForm.setValue({Name: this.patient.Name, Description: this.patient.Description, Hazard: this.patient.HazardAvoidance, Region: this.patient.Region, Language: this.patient.PreferredLanguage});
+    this.patientProfileForm.setValue({name: this.patient.name, description: this.patient.description, hazard: this.patient.hazardAvoidance, region: this.patient.region, language: this.patient.preferredLanguage});
   
   }
 
   editPatientProfile(){
-    this.patient.Name = this.patientProfileForm.get('Name')?.value
-    this.patient.Description = this.patientProfileForm.get('Description')?.value
-    this.patient.HazardAvoidance = this.patientProfileForm.get('Hazard')?.value
-    this.patient.Region = this.patientProfileForm.get('Region')?.value
-    this.patient.PreferredLanguage = this.patientProfileForm.get('Language')?.value
+    this.patient.name = this.patientProfileForm.get('name')?.value;
+    this.patient.description = this.patientProfileForm.get('description')?.value;
+    this.patient.hazardAvoidance = Number(this.patientProfileForm.get('hazard')?.value);
+    this.patient.region = this.patientProfileForm.get('region')?.value;
+    this.patient.preferredLanguage = Number(this.patientProfileForm.get('language')?.value);
 
     if(this.newPatient){
       this.patientService.createPatientProfile(this.patientProfileAdapter.newPatientProfile(this.patient)).subscribe({
@@ -67,7 +67,7 @@ export class EditPatientProfileDetailsComponent implements OnInit {
       })
     }
     else{
-      this.patientService.updatePatientProfile(this.patient.Id,this.patient).subscribe({
+      this.patientService.updatePatientProfile(this.patient.id,this.patient).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -76,7 +76,7 @@ export class EditPatientProfileDetailsComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/ " + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/ " + this.patient.id);
           this.sweetAlert.updateSuccess();
         }
       });

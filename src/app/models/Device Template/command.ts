@@ -1,7 +1,7 @@
 export interface Command {
-    Id:            number;
-    Name:          string;
-    IsSynchronous: boolean;
-    Type:          number;
-    Description:   string;
+    id:            number;
+    name:          string;
+    isSynchronous: boolean;
+    type:          number;
+    description:   string;
 }

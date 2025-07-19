@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col">
-        <h1>{{accessMode.Name | titlecase}}</h1>
+        <h1>{{accessMode.name | titlecase}}</h1>
     </div>
     <div class="col">
         <div class="d-flex justify-content-end">
-            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../../../{{this.patientProfile.Id}}">Back</a>
+            <a id="btnAtras" class="btn btn-outline-secondary" routerLink="../../../{{this.patientProfile.id}}">Back</a>
             &nbsp;
-            <button class="btn btn-outline-danger" (click)="removeDialog(accessMode.Name, 1)">Remove access mode</button>
+            <button class="btn btn-outline-danger" (click)="removeDialog(accessMode.name, 1)">Remove access mode</button>
         </div>
     </div>    
 </div>
@@ -29,16 +29,16 @@
             <mat-icon>storage</mat-icon>
             Adaptation Request
         </ng-template>
-        <ol class="list-group mt-2" *ngFor="let adaptationRequest of accessMode.AdaptationRequest">
+        <ol class="list-group mt-2" *ngFor="let adaptationRequest of accessMode.adaptationRequest">
             <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
-                    <div class="fw-bold">{{adaptationRequest.AccessModeTarget | accessModeType | titlecase}}</div>
-                    {{adaptationRequest.Description | titlecase}}
+                    <div class="fw-bold">{{adaptationRequest.accessModeTarget | accessModeType | titlecase}}</div>
+                    {{adaptationRequest.description | titlecase}}
                 </div>
-                <span class="badge bg-primary rounded-pill">Language: {{adaptationRequest.LanguageOfAdaptation | language | uppercase}}</span>
+                <span class="badge bg-primary rounded-pill">Language: {{adaptationRequest.languageOfAdaptation | language | uppercase}}</span>
                 <div>
-                    <button class="btn btn-outline-success" (click)="editAdaptationRequest(adaptationRequest.Id)">Edit</button>
-                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation Request', 2, adaptationRequest.Id)">Remove</button>
+                    <button class="btn btn-outline-success" (click)="editAdaptationRequest(adaptationRequest.id)">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation Request', 2, adaptationRequest.id)">Remove</button>
                 </div>
             </li>
         </ol>
@@ -51,15 +51,15 @@
             <mat-icon>accessibility</mat-icon>
             Adaptation type required
         </ng-template>
-        <ol class="list-group mt-2" *ngFor="let adaptationType of accessMode.AdaptationType">
+        <ol class="list-group mt-2" *ngFor="let adaptationType of accessMode.adaptationType">
             <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
-                <div class="fw-bold">{{adaptationType.AdaptionRequest | adaptationType | titlecase}}</div>
-                {{adaptationType.Description}}
+                <div class="fw-bold">{{adaptationType.adaptionRequest | adaptationType | titlecase}}</div>
+                {{adaptationType.description}}
                 </div>
                 <div>
-                    <button class="btn btn-outline-success" (click)="editAdaptationType(adaptationType.Id)">Edit</button>
-                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation type', 3, adaptationType.Id)">Remove</button>
+                    <button class="btn btn-outline-success" (click)="editAdaptationType(adaptationType.id)">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation type', 3, adaptationType.id)">Remove</button>
                 </div>
             </li>
         </ol>
@@ -72,15 +72,15 @@
             <mat-icon>fingerprint</mat-icon>
             Adaptation detail required
         </ng-template>
-        <ol class="list-group mt-2" *ngFor="let adaptationDetail of accessMode.AdaptationDetail">
+        <ol class="list-group mt-2" *ngFor="let adaptationDetail of accessMode.adaptationDetail">
             <li class="list-group-item d-flex align-items-start">
                 <div class="ms-2 me-auto">
-                <div class="fw-bold">{{adaptationDetail.AdaptationRequest | adaptationDetail | titlecase}}</div>
-                {{adaptationDetail.Description}}
+                <div class="fw-bold">{{adaptationDetail.adaptationRequest | adaptationDetail | titlecase}}</div>
+                {{adaptationDetail.description}}
                 </div>
                 <div>
-                    <button class="btn btn-outline-success" (click)="editAdaptationDetail(adaptationDetail.Id)">Edit</button>
-                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation detail', 4, adaptationDetail.Id)">Remove</button>
+                    <button class="btn btn-outline-success" (click)="editAdaptationDetail(adaptationDetail.id)">Edit</button>
+                    <button class="btn btn-outline-danger" (click)="removeDialog('Adaptation detail', 4, adaptationDetail.id)">Remove</button>
                 </div>
             </li>
         </ol>

@@ -33,9 +33,9 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newDevice: NewDevice;
 
     newDevice = {
-      IsEdge: device.IsEdge,
-      Name: device.Name,
-      Type: device.Type
+      isEdge: device.isEdge,
+      name: device.name,
+      type: device.type
     }
 
     return newDevice;
@@ -45,10 +45,10 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newProperty: NewProperty;
 
     newProperty = {
-      DeviceTemplate_oid: idDeviceTemplate,
-      IsCloudable: property.IsCloudable,
-      IsWritable: property.IsWritable,
-      Name: property.Name
+      deviceTemplate_oid: idDeviceTemplate,
+      isCloudable: property.isCloudable,
+      isWritable: property.isWritable,
+      name: property.name
     }
 
     return newProperty;
@@ -58,11 +58,11 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newCommand: NewCommand;
 
     newCommand = {
-      DeviceTemplate_oid: idDeviceTemplate,
-      Description: command.Description,
-      IsSynchronous: command.IsSynchronous,
-      Name: command.Name,
-      Type: command.Type
+      deviceTemplate_oid: idDeviceTemplate,
+      description: command.description,
+      isSynchronous: command.isSynchronous,
+      name: command.name,
+      type: command.type
     }
 
     return newCommand;
@@ -72,12 +72,12 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newTelemetry: NewTelemetry;
 
     newTelemetry = {
-      DeviceTemplate_oid: idDeviceTemplate,
-      Frecuency: telemetry.Frecuency,
-      Name: telemetry.Name,
-      Type: telemetry.Type,
-      Unit: telemetry.Unit,
-      Schema: telemetry.Schema
+      deviceTemplate_oid: idDeviceTemplate,
+      frecuency: telemetry.frecuency,
+      name: telemetry.name,
+      type: telemetry.type,
+      unit: telemetry.unit,
+      schema: telemetry.schema
     }
 
     return newTelemetry;
@@ -87,9 +87,9 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newEvent: NewEventTelemetry;
 
     newEvent = {
-      Telemetry_oid: idTelemetry,
-      Name: event.Name,
-      Severity: event.Severity
+      telemetry_oid: idTelemetry,
+      name: event.name,
+      severity: event.severity
     }
 
     return newEvent;
@@ -99,11 +99,11 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newLocation: NewLocation;
 
     newLocation = {
-      Telemetry_oid: idTelemetry,
-      Altitude: location.Altitude,
-      Latitude: location.Latitude,
-      Longitude: location.Longitude,
-      Name: location.Name
+      telemetry_oid: idTelemetry,
+      altitude: location.altitude,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      name: location.name
     }
 
     return newLocation;
@@ -113,9 +113,9 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newSensor: NewSensor;
 
     newSensor = {
-      Telemetry_oid: idTelemetry,
-      Name: sensor.Name,
-      SensorType: sensor.SensorType
+      telemetry_oid: idTelemetry,
+      name: sensor.name,
+      sensorType: sensor.sensorType
     }
 
     return newSensor;
@@ -125,8 +125,8 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newState: NewStateTelemetry;
 
     newState = {
-      Telemetry_oid: idTelemetry,
-      Name: name
+      telemetry_oid: idTelemetry,
+      name: name
     }
 
     return newState;
@@ -136,9 +136,9 @@ export class DeviceTemplateAdapterComponent implements OnInit {
     let newStateDevice: NewStateDevice;
 
     newStateDevice = {
-      StateTelemetry_oid: idStateTelemetry,
-      Name: stateDevice.Name,
-      Value: stateDevice.Value
+      stateTelemetry_oid: idStateTelemetry,
+      name: stateDevice.name,
+      value: stateDevice.value
     }
 
     return newStateDevice;

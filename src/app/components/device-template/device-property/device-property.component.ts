@@ -16,10 +16,10 @@ export class DevicePropertyComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["DeviceTemplate/" + this.device.Name + "/Property/" + id]);
+    this.router.navigate(["DeviceTemplate/" + this.device.name + "/Property/" + id]);
   }
 
   createProperty(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Property/" + -999 + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Property/" + -999 + "/Edit");
   }
 }

@@ -43,7 +43,7 @@ export class PatientProfileDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.patientProfile.Name
+      data: this.patientProfile.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -63,7 +63,7 @@ export class PatientProfileDetailComponent implements OnInit {
   }
 
   removePatientProfile(){
-    this.patientProfileService.deletePatientProfile(this.patientProfile.Id).subscribe({
+    this.patientProfileService.deletePatientProfile(this.patientProfile.id).subscribe({
       next: result => {
         console.log("Removing patient profile...");
       },

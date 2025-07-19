@@ -1,13 +1,13 @@
 <form [formGroup]="deviceProfileForm" (ngSubmit)="editDeviceProfile()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <td>
                     <div>
                         <b>Type</b><br>
-                        <select class="form-select" formControlName="Type">
+                        <select class="form-select" formControlName="type">
                             <option value="1">Sensor</option>
                             <option value="2">Actuator</option>
                         </select>
@@ -43,7 +43,7 @@
                     <div>
                         <b>IsEdge</b><br>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="isedge" formControlName="IsEdge">
+                            <input class="form-check-input" type="checkbox" role="switch" id="isedge" formControlName="isEdge">
                         </div>
                     </div>
                 </td>

@@ -1,5 +1,5 @@
 export interface Sensor {
-    Id:         number;
-    Name:       string;
-    SensorType: string;
+    id:         number;
+    name:       string;
+    sensorType: string;
 }

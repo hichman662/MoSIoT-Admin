@@ -22,16 +22,16 @@ export class EditLocationTelemetryComponent implements OnInit {
   idTelemetry!:number;
 
   locationForm = this.fb.group({
-    Name:['',Validators.required],
-    Latitude:['', Validators.required],
-    Altitude:['', Validators.required],
-    Longitude:['', Validators.required]
+    name:['',Validators.required],
+    latitude:['', Validators.required],
+    altitude:['', Validators.required],
+    longitude:['', Validators.required]
   })
 
-  get Name() { return this.locationForm.get('Name'); }
-  get Latitude() { return this.locationForm.get('Latitude'); }
-  get Altitude() { return this.locationForm.get('Altitude'); }
-  get Longitude() { return this.locationForm.get('Longitude'); }
+  get name() { return this.locationForm.get('name'); }
+  get latitude() { return this.locationForm.get('latitude'); }
+  get altitude() { return this.locationForm.get('altitude'); }
+  get longitude() { return this.locationForm.get('longitude'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -39,9 +39,9 @@ export class EditLocationTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.idTelemetry)!;
 
-    this.location = this.telemetry.Location!;
+    this.location = this.telemetry.location!;
     
     if(this.location == undefined){
       this.isNew = true;
@@ -49,30 +49,30 @@ export class EditLocationTelemetryComponent implements OnInit {
     }
 
     this.locationForm.setValue({
-      Name: this.location.Name,
-      Latitude: this.location.Latitude,
-      Altitude: this.location.Altitude,
-      Longitude: this.location.Longitude});
+      name: this.location.name,
+      latitude: this.location.latitude,
+      altitude: this.location.altitude,
+      longitude: this.location.longitude});
   }
 
   initDefaults(){
     this.location = {
-      Id: 0,
-      Name: "",
-      Altitude: 0,
-      Latitude: 0,
-      Longitude: 0
+      id: 0,
+      name: "",
+      altitude: 0,
+      latitude: 0,
+      longitude: 0
     }
   }
 
   edit(){
-    this.location.Name =  this.locationForm.get('Name')?.value;
-    this.location.Altitude = this.locationForm.get('Altitude')?.value;
-    this.location.Latitude = this.locationForm.get('Latitude')?.value;
-    this.location.Longitude = this.locationForm.get('Longitude')?.value;
+    this.location.name =  this.locationForm.get('name')?.value;
+    this.location.altitude = this.locationForm.get('altitude')?.value;
+    this.location.latitude = this.locationForm.get('latitude')?.value;
+    this.location.longitude = this.locationForm.get('longitude')?.value;
 
     if(this.isNew){
-      this.deviceService.createLocationTelemetry(this.deviceTemplateAdapter.newLocationTelemetry(this.location, this.telemetry.Id)).subscribe({
+      this.deviceService.createLocationTelemetry(this.deviceTemplateAdapter.newLocationTelemetry(this.location, this.telemetry.id)).subscribe({
         next : result =>{
           this.location = result;
         },
@@ -81,12 +81,12 @@ export class EditLocationTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.createSuccess("location");
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
     else{
-      this.deviceService.updateLocationTelemetry(this.location.Id,this.location).subscribe({
+      this.deviceService.updateLocationTelemetry(this.location.id,this.location).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -95,13 +95,13 @@ export class EditLocationTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.updateSuccess();
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
   }
 
   cancel(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.telemetry.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.telemetry.id);
   }
 }

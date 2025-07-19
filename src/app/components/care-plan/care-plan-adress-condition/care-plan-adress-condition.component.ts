@@ -22,10 +22,10 @@ export class CarePlanAdressConditionComponent implements OnInit {
   conditions!:Condition[];
 
   adressConditionForm = this.fb.group({
-    Condition:['',Validators.required]
+    condition:['',Validators.required]
   })
 
-  get Condition() { return this.adressConditionForm.get('Condition'); }
+  get condition() { return this.adressConditionForm.get('condition'); }
   
   constructor(private sweetAlert: SweetAlertsComponent,private fb:FormBuilder, private carePlanService:CarePlanService, public dialog: MatDialog, private patientProfileService: PatientProfileService, private router:Router) { }
 
@@ -41,12 +41,12 @@ export class CarePlanAdressConditionComponent implements OnInit {
   }
 
   editAdressCondition(){
-    let idCondition:number[] = this.adressConditionForm.get('Condition')?.value;
+    let idCondition:number[] = this.adressConditionForm.get('condition')?.value;
 
     idCondition = this.deleteDuplicates(idCondition);
 
     if(idCondition != undefined){
-      this.carePlanService.updateCarePlanAdressCondition(this.carePlan.Id,idCondition).subscribe({
+      this.carePlanService.updateCarePlanAdressCondition(this.carePlan.id,idCondition).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -79,8 +79,8 @@ export class CarePlanAdressConditionComponent implements OnInit {
 
   deleteDuplicates(newConditionsId:number[]){
     newConditionsId.forEach(newCondition => {
-      this.carePlan.AddressConditions?.find(condition => {
-        if(condition.Id == newCondition){
+      this.carePlan.addressConditions?.find(condition => {
+        if(condition.id == newCondition){
           newConditionsId.splice(newConditionsId.indexOf(newCondition),1);
         }
       })
@@ -113,7 +113,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
   }
 
   removeCondition(idCondition:number){
-      this.carePlan.AddressConditions?.splice(this.carePlan.AddressConditions?.map(condition => condition.Id).indexOf(idCondition),1);
+      this.carePlan.addressConditions?.splice(this.carePlan.addressConditions?.map(condition => condition.id).indexOf(idCondition),1);
 
       this.carePlanService.deleteAdressCondition(idCondition).subscribe({
         next : result =>{
@@ -124,7 +124,7 @@ export class CarePlanAdressConditionComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/ " + this.carePlan.id);
           this.sweetAlert.removeSuccess("condition");
         }
       })
@@ -144,6 +144,6 @@ export class CarePlanAdressConditionComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["CarePlan/" + this.carePlan.Name + "/AdressCondition/" + id]);
+    this.router.navigate(["CarePlan/" + this.carePlan.name + "/AdressCondition/" + id]);
   }
 }

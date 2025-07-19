@@ -7,9 +7,9 @@
     <tbody *ngFor="let data of dataSource">
         <tr>
             <td>
-                <b>{{data.Name}}</b><br>
-                <div *ngIf ="isString(data.Value);else notStringValue">{{data.Value | titlecase | isAssigned}}</div>
-                <ng-template #notStringValue>{{data.Value | isAssigned}}</ng-template>
+                <b>{{data.name}}</b><br>
+                <div *ngIf ="isString(data.value);else notStringValue">{{data.value | titlecase | isAssigned}}</div>
+                <ng-template #notStringValue>{{data.value | isAssigned}}</ng-template>
             </td>
         </tr>
     </tbody>

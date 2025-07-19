@@ -25,18 +25,18 @@ export class DeviceProfileComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Type",
-        Value: this.deviceTypePipe.transform(this.device.Type)
+        name: "type",
+        value: this.deviceTypePipe.transform(this.device.type)
       },
       {
-        Name: "IsEdge",
-        Value: this.boolToStringPipe.transform(this.device.IsEdge)
+        name: "isEdge",
+        value: this.boolToStringPipe.transform(this.device.isEdge)
       }
     ]
   }
 
   editProfile(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Id + "/EditProfile");
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.id + "/EditProfile");
   }
 
 }

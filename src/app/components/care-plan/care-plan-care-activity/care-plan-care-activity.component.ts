@@ -16,10 +16,10 @@ export class CarePlanCareActivityComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["CarePlan/" + this.carePlan.Name + "/CareActivity/" + id]);
+    this.router.navigate(["CarePlan/" + this.carePlan.name + "/CareActivity/" + id]);
   }
 
   createCareActivity(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + -999 + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + -999 + "/Edit");
   }
 }

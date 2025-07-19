@@ -32,30 +32,30 @@ export class LocationTelemtryDetailComponent implements OnInit {
   }
 
   editLocation(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Location/" + this.location.Name + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Location/" + this.location.name + "/Edit");
   }
 
   createLocation(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Location/New/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Location/New/Edit");
   }
 
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Name",
-        Value: this.location.Name
+        name: "name",
+        value: this.location.name
       },
       {
-        Name: "Latitude",
-        Value: this.location.Latitude
+        name: "latitude",
+        value: this.location.latitude
       },
       {
-        Name: "Longitude",
-        Value: this.location.Longitude
+        name: "longitude",
+        value: this.location.longitude
       },
       {
-        Name: "Altitude",
-        Value: this.location.Altitude
+        name: "altitude",
+        value: this.location.altitude
       }
     ]
   }

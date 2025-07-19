@@ -1,5 +1,5 @@
 export interface NewMeasure {
-    Name:        string;
-    Description: string;
-    LOINCcode:   string;
+    name:        string;
+    description: string;
+    lOINCcode:   string;
 }

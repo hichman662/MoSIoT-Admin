@@ -1,5 +1,5 @@
 <form [formGroup]="eventForm" (ngSubmit)="edit()">
-    <h1>{{telemetry.Name}}</h1>
+    <h1>{{telemetry.name}}</h1>
     <hr>
     <mat-tab-group animationDuration="0ms">
         <mat-tab>
@@ -19,9 +19,9 @@
                             <div>
                                 <b>Name</b><br>
                                 <div class="needs-validation">
-                                    <input type="text" class="form-control" formControlName="Name" required>
-                                    <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-                                        <div *ngIf="Name?.errors?.['required']">
+                                    <input type="text" class="form-control" formControlName="name" required>
+                                    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                                        <div *ngIf="name?.errors?.['required']">
                                             <div class="invalid-feedback">The name is required</div>
                                         </div>
                                     </div>
@@ -33,7 +33,7 @@
                         <td>
                             <div>
                                 <b>Severity</b><br>
-                                <select class="form-select" formControlName="Severity">
+                                <select class="form-select" formControlName="severity">
                                     <option value="1">Warning</option>
                                     <option value="2">Error</option>
                                     <option value="3">Info</option>

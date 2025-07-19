@@ -28,7 +28,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.accessModeId = params['accessModeId']);
 
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
-    this.accessMode = this.patientProfile.AccessMode.find(accessMode => accessMode.Id == this.accessModeId)!;
+    this.accessMode = this.patientProfile.accessMode.find(accessMode => accessMode.id == this.accessModeId)!;
     
     this.loadTable(); 
   }
@@ -36,42 +36,42 @@ export class PatientProfileAccessDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Access mode type",
-        Value: this.accessModeTypePipe.transform(this.accessMode.TypeAccessMode)
+        name: "Access mode type",
+        value: this.accessModeTypePipe.transform(this.accessMode.typeAccessMode)
       },
       {
-        Name: "Description",
-        Value: this.accessMode.Description
+        name: "Description",
+        value: this.accessMode.description
       }
     ]
   }
 
   editAccessMode(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/Edit");
   }
 
   editAdaptationRequest(adaptationRequestId:number){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationRequest/" + adaptationRequestId + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationRequest/" + adaptationRequestId + "/Edit");
   }
 
   editAdaptationType(adaptationTypeId:number){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationType/" + adaptationTypeId + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationType/" + adaptationTypeId + "/Edit");
   }
 
   editAdaptationDetail(adaptationDetailId:number){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationDetail/" + adaptationDetailId + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationDetail/" + adaptationDetailId + "/Edit");
   }
 
   createAdaptationRequest(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationRequest/New");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationRequest/New");
   }
 
   createAdaptationType(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationType/New");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationType/New");
   }
 
   createAdaptationDetail(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/AccessMode/" + this.accessMode.Id + "/AdaptationDetail/New");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/AccessMode/" + this.accessMode.id + "/AdaptationDetail/New");
   }
 
   removeDialog(name:string, type:number, id?:number){
@@ -115,8 +115,8 @@ export class PatientProfileAccessDetailComponent implements OnInit {
   }
 
   removePatientProfileAccessMode(){
-    console.log("Access mode ID to remove: " + this.accessMode.Id);
-    this.patientProfileService.deleteAccessMode(this.accessMode.Id).subscribe({
+    console.log("Access mode ID to remove: " + this.accessMode.id);
+    this.patientProfileService.deleteAccessMode(this.accessMode.id).subscribe({
       next: result => {
         console.log("Removing access mode...");
         console.log(result);
@@ -126,7 +126,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Access mode");
-        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
       }
     })
   }
@@ -142,7 +142,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           this.sweetAlert.removeSuccess("Adaptation request");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
         }
       })
     }
@@ -159,7 +159,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           this.sweetAlert.removeSuccess("Adapatation type");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
         }
       })
     }
@@ -176,7 +176,7 @@ export class PatientProfileAccessDetailComponent implements OnInit {
         },
         complete: () => {
           this.sweetAlert.removeSuccess("Adaptation detail");
-          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+          this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
         }
       })
     }

@@ -26,7 +26,7 @@ export class CarePlanMeasureComponent implements OnInit {
 
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idGoal = params['goalId']);
-    this.goal = this.carePlan.Goals?.find(goal => goal.Id == this.idGoal)!;
+    this.goal = this.carePlan.goals?.find(goal => goal.id == this.idGoal)!;
 
     this.carePlanService.getAllMeasure().subscribe({
       next: result => {
@@ -42,10 +42,10 @@ export class CarePlanMeasureComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["CarePlan/" + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Measure/" + id]);
+    this.router.navigate(["CarePlan/" + this.carePlan.name + "/Goal/" + this.goal.id + "/Measure/" + id]);
   }
 
   createMeasure(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.goal.Id + "/Measure/" + -999 + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.goal.id + "/Measure/" + -999 + "/Edit");
   }
 }

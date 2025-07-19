@@ -24,14 +24,14 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
   idTarget!:number;
 
   measureForm = this.fb.group({
-    Name:['',Validators.required],
-    LOIN:['', Validators.required],
-    Description:['',Validators.required]
+    name:['',Validators.required],
+    lOIN:['', Validators.required],
+    description:['',Validators.required]
   })
 
-  get Name() { return this.measureForm.get('Name'); }
-  get LOIN() { return this.measureForm.get('LOIN'); }
-  get Description() { return this.measureForm.get('Description'); }
+  get name() { return this.measureForm.get('name'); }
+  get lOIN() { return this.measureForm.get('lOIN'); }
+  get description() { return this.measureForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
@@ -39,7 +39,7 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idGoal = params['goalId']);
-    this.goal = this.carePlan.Goals?.find(goal => goal.Id == this.idGoal)!;
+    this.goal = this.carePlan.goals?.find(goal => goal.id == this.idGoal)!;
 
     this.activatedRoute.params.subscribe((params: Params) => this.idTarget = params['targetId']);
 
@@ -51,23 +51,23 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
       this.initDefaults();
     }
 
-    this.measureForm.setValue({Name: this.measure.Name, LOIN: this.measure.LOINCcode, Description: this.measure.Description});
+    this.measureForm.setValue({name: this.measure.name, LOIN: this.measure.lOINCcode, description: this.measure.description});
   }
 
   initDefaults(){
     this.measure = {
-      Id: 0,
-      Name: "",
-      LOINCcode: "",
-      Description: "",
-      TelemetriesMeasure: []
+      id: 0,
+      name: "",
+      lOINCcode: "",
+      description: "",
+      telemetriesMeasure: []
     }
   }
 
   editMeasure(){
-    this.measure.Name = this.measureForm.get('Name')?.value;
-    this.measure.LOINCcode = this.measureForm.get('LOIN')?.value;
-    this.measure.Description = this.measureForm.get('Description')?.value;
+    this.measure.name = this.measureForm.get('name')?.value;
+    this.measure.lOINCcode = this.measureForm.get('lOIN')?.value;
+    this.measure.description = this.measureForm.get('description')?.value;
 
     if(this.isNew){
       this.carePlanService.createMeasure(this.carePlanAdapter.newMeasure(this.measure)).subscribe({
@@ -78,13 +78,13 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
           this.sweetAlert.createError("measure",error);
         },
         complete : () => {
-          this.addMeasureToTarget(this.measure.Id);
+          this.addMeasureToTarget(this.measure.id);
           this.sweetAlert.createSuccess("measure");
         }
       });
     }
     else{
-      this.carePlanService.updateMeasure(this.measure.Id, this.carePlanAdapter.newMeasure(this.measure)).subscribe({
+      this.carePlanService.updateMeasure(this.measure.id, this.carePlanAdapter.newMeasure(this.measure)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -93,7 +93,7 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('measureDetail',JSON.stringify(this.measure));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -110,13 +110,13 @@ export class EditCarePlanMeasureDetailsComponent implements OnInit {
       },
       complete : () => {
         localStorage.setItem('measureDetail',JSON.stringify(this.measure));
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
         this.sweetAlert.updateSuccess();
       }
     });
   }
 
   cancelMeasure(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.idGoal);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.idGoal);
   }
 }

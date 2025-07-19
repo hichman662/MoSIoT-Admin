@@ -24,25 +24,25 @@ export class PatientProfileDetailsComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Description",
-        Value: this.patientProfile.Description
+        name: "Description",
+        value: this.patientProfile.description
       },
       {
-        Name: "Hazard Avoidance",
-        Value: this.hazardValuePipe.transform(this.patientProfile.HazardAvoidance)
+        name: "Hazard Avoidance",
+        value: this.hazardValuePipe.transform(this.patientProfile.hazardAvoidance)
       },
       {
-        Name: "Region",
-        Value: this.patientProfile.Region
+        name: "Region",
+        value: this.patientProfile.region
       },
       {
-        Name: "Preferred Language",
-        Value: this.languagePipe.transform(this.patientProfile.PreferredLanguage)
+        name: "Preferred Language",
+        value: this.languagePipe.transform(this.patientProfile.preferredLanguage)
       }
     ]
   }
 
   editDetails(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/EditDetails");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/EditDetails");
   }
 }

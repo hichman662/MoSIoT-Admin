@@ -19,20 +19,20 @@ export class EditCareActivityDetailComponent implements OnInit {
   id!:number;
 
   careActivityForm = this.fb.group({
-    Name:['',Validators.required],
-    Type:['',Validators.required],
-    Periodicity:['', Validators.required],
-    Duration:['', Validators.required],
-    Location:['', Validators.required],
-    Description:['',Validators.required]
+    name:['',Validators.required],
+    type:['',Validators.required],
+    periodicity:['', Validators.required],
+    duration:['', Validators.required],
+    location:['', Validators.required],
+    description:['',Validators.required]
   })
 
-  get Name() { return this.careActivityForm.get('Name'); }
-  get Type() { return this.careActivityForm.get('Type'); }
-  get Periodicity() { return this.careActivityForm.get('Periodicity'); }
-  get Duration() { return this.careActivityForm.get('Duration'); }
-  get Location() { return this.careActivityForm.get('Location'); }
-  get Description() { return this.careActivityForm.get('Description'); }
+  get name() { return this.careActivityForm.get('name'); }
+  get type() { return this.careActivityForm.get('type'); }
+  get periodicity() { return this.careActivityForm.get('periodicity'); }
+  get duration() { return this.careActivityForm.get('duration'); }
+  get location() { return this.careActivityForm.get('location'); }
+  get description() { return this.careActivityForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
@@ -40,40 +40,40 @@ export class EditCareActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivityId']);
-    this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
+    this.careActivity = this.carePlan.careActivities?.find(careActivity => careActivity.id == this.id)!;
 
     //If not exists, create new
-    if(!this.carePlan.CareActivities?.some(careActivity => careActivity.Id == this.id)){
+    if(!this.carePlan.careActivities?.some(careActivity => careActivity.id == this.id)){
       this.isNew = true;
       this.initDefaults();
     }
 
-    this.careActivityForm.setValue({Name: this.careActivity.Name, Type: this.careActivity.TypeActivity, Periodicity: this.careActivity.Periodicity, 
-      Duration: this.careActivity.Duration, Location: this.careActivity.Location, Description: this.careActivity.Description});
+    this.careActivityForm.setValue({name: this.careActivity.name, type: this.careActivity.typeActivity, periodicity: this.careActivity.periodicity, 
+      duration: this.careActivity.duration, location: this.careActivity.location, description: this.careActivity.description});
   }
 
   initDefaults(){
     this.careActivity = {
-      Name: "",
-      Description: "",
-      Duration: 1,
-      Location: "",
-      Periodicity: 1,
-      TypeActivity: 1,
-      Id: 0
+      name: "",
+      description: "",
+      duration: 1,
+      location: "",
+      periodicity: 1,
+      typeActivity: 1,
+      id: 0
     }
   }
 
   editaCareAcitivity(){
-    this.careActivity.Name = this.careActivityForm.get('Name')?.value;
-    this.careActivity.TypeActivity = this.careActivityForm.get('Type')?.value;
-    this.careActivity.Periodicity = this.careActivityForm.get('Periodicity')?.value;
-    this.careActivity.Duration = this.careActivityForm.get('Duration')?.value;
-    this.careActivity.Location = this.careActivityForm.get('Location')?.value;
-    this.careActivity.Description = this.careActivityForm.get('Description')?.value;
+    this.careActivity.name = this.careActivityForm.get('name')?.value;
+    this.careActivity.typeActivity = this.careActivityForm.get('type')?.value;
+    this.careActivity.periodicity = this.careActivityForm.get('periodicity')?.value;
+    this.careActivity.duration = this.careActivityForm.get('duration')?.value;
+    this.careActivity.location = this.careActivityForm.get('location')?.value;
+    this.careActivity.description = this.careActivityForm.get('description')?.value;
 
     if(this.isNew){
-      this.carePlanService.createCareActivity(this.carePlanAdapter.newCareActivity(this.careActivity, this.carePlan.Id)).subscribe({
+      this.carePlanService.createCareActivity(this.carePlanAdapter.newCareActivity(this.careActivity, this.carePlan.id)).subscribe({
         next : result =>{
           this.careActivity = result;
         },
@@ -82,13 +82,13 @@ export class EditCareActivityDetailComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.createSuccess("care activity");
         }
       });
     }
     else{
-      this.carePlanService.updateCareActivity(this.careActivity.Id,this.carePlanAdapter.newCareActivity(this.careActivity, this.carePlan.Id)).subscribe({
+      this.carePlanService.updateCareActivity(this.careActivity.id,this.carePlanAdapter.newCareActivity(this.careActivity, this.carePlan.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -97,7 +97,7 @@ export class EditCareActivityDetailComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -105,6 +105,6 @@ export class EditCareActivityDetailComponent implements OnInit {
   }
 
   cancelCareActivity(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Id);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.id);
   }
 }

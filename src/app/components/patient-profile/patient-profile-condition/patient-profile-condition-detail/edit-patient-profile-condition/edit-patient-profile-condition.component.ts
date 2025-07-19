@@ -19,16 +19,16 @@ export class EditPatientProfileConditionComponent implements OnInit {
   id!:number;
 
   patientConditionForm = this.fb.group({
-    Name:['',Validators.required],
-    Clinical:['', Validators.required],
-    Disease:['', Validators.required],
-    Description:['',Validators.required]
+    name:['',Validators.required],
+    clinical:['', Validators.required],
+    disease:['', Validators.required],
+    description:['',Validators.required]
   })
 
-  get Name() { return this.patientConditionForm.get('Name'); }
-  get Clinical() { return this.patientConditionForm.get('Clinical'); }
-  get Disease() { return this.patientConditionForm.get('Disease'); }
-  get Description() { return this.patientConditionForm.get('Description'); }
+  get name() { return this.patientConditionForm.get('name'); }
+  get clinical() { return this.patientConditionForm.get('clinical'); }
+  get disease() { return this.patientConditionForm.get('disease'); }
+  get description() { return this.patientConditionForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute, private patientProfileAdapter: PatientProfileAdapterComponent) { }
@@ -36,35 +36,35 @@ export class EditPatientProfileConditionComponent implements OnInit {
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['conditionId']);
-    this.condition = this.patient.Condition.find(condition => condition.Id == this.id)!;
+    this.condition = this.patient.condition.find(condition => condition.id == this.id)!;
 
     //If not exists, create new
-    if(!this.patient.Condition.some(condition => condition.Id == this.id)){
+    if(!this.patient.condition.some(condition => condition.id == this.id)){
       this.isNew = true;
       this.initDefaults();
     }
 
-    this.patientConditionForm.setValue({Name: this.condition.Name, Clinical: this.condition.ClinicalStatus, Disease: this.condition.Disease, Description: this.condition.Description});
+    this.patientConditionForm.setValue({Name: this.condition.name, Clinical: this.condition.clinicalStatus, Disease: this.condition.disease, Description: this.condition.description});
   }
 
   initDefaults(){
     this.condition = {
-      Id: 0,
-      Name: "",
-      ClinicalStatus: 1,
-      Description: "",
-      Disease: 1
+      id: 0,
+      name: "",
+      clinicalStatus: 1,
+      description: "",
+      disease: 1
     }
   }
 
   editPatientCondition(){
-    this.condition.Name = this.patientConditionForm.get('Name')?.value;
-    this.condition.ClinicalStatus = this.patientConditionForm.get('Clinical')?.value;
-    this.condition.Disease = this.patientConditionForm.get('Disease')?.value;
-    this.condition.Description = this.patientConditionForm.get('Description')?.value;
+    this.condition.name = this.patientConditionForm.get('name')?.value;
+    this.condition.clinicalStatus = this.patientConditionForm.get('clinical')?.value;
+    this.condition.disease = this.patientConditionForm.get('disease')?.value;
+    this.condition.description = this.patientConditionForm.get('description')?.value;
 
     if(this.isNew){
-      this.patientService.createCondition(this.patientProfileAdapter.newCondition(this.condition, this.patient.Id)).subscribe({
+      this.patientService.createCondition(this.patientProfileAdapter.newCondition(this.condition, this.patient.id)).subscribe({
         next : result =>{
           this.condition = result;
         },
@@ -73,13 +73,13 @@ export class EditPatientProfileConditionComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.createSuccess("Condition");
         }
       });
     }
     else{
-      this.patientService.updatePatientCondition(this.condition.Id,this.condition).subscribe({
+      this.patientService.updatePatientCondition(this.condition.id,this.condition).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -88,7 +88,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('patientProfileDetail',JSON.stringify(this.patient));
-          this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+          this.router.navigateByUrl("PatientProfile/" + this.patient.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -96,6 +96,6 @@ export class EditPatientProfileConditionComponent implements OnInit {
   }
 
   cancelPatientCondition(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patient.Id);
+    this.router.navigateByUrl("PatientProfile/ " + this.patient.id);
   }
 }

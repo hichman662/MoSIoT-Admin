@@ -1,5 +1,5 @@
 export interface NewStateDevice {
-    Name:               string;
-    Value:              string;
-    StateTelemetry_oid: number;
+    name:               string;
+    value:              string;
+    stateTelemetry_oid: number;
 }

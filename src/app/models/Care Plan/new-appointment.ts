@@ -1,8 +1,8 @@
 export interface NewAppointment {
-    Id:               number;
-    IsVirtual:        boolean;
-    Description:      string;
-    Direction:        string;
-    ReasonCode:       string;
-    CareActivity_oid: number;
+    id:               number;
+    isVirtual:        boolean;
+    description:      string;
+    direction:        string;
+    reasonCode:       string;
+    careActivity_oid: number;
 }

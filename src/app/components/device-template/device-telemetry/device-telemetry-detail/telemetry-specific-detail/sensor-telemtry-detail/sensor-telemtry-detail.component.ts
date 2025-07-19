@@ -32,22 +32,22 @@ export class SensorTelemtryDetailComponent implements OnInit {
   }
 
   editSensor(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Sensor/" + this.sensor.Name + "/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Sensor/" + this.sensor.name + "/Edit");
   }
 
   createSensor(){
-    this.router.navigateByUrl("DeviceTemplate/" + this.device.Name + "/Telemetry/" + this.idTelemetry + "/Sensor/New/Edit");
+    this.router.navigateByUrl("DeviceTemplate/" + this.device.name + "/Telemetry/" + this.idTelemetry + "/Sensor/New/Edit");
   }
 
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Name",
-        Value: this.sensor.Name
+        name: "Name",
+        value: this.sensor.name
       },
       {
-        Name: "Sensor Type",
-        Value: this.sensor.SensorType
+        name: "Sensor Type",
+        value: this.sensor.sensorType
       }
     ]
   }

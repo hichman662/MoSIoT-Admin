@@ -21,14 +21,14 @@ export class EditPatientProfileAdaptationRequestComponent implements OnInit {
   idAdapatationRequest!:number;
 
   patientAdaptationForm = this.fb.group({
-    Target:['',Validators.required],
-    Language:['',Validators.required],
-    Description:['',Validators.required]
+    target:['',Validators.required],
+    language:['',Validators.required],
+    description:['',Validators.required]
   })
 
-  get Target() { return this.patientAdaptationForm.get('Target'); }
-  get Language() { return this.patientAdaptationForm.get('Language'); }
-  get Description() { return this.patientAdaptationForm.get('Description'); }
+  get target() { return this.patientAdaptationForm.get('target'); }
+  get language() { return this.patientAdaptationForm.get('language'); }
+  get description() { return this.patientAdaptationForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private patientService:PatientProfileService, 
     private router:Router, private activatedRoute: ActivatedRoute) { }
@@ -36,19 +36,19 @@ export class EditPatientProfileAdaptationRequestComponent implements OnInit {
   ngOnInit(): void {
     this.patient = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idAccessMode = params['accessModeId']);
-    this.accessMode = this.patient.AccessMode.find(access => access.Id == this.idAccessMode)!;
+    this.accessMode = this.patient.accessMode.find(access => access.id == this.idAccessMode)!;
     this.activatedRoute.params.subscribe((params: Params) => this.idAdapatationRequest = params['adaptationRequestId']);
-    this.adaptationRequest = this.accessMode.AdaptationRequest?.find(adaptation => adaptation.Id == this.idAdapatationRequest)!;
+    this.adaptationRequest = this.accessMode.adaptationRequest?.find(adaptation => adaptation.id == this.idAdapatationRequest)!;
 
-    this.patientAdaptationForm.setValue({Target: this.adaptationRequest.AccessModeTarget, Language: this.adaptationRequest.LanguageOfAdaptation, Description: this.adaptationRequest.Description});
+    this.patientAdaptationForm.setValue({Target: this.adaptationRequest.accessModeTarget, Language: this.adaptationRequest.languageOfAdaptation, Description: this.adaptationRequest.description});
   }
 
   editPatientAdaptation(){
-    this.adaptationRequest.AccessModeTarget = this.patientAdaptationForm.get('Target')?.value;
-    this.adaptationRequest.LanguageOfAdaptation = this.patientAdaptationForm.get('Language')?.value;
-    this.adaptationRequest.Description = this.patientAdaptationForm.get('Description')?.value;
+    this.adaptationRequest.accessModeTarget = this.patientAdaptationForm.get('target')?.value;
+    this.adaptationRequest.languageOfAdaptation = this.patientAdaptationForm.get('language')?.value;
+    this.adaptationRequest.description = this.patientAdaptationForm.get('description')?.value;
     
-    this.patientService.updatePatientAdaptationRequest(this.adaptationRequest.Id,this.adaptationRequest).subscribe({
+    this.patientService.updatePatientAdaptationRequest(this.adaptationRequest.id,this.adaptationRequest).subscribe({
       next : result =>{
         console.log(result);
       },
@@ -56,13 +56,13 @@ export class EditPatientProfileAdaptationRequestComponent implements OnInit {
         this.sweetAlert.updateError(error);
       },
       complete : () => {
-        this.router.navigateByUrl("PatientProfile/" + this.patient.Id);
+        this.router.navigateByUrl("PatientProfile/" + this.patient.id);
         this.sweetAlert.updateSuccess();
       }
     });
   }
 
   cancelPatientAdaptation(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patient.Name + "/AccessMode/" + this.idAccessMode);
+    this.router.navigateByUrl("PatientProfile/ " + this.patient.name + "/AccessMode/" + this.idAccessMode);
   }
 }

@@ -16,10 +16,10 @@ export class PatientProfileDisabilityComponent implements OnInit {
   }
 
   details(id:number){
-    this.router.navigate(["PatientProfile/" + this.patientProfile.Name + "/Disability/" + id]);
+    this.router.navigate(["PatientProfile/" + this.patientProfile.name + "/Disability/" + id]);
   }
 
   createDisability(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/Disability/" + -999 + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/Disability/" + -999 + "/Edit");
   }
 }

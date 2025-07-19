@@ -21,22 +21,22 @@ export class EditCareActivityMedicationComponent implements OnInit {
   id!:number;
 
   careActivityMedicationForm = this.fb.group({
-    Name:['',Validators.required],
-    Description:['',Validators.required],
-    Product:[''],
-    Manufacturer:['', Validators.required],
-    Dosage:['', Validators.required],
-    Form:['', Validators.required],
-    Code:['', Validators.required]
+    name:['',Validators.required],
+    description:['',Validators.required],
+    product:[''],
+    manufacturer:['', Validators.required],
+    dosage:['', Validators.required],
+    form:['', Validators.required],
+    code:['', Validators.required]
   })
 
-  get Name() { return this.careActivityMedicationForm.get('Name'); }
-  get Description() { return this.careActivityMedicationForm.get('Description'); }
-  get Product() { return this.careActivityMedicationForm.get('Product'); }
-  get Manufacturer() { return this.careActivityMedicationForm.get('Manufacturer'); }
-  get Dosage() { return this.careActivityMedicationForm.get('Dosage'); }
-  get Form() { return this.careActivityMedicationForm.get('Form'); }
-  get Code() { return this.careActivityMedicationForm.get('Code'); }
+  get name() { return this.careActivityMedicationForm.get('name'); }
+  get description() { return this.careActivityMedicationForm.get('description'); }
+  get product() { return this.careActivityMedicationForm.get('product'); }
+  get manufacturer() { return this.careActivityMedicationForm.get('manufacturer'); }
+  get dosage() { return this.careActivityMedicationForm.get('dosage'); }
+  get form() { return this.careActivityMedicationForm.get('form'); }
+  get code() { return this.careActivityMedicationForm.get('code'); }
 
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService, 
@@ -45,14 +45,14 @@ export class EditCareActivityMedicationComponent implements OnInit {
   ngOnInit(): void {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivityId']);
-    this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
+    this.careActivity = this.carePlan.careActivities?.find(careActivity => careActivity.id == this.id)!;
 
     if(this.careActivity == undefined){
       this.sweetAlert.readError("care activity","care activity load error");
-      this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+      this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
     }
     else{
-      this.careActivityMedication = this.careActivity.Medications!;
+      this.careActivityMedication = this.careActivity.medications!;
 
       //If not exists, create new
       if(this.careActivityMedication == undefined){
@@ -61,33 +61,33 @@ export class EditCareActivityMedicationComponent implements OnInit {
       }
     }
 
-    this.careActivityMedicationForm.setValue({Name: this.careActivityMedication.Name, Description: this.careActivityMedication.Description, Product: this.careActivityMedication.ProductReference,
-    Manufacturer: this.careActivityMedication.Manufacturer, Dosage: this.careActivityMedication.Dosage, Form: this.careActivityMedication.Form, Code: this.careActivityMedication.MedicationCode});
+    this.careActivityMedicationForm.setValue({name: this.careActivityMedication.name, description: this.careActivityMedication.description, product: this.careActivityMedication.productReference,
+    manufacturer: this.careActivityMedication.manufacturer, dosage: this.careActivityMedication.dosage, form: this.careActivityMedication.form, code: this.careActivityMedication.medicationCode});
   }
 
   initDefaults(){
     this.careActivityMedication = {
-      Name: "",
-      Description: "",
-      ProductReference: 1,
-      Manufacturer: "",
-      Dosage: "",
-      Form: 1,
-      MedicationCode: ""
+      name: "",
+      description: "",
+      productReference: 1,
+      manufacturer: "",
+      dosage: "",
+      form: 1,
+      medicationCode: ""
     }
   }
 
   editaCareAcitivityMedication(){
-    this.careActivityMedication.Name = this.careActivityMedicationForm.get('Name')?.value;
-    this.careActivityMedication.Description = this.careActivityMedicationForm.get('Description')?.value;
-    this.careActivityMedication.ProductReference = this.careActivityMedicationForm.get('Product')?.value;
-    this.careActivityMedication.Manufacturer = this.careActivityMedicationForm.get('Manufacturer')?.value;
-    this.careActivityMedication.Dosage = this.careActivityMedicationForm.get('Dosage')?.value;
-    this.careActivityMedication.Form = this.careActivityMedicationForm.get('Form')?.value;
-    this.careActivityMedication.MedicationCode = this.careActivityMedicationForm.get('Code')?.value;
+    this.careActivityMedication.name = this.careActivityMedicationForm.get('name')?.value;
+    this.careActivityMedication.description = this.careActivityMedicationForm.get('description')?.value;
+    this.careActivityMedication.productReference = this.careActivityMedicationForm.get('product')?.value;
+    this.careActivityMedication.manufacturer = this.careActivityMedicationForm.get('manufacturer')?.value;
+    this.careActivityMedication.dosage = this.careActivityMedicationForm.get('dosage')?.value;
+    this.careActivityMedication.form = this.careActivityMedicationForm.get('form')?.value;
+    this.careActivityMedication.medicationCode = this.careActivityMedicationForm.get('code')?.value;
 
     if(this.isNew){
-      this.carePlanService.createCareActivityMedication(this.carePlanAdapter.newCareMedication(this.careActivityMedication, this.careActivity.Id)).subscribe({
+      this.carePlanService.createCareActivityMedication(this.carePlanAdapter.newCareMedication(this.careActivityMedication, this.careActivity.id)).subscribe({
         next : result =>{
           this.careActivityMedication = result;
         },
@@ -96,13 +96,13 @@ export class EditCareActivityMedicationComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.createSuccess("medication");
         }
       });
     }
     else{
-      this.carePlanService.updateCareActivityMedication(this.careActivityMedication.ProductReference,this.carePlanAdapter.newCareMedication(this.careActivityMedication, this.careActivity.Id)).subscribe({
+      this.carePlanService.updateCareActivityMedication(this.careActivityMedication.productReference,this.carePlanAdapter.newCareMedication(this.careActivityMedication, this.careActivity.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -111,7 +111,7 @@ export class EditCareActivityMedicationComponent implements OnInit {
         },
         complete : () => {
           localStorage.setItem('carePlanDetail',JSON.stringify(this.carePlan));
-          this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+          this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
           this.sweetAlert.updateSuccess();
         }
       });
@@ -119,6 +119,6 @@ export class EditCareActivityMedicationComponent implements OnInit {
   }
 
   cancelCareActivityMedication(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id);
   }
 }

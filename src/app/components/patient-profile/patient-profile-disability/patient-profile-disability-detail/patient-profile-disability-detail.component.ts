@@ -29,7 +29,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['disabilityId']);
 
     this.patientProfile = JSON.parse('' + localStorage.getItem('patientProfileDetail'));
-    this.disability = this.patientProfile.Disabilities.find(disability => disability.Id == this.id)!;
+    this.disability = this.patientProfile.disabilities.find(disability => disability.id == this.id)!;
 
     this.loadTable();
   }
@@ -37,22 +37,22 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
   loadTable(){
     this.tableDataSource = [
       {
-        Name: "Disability type",
-        Value: this.disabilityTypePipe.transform(this.disability.Type)
+        name: "disability type",
+        value: this.disabilityTypePipe.transform(this.disability.type)
       },
       {
-        Name: "Severity",
-        Value: this.severityPipe.transform(this.disability.Severity)
+        name: "severity",
+        value: this.severityPipe.transform(this.disability.severity)
       },
       {
-        Name: "Description",
-        Value: this.disability.Description
+        name: "description",
+        value: this.disability.description
       }
     ]
   }
 
   editDisability(){
-    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.Name + "/Disability/" + this.disability.Id + "/Edit");
+    this.router.navigateByUrl("PatientProfile/ " + this.patientProfile.name + "/Disability/" + this.disability.id + "/Edit");
   }
 
   removeDialog(){
@@ -60,7 +60,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.disability.Name
+      data: this.disability.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -80,8 +80,8 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
   }
 
   removePatientProfileDisability(){
-    console.log("Disability ID to remove: " + this.disability.Id);
-    this.patientProfileService.deleteDisability(this.disability.Id).subscribe({
+    console.log("Disability ID to remove: " + this.disability.id);
+    this.patientProfileService.deleteDisability(this.disability.id).subscribe({
       next: result => {
         console.log("Removing disability...");
       },
@@ -90,7 +90,7 @@ export class PatientProfileDisabilityDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Disability");
-        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.Id);
+        this.router.navigateByUrl("/PatientProfile/" + this.patientProfile.id);
       }
     })
   }

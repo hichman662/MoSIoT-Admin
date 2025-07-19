@@ -22,10 +22,10 @@ export class EditStateTelemetryComponent implements OnInit {
   idTelemetry!:number;
 
   stateForm = this.fb.group({
-    Name:['',Validators.required]
+    name:['',Validators.required]
   })
 
-  get Name() { return this.stateForm.get('Name'); }
+  get name() { return this.stateForm.get('name'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -33,31 +33,31 @@ export class EditStateTelemetryComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id == this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id == this.idTelemetry)!;
 
-    this.state = this.telemetry.State!;
+    this.state = this.telemetry.state!;
     
     if(this.state == undefined){
       this.isNew = true;
       this.initDefaults();    
     }
 
-    this.stateForm.setValue({ Name: this.state.Name });
+    this.stateForm.setValue({ Name: this.state.name });
   }
 
   initDefaults(){
     this.state = {
-      Id: 0,
-      Name: "",
-      States: []
+      id: 0,
+      name: "",
+      states: []
     }
   }
 
   edit(){
-    this.state.Name =  this.stateForm.get('Name')?.value;
+    this.state.name =  this.stateForm.get('name')?.value;
 
     if(this.isNew){
-      this.deviceService.createStateTelemetry(this.deviceTemplateAdapter.newStateTelemetry(this.state.Name, this.telemetry.Id)).subscribe({
+      this.deviceService.createStateTelemetry(this.deviceTemplateAdapter.newStateTelemetry(this.state.name, this.telemetry.id)).subscribe({
         next : result =>{
           this.state = result;
         },
@@ -66,12 +66,12 @@ export class EditStateTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.createSuccess("state telemetry");
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
     else{
-      this.deviceService.updateStateTelemetry(this.state.Id,this.deviceTemplateAdapter.newStateTelemetry(this.state.Name, this.telemetry.Id)).subscribe({
+      this.deviceService.updateStateTelemetry(this.state.id,this.deviceTemplateAdapter.newStateTelemetry(this.state.name, this.telemetry.id)).subscribe({
         next : result =>{
           console.log(result);
         },
@@ -80,13 +80,13 @@ export class EditStateTelemetryComponent implements OnInit {
         },
         complete : () => {
           this.sweetAlert.updateSuccess();
-          this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+          this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
         }
       });
     }
   }
 
   cancel(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.telemetry.Id);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.telemetry.id);
   }
 }

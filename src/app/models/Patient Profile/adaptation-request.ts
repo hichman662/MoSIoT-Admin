@@ -1,6 +1,6 @@
 export interface AdaptationRequest {
-    Id:                   number;
-    AccessModeTarget:     number;
-    LanguageOfAdaptation: number;
-    Description:          string;
+    id:                   number;
+    accessModeTarget:     number;
+    languageOfAdaptation: number;
+    description:          string;
 }

@@ -22,14 +22,14 @@ export class CreateCareplanTargetComponent implements OnInit {
   idTarget!:number;
 
   targetForm = this.fb.group({
-    Desired:['',Validators.required],
-    Description:['',Validators.required],
-    DueDate:['',Validators.required]
+    desired:['',Validators.required],
+    description:['',Validators.required],
+    dueDate:['',Validators.required]
   })
 
-  get Desired() { return this.targetForm.get('Desired'); }
-  get DueDate() { return this.targetForm.get('DueDate'); }
-  get Description() { return this.targetForm.get('Description'); }
+  get desired() { return this.targetForm.get('desired'); }
+  get dueDate() { return this.targetForm.get('dueDate'); }
+  get description() { return this.targetForm.get('description'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private carePlanService:CarePlanService,
     private router:Router, private activatedRoute: ActivatedRoute, private carePlanAdapter: CarePlanAdapterComponent) { }
@@ -38,27 +38,27 @@ export class CreateCareplanTargetComponent implements OnInit {
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
 
     this.activatedRoute.params.subscribe((params: Params) => this.idGoal = params['goalId']);
-    this.goal = this.carePlan.Goals?.find(goal => goal.Id == this.idGoal)!;
+    this.goal = this.carePlan.goals?.find(goal => goal.id == this.idGoal)!;
 
     this.initDefaults();
 
-    this.targetForm.setValue({Desired: this.target.DesiredValue, Description: this.target.Description, DueDate: new Date(this.target.DueDate)});
+    this.targetForm.setValue({desired: this.target.desiredValue, description: this.target.description, dueDate: new Date(this.target.dueDate)});
   }
 
   initDefaults(){
     this.target = {
-      Description: "",
-      DesiredValue: "",
-      DueDate: new Date(),
-      Id: 0,
+      description: "",
+      desiredValue: "",
+      dueDate: new Date(),
+      id: 0,
     }
   }
 
   createTarget(){
-    this.target.DesiredValue = this.targetForm.get('Desired')?.value;
-    this.target.DueDate = this.targetForm.get('DueDate')?.value;
-    this.target.DueDate.setDate(this.target.DueDate.getDate() + 1); //Backend substracts a day from the request
-    this.target.Description = this.targetForm.get('Description')?.value;
+    this.target.desiredValue = this.targetForm.get('desired')?.value;
+    this.target.dueDate = this.targetForm.get('dueDate')?.value;
+    this.target.dueDate.setDate(this.target.dueDate.getDate() + 1); //Backend substracts a day from the request
+    this.target.description = this.targetForm.get('description')?.value;
 
     this.carePlanService.createTarget(this.carePlanAdapter.newTarget(this.target, this.idGoal)).subscribe({
       next : result =>{
@@ -68,7 +68,7 @@ export class CreateCareplanTargetComponent implements OnInit {
         this.sweetAlert.createError("target",error);
       },
       complete : () => {
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
         this.sweetAlert.createSuccess("target");
       }
     });
@@ -79,6 +79,6 @@ export class CreateCareplanTargetComponent implements OnInit {
   }
 
   cancelTarget(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/Goal/" + this.idGoal);
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/Goal/" + this.idGoal);
   }
 }

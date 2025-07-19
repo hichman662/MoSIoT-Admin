@@ -24,12 +24,12 @@ export class CreateStateDeviceComponent implements OnInit {
   idStateTelemetry!:number;
 
   stateDeviceForm = this.fb.group({
-    Name:['',Validators.required],
-    Value:['',Validators.required]
+    name:['',Validators.required],
+    value:['',Validators.required]
   })
 
-  get Name() { return this.stateDeviceForm.get('Name'); }
-  get Value() { return this.stateDeviceForm.get('Value'); }
+  get name() { return this.stateDeviceForm.get('name'); }
+  get value() { return this.stateDeviceForm.get('value'); }
   
   constructor(private sweetAlert:SweetAlertsComponent, private fb:FormBuilder, private router:Router, private activatedRoute: ActivatedRoute, private deviceService:DeviceTemplateService, 
     private deviceTemplateAdapter: DeviceTemplateAdapterComponent) { }
@@ -37,26 +37,26 @@ export class CreateStateDeviceComponent implements OnInit {
   ngOnInit(): void {
     this.device = JSON.parse('' + localStorage.getItem('deviceDetail'));
     this.activatedRoute.params.subscribe((params: Params) => this.idTelemetry = params['telemetryId']);
-    this.telemetry = this.device.Telemetries?.find(telemetry => telemetry.Id = this.idTelemetry)!;
+    this.telemetry = this.device.telemetries?.find(telemetry => telemetry.id = this.idTelemetry)!;
     this.activatedRoute.params.subscribe((params: Params) => this.idStateTelemetry = params['stateId']);
-    this.stateTelemetry = this.telemetry.State!;
+    this.stateTelemetry = this.telemetry.state!;
 
     this.initDefaults();
 
-    this.stateDeviceForm.setValue({ Name: this.stateDevice.Name, Value: this.stateDevice.Value });
+    this.stateDeviceForm.setValue({ Name: this.stateDevice.name, Value: this.stateDevice.value });
   }
 
   initDefaults(){
     this.stateDevice = {
-      Id: 0,
-      Name: "",
-      Value: ""
+      id: 0,
+      name: "",
+      value: ""
     }
   }
 
   create(){
-    this.stateDevice.Name =  this.stateDeviceForm.get('Name')?.value;
-    this.stateDevice.Value =  this.stateDeviceForm.get('Value')?.value;
+    this.stateDevice.name =  this.stateDeviceForm.get('name')?.value;
+    this.stateDevice.value =  this.stateDeviceForm.get('value')?.value;
 
     this.deviceService.createStateDeviceTelemetry(this.deviceTemplateAdapter.newStateDevice(this.stateDevice, this.idStateTelemetry)).subscribe({
       next : result =>{
@@ -67,12 +67,12 @@ export class CreateStateDeviceComponent implements OnInit {
       },
       complete : () => {
         this.sweetAlert.createSuccess("state device");
-        this.router.navigateByUrl("DeviceTemplate/" + this.device.Id);
+        this.router.navigateByUrl("DeviceTemplate/" + this.device.id);
       }
     });
   }
 
   cancel(){
-    this.router.navigateByUrl("DeviceTemplate/ " + this.device.Name + "/Telemetry/" + this.idTelemetry);
+    this.router.navigateByUrl("DeviceTemplate/ " + this.device.name + "/Telemetry/" + this.idTelemetry);
   }
 }

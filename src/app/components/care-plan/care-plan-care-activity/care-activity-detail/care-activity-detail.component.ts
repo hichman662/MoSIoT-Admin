@@ -38,53 +38,53 @@ export class CareActivityDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params: Params) => this.id = params['careActivtyId']);
     this.carePlan = JSON.parse('' + localStorage.getItem('carePlanDetail'));
-    this.careActivity = this.carePlan.CareActivities?.find(careActivity => careActivity.Id == this.id)!;
+    this.careActivity = this.carePlan.careActivities?.find(careActivity => careActivity.id == this.id)!;
 
     if(this.careActivity != null){
       this.loadDetailsTable();
 
-      if(this.careActivity.Medications != null){
-        this.loadMedicationTable(this.careActivity.Medications);
+      if(this.careActivity.medications != null){
+        this.loadMedicationTable(this.careActivity.medications);
       }
       else{
-        this.tableMedicationDataSource = [{Name: "Empty", Value: ""}]
+        this.tableMedicationDataSource = [{name: "Empty", value: ""}]
       }
 
-      if(this.careActivity.NutritionOrders != null){
-        this.loadNutritionOrderTable(this.careActivity.NutritionOrders);
+      if(this.careActivity.nutritionOrders != null){
+        this.loadNutritionOrderTable(this.careActivity.nutritionOrders);
       }
       else{
-        this.tableNutritionOrderDataSource = [{Name: "Empty", Value: ""}]
+        this.tableNutritionOrderDataSource = [{name: "Empty", value: ""}]
       }
 
-      if(this.careActivity.Appointments != null){
-        this.loadAppointmentsTable(this.careActivity.Appointments);
+      if(this.careActivity.appointments != null){
+        this.loadAppointmentsTable(this.careActivity.appointments);
       }
       else{
-        this.tableAppoinmentsDataSource = [{Name: "Empty", Value: ""}]
+        this.tableAppoinmentsDataSource = [{name: "Empty", value: ""}]
       }
     }
     else{
       this.sweetAlert.createError("care activity","care activity error");
-      this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+      this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
     }
     
   }
 
   editCareActivity(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id + "/Edit");
   }
 
   editCareActivityMedication(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Medication/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id + "/Medication/Edit");
   }
 
   editCareActivityNutrition(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Nutrition/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id + "/Nutrition/Edit");
   }
 
   editCareActivityAppointment(){
-    this.router.navigateByUrl("CarePlan/ " + this.carePlan.Name + "/CareActivity/" + this.careActivity.Id + "/Appointment/Edit");
+    this.router.navigateByUrl("CarePlan/ " + this.carePlan.name + "/CareActivity/" + this.careActivity.id + "/Appointment/Edit");
   }
 
   removeDialog(){
@@ -92,7 +92,7 @@ export class CareActivityDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.careActivity.Name
+      data: this.careActivity.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -112,7 +112,7 @@ export class CareActivityDetailComponent implements OnInit {
   }
 
   removeCareActivity(){
-    this.carePlanService.deleteCareActivity(this.careActivity.Id).subscribe({
+    this.carePlanService.deleteCareActivity(this.careActivity.id).subscribe({
       next: result => {
         console.log("Removing care activity...");
       },
@@ -121,7 +121,7 @@ export class CareActivityDetailComponent implements OnInit {
       },
       complete: () => {
         this.sweetAlert.removeSuccess("Care activity");
-        this.router.navigateByUrl("CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("CarePlan/" + this.carePlan.id);
       }
     })
   }
@@ -129,24 +129,24 @@ export class CareActivityDetailComponent implements OnInit {
   loadDetailsTable(){
     this.tableDetailsDataSource = [
       {
-        Name: "Type Activity",
-        Value: this.typeActivityPipe.transform(this.careActivity.TypeActivity)
+        name: "Type Activity",
+        value: this.typeActivityPipe.transform(this.careActivity.typeActivity)
       },
       {
-        Name: "Description",
-        Value: this.careActivity.Description
+        name: "Description",
+        value: this.careActivity.description
       },
       {
-        Name: "Periodicity",
-        Value: this.typePeriodicityPipe.transform(this.careActivity.Periodicity)
+        name: "Periodicity",
+        value: this.typePeriodicityPipe.transform(this.careActivity.periodicity)
       },
       {
-        Name: "Duration",
-        Value: this.careActivity.Duration
+        name: "Duration",
+        value: this.careActivity.duration
       },
       {
-        Name: "Location",
-        Value: this.careActivity.Location
+        name: "Location",
+        value: this.careActivity.location
       }
     ]
   }
@@ -154,32 +154,32 @@ export class CareActivityDetailComponent implements OnInit {
   loadMedicationTable(medication:Medication){
     this.tableMedicationDataSource = [
       {
-        Name: "Name",
-        Value: medication.Name
+        name: "Name",
+        value: medication.name
       },
       {
-        Name: "Description",
-        Value: medication.Description
+        name: "Description",
+        value: medication.description
       },
       {
-        Name: "Product Reference",
-        Value: medication.ProductReference
+        name: "Product Reference",
+        value: medication.productReference
       },
       {
-        Name: "Manufacturer",
-        Value: medication.Manufacturer
+        name: "Manufacturer",
+        value: medication.manufacturer
       },
       {
-        Name: "Dosage",
-        Value: medication.Dosage
+        name: "Dosage",
+        value: medication.dosage
       },
       {
-        Name: "Form",
-        Value: this.formTypePipe.transform(medication.Form)
+        name: "Form",
+        value: this.formTypePipe.transform(medication.form)
       },
       {
-        Name: "Medication Code",
-        Value: medication.MedicationCode
+        name: "Medication Code",
+        value: medication.medicationCode
       }
     ]
   }
@@ -187,16 +187,16 @@ export class CareActivityDetailComponent implements OnInit {
   loadNutritionOrderTable(nutritionOrder:NutritionOrder){
     this.tableNutritionOrderDataSource = [
       {
-        Name: "Name",
-        Value: nutritionOrder.Name
+        name: "Name",
+        value: nutritionOrder.name
       },
       {
-        Name: "Description",
-        Value: nutritionOrder.Description
+        name: "Description",
+        value: nutritionOrder.description
       },
       {
-        Name: "Diet Code",
-        Value: nutritionOrder.DietCode
+        name: "Diet Code",
+        value: nutritionOrder.dietCode
       }
     ]
   }
@@ -204,20 +204,20 @@ export class CareActivityDetailComponent implements OnInit {
   loadAppointmentsTable(appointment:Appointment){
     this.tableAppoinmentsDataSource = [
       {
-        Name: "Description",
-        Value: appointment.Description
+        name: "Description",
+        value: appointment.description
       },
       {
-        Name: "Direction",
-        Value: appointment.Direction
+        name: "Direction",
+        value: appointment.direction
       },
       {
-        Name: "Reason Code",
-        Value: appointment.ReasonCode
+        name: "Reason Code",
+        value: appointment.reasonCode
       },
       {
-        Name: "Virtual",
-        Value: this.booleanToStringPipe.transform(appointment.IsVirtual)
+        name: "Virtual",
+        value: this.booleanToStringPipe.transform(appointment.isVirtual)
       }
     ]
   }

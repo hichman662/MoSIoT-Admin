@@ -1,13 +1,13 @@
 <form [formGroup]="goalForm" (ngSubmit)="editGoal()">
     <div class="form-floating needs-validation row">
-        <input type="text" class="form-control" formControlName="Name" id="name" required>
+        <input type="text" class="form-control" formControlName="name" id="name" required>
         <label for="name">Name</label>
-        <div *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)">
-            <div *ngIf="Name?.errors?.['required']">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div *ngIf="name?.errors?.['required']">
                 <div class="invalid-feedback">The name is required</div>
             </div>
         </div>
-        <div *ngIf="!Name?.invalid && !Name?.errors?.['required']">
+        <div *ngIf="!name?.invalid && !name?.errors?.['required']">
             <div class="valid-feedback">¡Valid Name!</div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <td>
                     <div>
                         <b>Category</b><br>
-                        <select class="form-select" formControlName="Category" required>
+                        <select class="form-select" formControlName="category" required>
                             <option value="1">Dietary</option>
                             <option value="2">Safety</option>
                             <option value="3">Behavioral</option>
@@ -44,9 +44,9 @@
                 <td>
                     <div>
                         <b>Description</b><br>
-                        <textarea class="form-control" formControlName="Description" required></textarea>
-                        <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                            <div *ngIf="Description?.errors?.['required']">
+                        <textarea class="form-control" formControlName="description" required></textarea>
+                        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                            <div *ngIf="description?.errors?.['required']">
                                 <div class="invalid-feedback">A description is required</div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                 <td>
                     <div>
                         <b>Priority</b><br>
-                        <select class="form-select" formControlName="Priority" required>
+                        <select class="form-select" formControlName="priority" required>
                             <option value="1">High</option>
                             <option value="2">Medium</option>
                             <option value="3">Low</option>
@@ -69,7 +69,7 @@
                 <td>
                     <div>
                         <b>Status</b><br>
-                        <select class="form-select" formControlName="Status" required>
+                        <select class="form-select" formControlName="status" required>
                             <option value="1">Draft</option>
                             <option value="2">Active</option>
                             <option value="3">On Hold</option>
@@ -84,9 +84,9 @@
                 <td>
                     <div>
                         <b>Outcome Code</b><br>
-                        <input class="form-control" formControlName="Outcome" required>
-                        <div *ngIf="Outcome?.invalid && (Outcome?.dirty || Outcome?.touched)">
-                            <div *ngIf="Outcome?.errors?.['required']">
+                        <input class="form-control" formControlName="outcome" required>
+                        <div *ngIf="outcome?.invalid && (outcome?.dirty || outcome?.touched)">
+                            <div *ngIf="outcome?.errors?.['required']">
                                 <div class="invalid-feedback">An outcome is required</div>
                             </div>
                         </div>
@@ -97,8 +97,8 @@
                 <td>
                     <div>
                         <b>Condition</b><br>
-                        <select class="custom-select" size="5" formControlName="Condition">
-                            <option *ngFor="let condition of conditions" [value]="condition.Id">{{condition.Name}}</option>
+                        <select class="custom-select" size="5" formControlName="condition">
+                            <option *ngFor="let condition of conditions" [value]="condition.id">{{condition.name}}</option>
                         </select>
                     </div>
                 </td>

@@ -46,15 +46,15 @@ export class PatientProfileComponent implements OnInit {
 
   createPatientProfile(){
     let patientProfile:PatientProfile = {
-      Id: -999,
-      AccessMode: [],
-      Condition: [],
-      Description: "",
-      Disabilities: [],
-      HazardAvoidance: 1,
-      Name: "",
-      PreferredLanguage: 1,
-      Region: ""
+      id: -999,
+      accessMode: [],
+      condition: [],
+      description: "",
+      disabilities: [],
+      hazardAvoidance: 1,
+      name: "",
+      preferredLanguage: 1,
+      region: ""
     }
     
     localStorage.setItem('patientProfileDetail',JSON.stringify(patientProfile));

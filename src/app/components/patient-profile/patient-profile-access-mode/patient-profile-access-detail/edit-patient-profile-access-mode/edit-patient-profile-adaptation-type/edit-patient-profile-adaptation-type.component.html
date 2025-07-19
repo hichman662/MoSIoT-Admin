@@ -1,7 +1,7 @@
 <form [formGroup]="patientAdaptationForm" (ngSubmit)="editPatientAdaptation()">
     <div class="row">
         <div class="col">
-            <h1>{{accessMode.Name | titlecase}}</h1>
+            <h1>{{accessMode.name | titlecase}}</h1>
         </div>  
     </div>
     <hr>
@@ -13,15 +13,15 @@
                 Adaptation type required
             </ng-template>
 
-            <ol class="list-group mt-2" *ngFor="let adaptationTypeItem of accessMode.AdaptationType">
-                <div *ngIf="adaptationTypeItem.Id == adaptationType.Id; then liToEdit else liNormal"></div>
+            <ol class="list-group mt-2" *ngFor="let adaptationTypeItem of accessMode.adaptationType">
+                <div *ngIf="adaptationTypeItem.id == adaptationType.id; then liToEdit else liNormal"></div>
 
                 <ng-template #liToEdit>
                     <li class="list-group-item d-flex align-items-start" style="background-color: aliceblue;">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold">
                                 <b>Access Mode Target</b><br>
-                                <select class="form-select" formControlName="Type" required>
+                                <select class="form-select" formControlName="type" required>
                                     <option value="1">Alternative Text</option>
                                     <option value="2">Audio Description</option>
                                     <option value="3">Captions</option>
@@ -36,9 +36,9 @@
 
                             <div class="mt-2">
                                 <b>Description</b><br>
-                                <textarea type="text" class="form-control" formControlName="Description" required></textarea>
-                                <div *ngIf="Description?.invalid && (Description?.dirty || Description?.touched)">
-                                    <div *ngIf="Description?.errors?.['required']">
+                                <textarea type="text" class="form-control" formControlName="description" required></textarea>
+                                <div *ngIf="description?.invalid && (description?.dirty || description?.touched)">
+                                    <div *ngIf="description?.errors?.['required']">
                                         <div class="invalid-feedback">A description is required</div>
                                     </div>
                                 </div>
@@ -54,8 +54,8 @@
                 <ng-template #liNormal>
                     <li class="list-group-item d-flex align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold">{{adaptationTypeItem.AdaptionRequest | adaptationType | titlecase}}</div>
-                            {{adaptationTypeItem.Description}}
+                            <div class="fw-bold">{{adaptationTypeItem.adaptionRequest | adaptationType | titlecase}}</div>
+                            {{adaptationTypeItem.description}}
                         </div>
                     </li>
                 </ng-template>

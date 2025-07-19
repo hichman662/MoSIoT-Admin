@@ -47,7 +47,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent,{
       width: '250px',
-      data: this.measure.Name
+      data: this.measure.name
     });
 
     dialogRef.afterClosed().subscribe({
@@ -67,7 +67,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
   }
 
   removeMeasure(){
-    this.carePlanService.deleteMeasure(this.measure.Id).subscribe({
+    this.carePlanService.deleteMeasure(this.measure.id).subscribe({
       next: result => {
         console.log("Removing measure...");
       },
@@ -75,7 +75,7 @@ export class CarePlanMeasureDetailComponent implements OnInit {
         this.sweetAlert.removeError("measure",error);
       },
       complete: () => {
-        this.router.navigateByUrl("/CarePlan/" + this.carePlan.Id);
+        this.router.navigateByUrl("/CarePlan/" + this.carePlan.id);
         this.sweetAlert.removeSuccess("measure");
       }
     })
