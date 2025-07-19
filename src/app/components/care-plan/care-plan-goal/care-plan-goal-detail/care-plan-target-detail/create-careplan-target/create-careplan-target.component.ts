@@ -55,7 +55,7 @@ export class CreateCareplanTargetComponent implements OnInit {
   }
 
   createTarget(){
-    this.target.desiredValue = this.targetForm.get('desired')?.value;
+    this.target.desiredValue = String(this.targetForm.get('desired')?.value);
     this.target.dueDate = this.targetForm.get('dueDate')?.value;
     this.target.dueDate.setDate(this.target.dueDate.getDate() + 1); //Backend substracts a day from the request
     this.target.description = this.targetForm.get('description')?.value;

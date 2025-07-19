@@ -38,7 +38,7 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
 
     this.initDefaults();
 
-    this.patientAdaptationForm.setValue({Type: this.adaptationDetail.adaptationRequest, Description: this.adaptationDetail.description});
+    this.patientAdaptationForm.setValue({type: this.adaptationDetail.adaptationRequest, description: this.adaptationDetail.description});
   }
 
   initDefaults(){
@@ -50,7 +50,7 @@ export class CreatePatientProfileAdaptationDetailComponent implements OnInit {
   }
 
   createPatientAdaptation(){
-    this.adaptationDetail.adaptationRequest = this.patientAdaptationForm.get('type')?.value;
+    this.adaptationDetail.adaptationRequest = Number(this.patientAdaptationForm.get('type')?.value);
     this.adaptationDetail.description = this.patientAdaptationForm.get('description')?.value;
     
     this.patientService.createPatientadAptationDetail(this.adaptationDetail).subscribe({

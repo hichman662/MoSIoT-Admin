@@ -44,7 +44,7 @@ export class EditPatientProfileConditionComponent implements OnInit {
       this.initDefaults();
     }
 
-    this.patientConditionForm.setValue({Name: this.condition.name, Clinical: this.condition.clinicalStatus, Disease: this.condition.disease, Description: this.condition.description});
+    this.patientConditionForm.setValue({name: this.condition.name, clinical: this.condition.clinicalStatus, disease: this.condition.disease, description: this.condition.description});
   }
 
   initDefaults(){
@@ -59,8 +59,8 @@ export class EditPatientProfileConditionComponent implements OnInit {
 
   editPatientCondition(){
     this.condition.name = this.patientConditionForm.get('name')?.value;
-    this.condition.clinicalStatus = this.patientConditionForm.get('clinical')?.value;
-    this.condition.disease = this.patientConditionForm.get('disease')?.value;
+    this.condition.clinicalStatus = Number(this.patientConditionForm.get('clinical')?.value);
+    this.condition.disease = Number(this.patientConditionForm.get('disease')?.value);
     this.condition.description = this.patientConditionForm.get('description')?.value;
 
     if(this.isNew){

@@ -44,7 +44,7 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
       this.initDefaults();
     }
 
-    this.patientDisabilityForm.setValue({Name: this.disability.name, Type: this.disability.type, Severity: this.disability.severity, Description: this.disability.description});
+    this.patientDisabilityForm.setValue({name: this.disability.name, type: this.disability.type, severity: this.disability.severity, description: this.disability.description});
   }
 
   initDefaults(){
@@ -59,8 +59,8 @@ export class EditPatientProfileDisabilityComponent implements OnInit {
 
   editPatientDisability(){
     this.disability.name = this.patientDisabilityForm.get('name')?.value;
-    this.disability.type = this.patientDisabilityForm.get('type')?.value;
-    this.disability.severity = this.patientDisabilityForm.get('severity')?.value;
+    this.disability.type = Number(this.patientDisabilityForm.get('type')?.value);
+    this.disability.severity = Number(this.patientDisabilityForm.get('severity')?.value);
     this.disability.description = this.patientDisabilityForm.get('description')?.value;
 
     if(this.newDisability){

@@ -40,11 +40,11 @@ export class EditPatientProfileAdaptationRequestComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.idAdapatationRequest = params['adaptationRequestId']);
     this.adaptationRequest = this.accessMode.adaptationRequest?.find(adaptation => adaptation.id == this.idAdapatationRequest)!;
 
-    this.patientAdaptationForm.setValue({Target: this.adaptationRequest.accessModeTarget, Language: this.adaptationRequest.languageOfAdaptation, Description: this.adaptationRequest.description});
+    this.patientAdaptationForm.setValue({target: this.adaptationRequest.accessModeTarget, language: this.adaptationRequest.languageOfAdaptation, description: this.adaptationRequest.description});
   }
 
   editPatientAdaptation(){
-    this.adaptationRequest.accessModeTarget = this.patientAdaptationForm.get('target')?.value;
+    this.adaptationRequest.accessModeTarget = Number(this.patientAdaptationForm.get('target')?.value);
     this.adaptationRequest.languageOfAdaptation = this.patientAdaptationForm.get('language')?.value;
     this.adaptationRequest.description = this.patientAdaptationForm.get('description')?.value;
     

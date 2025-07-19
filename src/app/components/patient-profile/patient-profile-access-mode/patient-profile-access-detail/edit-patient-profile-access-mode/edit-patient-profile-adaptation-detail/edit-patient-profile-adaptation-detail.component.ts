@@ -38,11 +38,11 @@ export class EditPatientProfileAdaptationDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => this.idAdapatationDetail = params['adaptationDetailId']);
     this.adaptationDetail = this.accessMode.adaptationDetail?.find(adaptation => adaptation.id == this.idAdapatationDetail)!;
 
-    this.patientAdaptationForm.setValue({Type: this.adaptationDetail.adaptationRequest, Description: this.adaptationDetail.description});
+    this.patientAdaptationForm.setValue({type: this.adaptationDetail.adaptationRequest, description: this.adaptationDetail.description});
   }
 
   editPatientAdaptation(){
-    this.adaptationDetail.adaptationRequest = this.patientAdaptationForm.get('type')?.value;
+    this.adaptationDetail.adaptationRequest = Number(this.patientAdaptationForm.get('type')?.value);
     this.adaptationDetail.description = this.patientAdaptationForm.get('description')?.value;
     
     this.patientService.updatePatientadAptationDetail(this.adaptationDetail.id,this.adaptationDetail).subscribe({

@@ -41,7 +41,7 @@ export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
 
     this.initDefaults();
 
-    this.patientAdaptationForm.setValue({Target: this.adaptationRequest.accessModeTarget, Language: this.adaptationRequest.languageOfAdaptation, Description: this.adaptationRequest.description});
+    this.patientAdaptationForm.setValue({target: this.adaptationRequest.accessModeTarget, language: this.adaptationRequest.languageOfAdaptation, description: this.adaptationRequest.description});
   }
 
   initDefaults(){
@@ -54,8 +54,8 @@ export class CreatePatientProfileAdapatationRequestComponent implements OnInit {
   }
 
   createPatientAdaptation(){
-    this.adaptationRequest.accessModeTarget = this.patientAdaptationForm.get('target')?.value;
-    this.adaptationRequest.languageOfAdaptation = this.patientAdaptationForm.get('aanguage')?.value;
+    this.adaptationRequest.accessModeTarget = Number(this.patientAdaptationForm.get('target')?.value);
+    this.adaptationRequest.languageOfAdaptation = this.patientAdaptationForm.get('laanguage')?.value;
     this.adaptationRequest.description = this.patientAdaptationForm.get('description')?.value;
     
     this.patientService.createPatientAdaptationRequest(this.adaptationRequest).subscribe({

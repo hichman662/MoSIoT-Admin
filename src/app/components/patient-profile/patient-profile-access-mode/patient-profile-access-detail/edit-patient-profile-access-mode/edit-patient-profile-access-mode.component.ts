@@ -42,7 +42,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
       this.newAccessMode = true;
     }
 
-    this.patientAccessForm.setValue({Name: this.accessMode.name, Type: this.accessMode.typeAccessMode, Description: this.accessMode.description});
+    this.patientAccessForm.setValue({name: this.accessMode.name, type: this.accessMode.typeAccessMode, description: this.accessMode.description});
   }
 
   initDefaults(){
@@ -56,7 +56,7 @@ export class EditPatientProfileAccessModeComponent implements OnInit {
 
   editPatientAccess(){
     this.accessMode.name = this.patientAccessForm.get('name')?.value;
-    this.accessMode.typeAccessMode = this.patientAccessForm.get('type')?.value;
+    this.accessMode.typeAccessMode = Number(this.patientAccessForm.get('type')?.value);
     this.accessMode.description = this.patientAccessForm.get('description')?.value;
 
     if(this.newAccessMode){
